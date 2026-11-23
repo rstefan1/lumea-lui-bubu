@@ -1,0 +1,157 @@
+/* =====================================================================
+   assets/css/buildings.css – the BUILDINGS of the village (drawn by assets/js/buildings.js).
+
+   Every building is a card: the drawing, a piece of country road under it (the pieces of one row
+   join into one road), then the name, one line and a big "Intră" button.
+   The whole card is a link, and the button shows it clearly (also for parents and grandparents).
+   ===================================================================== */
+
+/* ---------- Colors of a building: --main, --dark, --light ---------- */
+.place { --main: #d9483b; --dark: #a22e25; --light: #f6c9b8; }
+.place--blue   { --main: #3b7fc4; --dark: #255a91; --light: #cfe3f6; }
+.place--green  { --main: #3f9a4a; --dark: #2a6d33; --light: #d4ecc9; }
+.place--yellow { --main: #e8b21c; --dark: #b07f00; --light: #fbecb5; }
+.place--orange { --main: #e9782a; --dark: #b5520f; --light: #fbd9bd; }
+.place--pink   { --main: #e0608f; --dark: #ad3963; --light: #f9d3e1; }
+.place--teal   { --main: #1fa094; --dark: #12716a; --light: #c8eeea; }
+.place--purple { --main: #8a5cc8; --dark: #5f3c96; --light: #e4d6f6; }
+
+/* ---------- The parts of the drawings ---------- */
+.place .b-main  { fill: var(--main); }
+.place .b-dark  { fill: var(--dark); }
+.place .b-light { fill: var(--light); }
+.place .b-ink   { fill: #3b3030; }
+.place .b-gold  { fill: #ffcf3a; }
+.place .b-paper { fill: #fffaf0; }
+.place .b-wall  { fill: #f8ecd2; }
+.place .b-wall-base { fill: #d9c39b; }
+.place .b-wall-post { fill: #f6dc8a; }
+.place .b-roof  { fill: #b9472f; }
+.place .b-roof-edge { fill: #7d2d1d; opacity: 0.55; }
+.place .b-roof-wood { fill: #5b3b22; }
+.place .b-cornice { fill: #fffaf0; }
+.place .b-glass { fill: #a9dcf5; stroke: #fffaf0; stroke-width: 3; }
+.place .b-glass-light { fill: #dff1ff; }
+.place .b-window-warm { fill: #ffe7a1; stroke: #fffaf0; stroke-width: 2; }
+.place .b-frame-wood { stroke: #7a4a22; stroke-width: 3; }
+.place .b-window-bars { stroke: #7a4a22; stroke-width: 2.5; fill: none; }
+.place .b-window-bars-light { stroke: #fffaf0; stroke-width: 2.5; fill: none; }
+.place .b-number { font-family: "Fredoka", sans-serif; font-weight: 700; fill: #7a4a22; }
+.place .b-door  { fill: var(--dark); }
+.place .b-door-wood { fill: #6b3f1e; }
+.place .b-door-line { stroke: rgba(0, 0, 0, 0.3); stroke-width: 2; }
+.place .b-board { fill: #fffaf0; stroke: #7a4a22; stroke-width: 2; }
+.place .b-board-dark { fill: #3b3030; }
+.place .b-board-text { font-family: "Fredoka", sans-serif; font-weight: 700; fill: #5a3416; letter-spacing: 1px; }
+.place .b-board-text--light { fill: #fffaf0; }
+.place .b-clock { fill: #fff; stroke: #3b3030; stroke-width: 3; }
+.place .b-clock-hands { stroke: #3b3030; stroke-width: 2.5; stroke-linecap: round; fill: none; }
+.place .b-platform { fill: #d8d1c3; }
+.place .b-platform-edge { fill: #f2c94c; }
+.place .b-rail { fill: #8b9099; }
+.place .b-sleeper { fill: #8a5a32; }
+.place .b-steam { fill: #fff; opacity: 0.92; }
+.place .b-lamp { fill: #fff3b0; stroke: #ffcf3a; stroke-width: 2; }
+.place .b-chimney { fill: #9a5b3c; }
+.place .b-trunk { fill: #7a4a22; }
+.place .b-pine { fill: #2f6e35; }
+.place .b-pine-light { fill: #3f8a42; }
+.place .b-bush { fill: #4f9a3e; }
+.place .b-bush-light { fill: #65b04c; }
+.place .b-logs { fill: #a8693a; }
+.place .b-log-line { stroke: #7a4a22; stroke-width: 2; }
+.place .b-gable { fill: #c7884f; }
+.place .b-mountain { fill: #a9bfd2; }
+.place .b-mountain-far { fill: #c3d3e0; }
+.place .b-snowcap { fill: #fff; }
+.place .b-strap { stroke: var(--dark); stroke-width: 2.5; fill: none; }
+.place .b-trail { fill: #fff; stroke: #7a4a22; stroke-width: 2; }
+.place .b-trail-mark { fill: #d9302b; }
+.place .b-envelope-flap { stroke: #fffaf0; stroke-width: 1.6; fill: none; }
+.place .b-envelope-flap-dark { stroke: #7a4a22; stroke-width: 1.4; fill: none; }
+.place .b-step { fill: #cfc5b3; }
+.place .b-post-pole { fill: #5a5a5a; }
+.place .b-mailbox { fill: #d9302b; }
+.place .b-hay { fill: #d9b25a; }
+.place .b-hay-line { stroke: #b88d3a; stroke-width: 2.5; fill: none; stroke-linecap: round; }
+.place .b-hay-pole { stroke: #7a4a22; stroke-width: 3; stroke-linecap: round; }
+.place .b-path { fill: #d8bb8a; }
+.place .b-tracks { fill: #6b4a2e; opacity: 0.55; }
+
+/* ---------- The card ---------- */
+.place {
+  position: relative; z-index: 1; display: flex; flex-direction: column; align-items: stretch;
+  text-decoration: none; color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+.place:focus-visible { outline: 5px solid var(--focus); outline-offset: -5px; border-radius: 18px; }
+/* the drawing; a little path leads from the country road to its door (assets/js/road.js) */
+.place__scene { position: relative; display: flex; justify-content: center; padding: 0 8px; }
+.place__svg { display: block; width: 100%; max-width: 380px; height: auto; aspect-ratio: 320 / 240; overflow: visible; }
+.place__svg { transition: transform 0.2s ease; transform-origin: 50% 100%; }
+@media (hover: hover) { a.place:hover .place__svg { transform: translateY(-4px) scale(1.02); } }
+
+/* the name, one line and the button, on a light board under the building: easy to read over the village */
+.place__info {
+  align-self: center;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  margin-top: 18px; padding: 12px 22px 16px; max-width: calc(100% - 16px);
+  background: rgba(255, 250, 240, 0.94); border-radius: 20px;
+  box-shadow: 0 6px 16px rgba(43, 42, 58, 0.12);
+}
+/* a game that can be played: a frame in its color and a soft ring that pulses around "Intră"
+   (only transform / opacity; nothing moves with "reduce motion") */
+a.place .place__info { box-shadow: 0 0 0 4px var(--main), 0 10px 24px rgba(43, 42, 58, 0.2); }
+a.place .place__btn { position: relative; }
+a.place .place__btn::after {
+  content: ""; position: absolute; inset: -4px; border-radius: inherit;
+  border: 4px solid var(--main); opacity: 0;
+  animation: btn-ring 2.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes btn-ring { 0% { transform: scale(1); opacity: 0.7; } 70%, 100% { transform: scale(1.35, 1.6); opacity: 0; } }
+/* not open yet: a little paler, so the eye goes first to the games that can be played */
+.place--soon .place__svg { filter: saturate(0.6); opacity: 0.88; }
+.place--soon .place__info { background: rgba(255, 250, 240, 0.78); box-shadow: none; }
+.place--soon .place__title { color: #4a4860; }
+.place__title {
+  font-family: "Fredoka", "Atkinson Hyperlegible", sans-serif; font-weight: 600;
+  font-size: 1.65rem; line-height: 1.1; color: var(--ink);
+}
+.place__desc { margin-top: 4px; font-size: 1.05rem; color: var(--muted); max-width: 30ch; }
+.place__btn {
+  margin-top: 12px; min-height: 48px; padding: 10px 26px;   /* big enough for every finger */
+  display: inline-flex; align-items: center;
+  border-radius: 999px; background: var(--dark); color: #fff;
+  font-weight: 700; font-size: 1.15rem;
+  box-shadow: 0 4px 0 rgba(43, 42, 58, 0.35);
+  transition: transform 0.15s;
+}
+@media (hover: hover) { a.place:hover .place__btn { transform: scale(1.06); } }
+a.place:active .place__btn { transform: translateY(3px); box-shadow: 0 1px 0 rgba(43, 42, 58, 0.35); }
+
+/* a ribbon on the building ("Nou!") */
+.place__badge {
+  position: absolute; left: max(14px, calc(50% - 170px)); top: 6px; z-index: 2;
+  padding: 6px 16px; border-radius: 10px;
+  background: #ffcf3a; color: #5a3416; font-weight: 700; font-size: 1.2rem;
+  box-shadow: 0 3px 0 #c99a12;
+  transform: rotate(-6deg);
+}
+
+/* a place that is not open yet: the button says "În curând" and is not a button */
+.place--soon .place__btn {
+  background: transparent; color: var(--muted); box-shadow: none;
+  border: 3px dashed rgba(85, 83, 106, 0.45);
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 600px) {
+  .place__title { font-size: 1.5rem; }
+  .place__svg { max-width: 320px; }
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .place__svg { max-width: 250px; }
+  .place__info { margin-top: 12px; padding: 8px 18px 12px; }
+  .place__title { font-size: 1.35rem; }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+  Home page of "Lumea lui Bubu": a village where every game (or corner of the site) is a building.
+  The village: assets/css/village.css; the buildings: data/places.js -> assets/js/buildings.js + assets/css/buildings.css.
+-->
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, noimageindex">
+<title>Lumea lui Bubu</title>
+<meta name="description" content="Satul lui Bubu, buburuza de pluș: jocuri, drumeții, calendarul de Advent și poșta lui Bubu.">
+<link rel="canonical" href="https://bubu.infoticedu.ro/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/img/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/img/icon-192.png">
+<meta name="theme-color" content="#8fd0f5">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lumea lui Bubu">
+<meta property="og:title" content="Lumea lui Bubu">
+<meta property="og:description" content="Satul lui Bubu, buburuza de pluș.">
+<meta property="og:locale" content="ro_RO">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/village.css">
+<link rel="stylesheet" href="assets/css/buildings.css">
+</head>
+<body>
+
+<!-- the landscape behind the entrance: sun, clouds and the hills of Bucovina
+     (assets/img/peisaj.svg, drawn by tools/genereaza-peisaj.py; decoration only) -->
+<div class="landscape" aria-hidden="true">
+  <span class="landscape__sun"></span>
+  <span class="cloud" style="top:9%; --dur:110s; --delay:-30s"></span>
+  <span class="cloud" style="top:22%; --dur:140s; --delay:-95s"></span>
+  <span class="cloud" style="top:34%; --dur:125s; --delay:-60s"></span>
+</div>
+
+<header class="entrance">
+  <div class="sign">
+    <p class="bubble">Bun venit în satul meu!</p>
+    <img class="sign__bubu" src="assets/img/bubu.webp" alt="Bubu, buburuza de pluș" width="320" height="320">
+    <div class="sign__board">
+      <h1 class="sign__title">Lumea lui Bubu</h1>
+      <p class="sign__sub">Satul jocurilor</p>
+    </div>
+    <div class="sign__posts" aria-hidden="true"></div>
+  </div>
+</header>
+
+<!-- the buildings of the village (drawn by assets/js/buildings.js from data/places.js) -->
+<main class="village" id="village">
+</main>
+
+<!-- shows that there are more buildings below (assets/js/scroll-hint.js) -->
+<button class="scroll-hint is-gone" id="scroll-hint" type="button" hidden>Vezi tot satul <span class="scroll-hint__arrow" aria-hidden="true">↓</span></button>
+
+<footer class="site-footer">
+  <p>prof. ing. Robert Ștefan</p>
+</footer>
+
+<script src="data/places.js"></script>
+<script src="assets/js/buildings.js"></script>
+<script src="assets/js/scenery.js"></script>
+<script src="assets/js/road.js"></script>
+<script src="assets/js/scroll-hint.js"></script>
+</body>
+</html>

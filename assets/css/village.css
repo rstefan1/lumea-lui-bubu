@@ -1,0 +1,358 @@
+/* =====================================================================
+   assets/css/village.css – the VILLAGE: sky, hills, the entrance sign with Bubu, the places of the buildings, the footer.
+   The buildings themselves are in assets/css/buildings.css (drawn by assets/js/buildings.js).
+
+   Easy to use for children, parents and grandparents:
+     - big, high-contrast texts (Atkinson Hyperlegible was made to be read easily),
+     - nothing that works only with a mouse (tablets have no "hover"),
+     - every decoration that moves uses only "transform" (cheap for old phones),
+       and nothing moves when "reduce motion" is turned on.
+   ===================================================================== */
+
+:root {
+  --sky-top: #8fd0f5;
+  --sky-low: #dff3fc;
+  --field: #bfe29a;
+  --field-low: #a9d482;
+  --ink: #2b2a3a;
+  --muted: #55536a;
+  --wood: #b5763c;
+  --wood-dark: #7a4a22;
+  --wood-light: #d39a5c;
+  --paper: #fffaf0;
+  --road: #efe4cf;
+  --road-edge: #d9c7a5;
+  --focus: #ffb703;
+  /* height of the landscape at the top (sky + hills): it follows the height of the screen,
+     so the first row of buildings is seen right away, without scrolling */
+  --land-h: clamp(290px, 40vh, 360px);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh; min-height: 100dvh;
+  display: flex; flex-direction: column;
+  font-family: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  font-size: 18px; line-height: 1.4;
+  color: var(--ink);
+  /* the sky at the top, the field of the village under the hills */
+  background: linear-gradient(180deg, var(--sky-top) 0, var(--sky-low) calc(var(--land-h) - 120px), var(--field) var(--land-h), var(--field-low) 100%);
+  overflow-x: hidden;
+}
+h1, h2 { font-family: "Fredoka", "Atkinson Hyperlegible", sans-serif; }
+a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); outline-offset: 4px; }
+
+/* ---------- The landscape at the top: sun, clouds and the hills of Bucovina ----------
+   assets/img/peisaj.svg (tools/genereaza-peisaj.py) does not move; it is "cut" at the sides on narrow screens
+   (the middle, with the road and the houses, stays). Only the clouds move, slowly. */
+.landscape {
+  position: absolute; left: 0; right: 0; top: 0; height: var(--land-h); z-index: 0;
+  pointer-events: none; overflow: hidden;
+  background: url("../img/peisaj.svg") center bottom / cover no-repeat;
+}
+.landscape__sun {
+  position: absolute; right: 8%; top: 28px; width: 86px; height: 86px; border-radius: 50%;
+  background: radial-gradient(circle, #fff6b8 0 45%, #ffd84d 60%, rgba(255, 216, 77, 0) 72%);
+}
+/* the clouds drift very slowly (transform only) */
+.cloud {
+  position: absolute; display: block; width: 130px; height: 44px;
+  background: #fff; border-radius: 40px; opacity: 0.92;
+  animation: cloud-drift var(--dur, 90s) linear infinite; animation-delay: var(--delay, 0s);
+}
+.cloud::before, .cloud::after { content: ""; position: absolute; background: #fff; border-radius: 50%; }
+.cloud::before { width: 60px; height: 60px; left: 20px; top: -28px; }
+.cloud::after  { width: 44px; height: 44px; left: 66px; top: -18px; }
+@keyframes cloud-drift { from { transform: translateX(-200px); } to { transform: translateX(calc(100vw + 60px)); } }
+
+/* ---------- The entrance of the village: a wooden sign with Bubu sitting on it ---------- */
+.entrance {
+  position: relative; z-index: 2;
+  min-height: var(--land-h);
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 0 16px;
+}
+/* wide screens: the sign stands at the left of the road, so the road and the village stay visible */
+@media (min-width: 980px) { .entrance { justify-content: flex-start; padding-left: 9vw; } }
+.sign { position: relative; display: flex; flex-direction: column; align-items: center; }
+/* the board: three planks of wood with nails in the corners */
+.sign__board {
+  position: relative; z-index: 1;
+  padding: clamp(10px, 1.8vh, 16px) clamp(22px, 4vw, 40px) clamp(9px, 1.6vh, 14px);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle, #5a3416 0 3px, transparent 4px) 12px 12px / calc(100% - 24px) calc(100% - 24px) no-repeat,
+    linear-gradient(180deg, transparent 0 32%, rgba(0, 0, 0, 0.18) 32% 34%, transparent 34% 66%, rgba(0, 0, 0, 0.18) 66% 68%, transparent 68%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 3px, transparent 3px 11px),
+    linear-gradient(180deg, var(--wood-light), var(--wood) 60%, #a5682f);
+  box-shadow: inset 0 0 0 4px var(--wood-dark), 0 8px 0 rgba(90, 52, 22, 0.35), 0 16px 26px rgba(43, 42, 58, 0.25);
+  text-align: center;
+  transform: rotate(-1.5deg);
+}
+.sign__title {
+  margin: 0;
+  font-weight: 700; font-size: clamp(2rem, min(5.5vw, 6vh), 3.4rem); line-height: 1.05;
+  color: var(--paper);
+  text-shadow: 0 3px 0 var(--wood-dark), 0 0 12px rgba(90, 52, 22, 0.35);
+  letter-spacing: 0.5px;
+}
+.sign__sub {
+  margin: 2px 0 0; font-weight: 700; font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  color: #fff1d6; text-shadow: 0 2px 0 var(--wood-dark);
+}
+/* the two posts of the sign, going down into the grass */
+.sign__posts { display: flex; justify-content: space-between; width: 62%; height: 22px; margin-top: -6px; }
+.sign__posts::before, .sign__posts::after {
+  content: ""; width: 18px; height: 100%; border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--wood-dark), var(--wood) 50%, var(--wood-dark));
+}
+/* Bubu sits on the top right corner of the sign and greets the visitors */
+.sign__bubu {
+  position: absolute; z-index: 2; right: -18px; top: -62px;
+  width: clamp(70px, min(10vw, 11vh), 96px); height: auto;
+  filter: drop-shadow(0 6px 6px rgba(43, 42, 58, 0.25));   /* static picture: a filter costs nothing here */
+  transform: rotate(8deg);
+}
+.bubble {
+  position: absolute; z-index: 3; right: -24px; top: -112px;
+  margin: 0; padding: 8px 14px; border-radius: 18px;
+  background: #fff; color: var(--ink);
+  font-weight: 700; font-size: 1rem; white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(43, 42, 58, 0.18);
+  transform: rotate(3deg);
+}
+.bubble::after {   /* the little tail of the speech bubble, towards Bubu */
+  content: ""; position: absolute; right: 44px; bottom: -10px;
+  border: 10px solid transparent; border-top-color: #fff; border-bottom: 0;
+}
+
+/* ---------- The village: the buildings stand along a country road that winds down the middle ----------
+   One building on the left, the next one on the right, a little lower, and so on (assets/js/buildings.js
+   marks them .place--left / .place--right). The road (assets/js/road.js) passes between them,
+   with a little path to every door. On phones held upright there is no room in the middle:
+   the buildings move a little to the left / right and the road winds along the free side. */
+.village {
+  --w: 38%;            /* width of a building with its name */
+  --side: 3%;          /* distance from the edge of the screen */
+  --overlap: 170px;    /* how much a building goes up next to the previous one (the zig-zag) */
+  position: relative; z-index: 1;
+  width: 100%; max-width: 1500px; margin: 0 auto; flex: 1;
+  display: flex; flex-direction: column;
+  padding: 10px 0 clamp(70px, 10vh, 110px);
+}
+.village > .place { width: var(--w); }
+.village > .place--left  { margin-left: var(--side); }
+.village > .place--right { margin-left: calc(100% - var(--w) - var(--side)); }
+.village > .place + .place { margin-top: calc(var(--overlap) * -1); }
+@media (max-width: 1050px) { .village { --w: 41%; --side: 1.5%; --overlap: 150px; } }
+@media (max-width: 640px)  {
+  .village { --w: 82%; --side: 0%; --overlap: -34px; }   /* no overlap: one under the other, 34px apart */
+}
+@media (orientation: landscape) and (max-height: 520px) { .village { --w: 41%; --overlap: 110px; } }
+
+/* the country road and what stands next to it (drawn by assets/js/road.js; the colors of the road
+   are the ones of the road in assets/img/peisaj.svg, so the two look like one road) */
+.village-road { position: absolute; left: 0; top: 0; width: 100%; z-index: 0; pointer-events: none; overflow: visible; }
+/* the things of the village are a little paler than the buildings of the games */
+.village-road .vr-scenery { opacity: 0.82; }
+.village-road .vr-shadow { fill: rgba(60, 80, 30, 0.22); }
+.village-road .vr-sign-post { fill: #8a5a32; }
+.village-road .vr-sign-board { stroke: #fffaf0; stroke-width: 2; stroke-linejoin: round; }
+.village-road .vr-sign-arrow { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.village-road .vr-ground-shadow { fill: rgba(70, 100, 40, 0.2); }
+.village-road .vr-earth { fill: #dcc196; stroke: #b98f5a; stroke-width: 3; stroke-linejoin: round; }
+.village-road .vr-earth--open { stroke: none; }
+.village-road .vr-rim { fill: none; stroke: #b98f5a; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.village-road .vr-light { fill: #e8d4ab; }
+.village-road .vr-rut { fill: none; stroke: #c4a06a; stroke-width: 3; stroke-linecap: round; opacity: 0.5; }
+.village-road .vr-border-stone { fill: #cfc4b2; stroke: #a99a83; stroke-width: 1; }
+.village-road .vr-pebble { fill: #c2a77a; }
+.village-road .vr-tuft { fill: none; stroke: #6aa84a; stroke-width: 2; stroke-linecap: round; }
+.village-road .vr-flower { fill: #fff; }
+.village-road .vr-flower--2 { fill: #ffe066; }
+.village-road .vr-flower--3 { fill: #ff9eb5; }
+
+/* the life of the village in the free places (drawn by assets/js/scenery.js) */
+.village-road .sc-shadow { fill: rgba(60, 80, 30, 0.2); }
+.village-road .sc-trunk { fill: #7a4a22; }
+.village-road .sc-leaf { fill: #4f9a3e; }
+.village-road .sc-leaf-light { fill: #63ad4a; }
+.village-road .sc-leaf-small { fill: #4f9a3e; }
+.village-road .sc-apple circle { fill: #d9302b; }
+.village-road .sc-fir { fill: #2f6e35; }
+.village-road .sc-fir-light { fill: #3f8a42; }
+.village-road .sc-legs { stroke: #3b3030; stroke-width: 2.5; stroke-linecap: round; }
+.village-road .sc-legs-thick { stroke: #3b3030; stroke-width: 4; stroke-linecap: round; }
+.village-road .sc-wool circle { fill: #fbfaf5; stroke: #d9d6cb; stroke-width: 1; }
+.village-road .sc-face { fill: #3b3030; }
+.village-road .sc-eye { fill: #fff; }
+.village-road .sc-cow { fill: #fbfaf5; stroke: #cfc9bb; stroke-width: 1; }
+.village-road .sc-spot { fill: #3b3030; }
+.village-road .sc-muzzle { fill: #f2b8b0; }
+.village-road .sc-tail { fill: none; stroke: #3b3030; stroke-width: 2; stroke-linecap: round; }
+.village-road .sc-horn { stroke: #e6d6b0; stroke-width: 2.5; stroke-linecap: round; }
+.village-road .sc-cow .sc-eye, .village-road .sc-cow ~ .sc-eye { fill: #3b3030; }
+.village-road .sc-hen { fill: #fbfaf5; stroke: #d9d6cb; stroke-width: 0.8; }
+.village-road .sc-hen-brown { fill: #b36a32; }
+.village-road .sc-hen-leg { stroke: #e0a020; stroke-width: 1.5; }
+.village-road .sc-beak { fill: #f0a020; }
+.village-road .sc-comb { fill: #d9302b; stroke: #d9302b; stroke-width: 1.5; }
+.village-road .sc-pond-edge { fill: #a7cf7f; }
+.village-road .sc-water { fill: #8ccbe8; }          /* the winter mode turns it to ice */
+.village-road .sc-stone { fill: #a39b8e; }
+.village-road .sc-ripple { fill: none; stroke: #c9e9f7; stroke-width: 2; stroke-linecap: round; }
+.village-road .sc-duck { fill: #fbfaf5; }
+.village-road .sc-reed { stroke: #5f9a3a; stroke-width: 2.5; stroke-linecap: round; }
+.village-road .sc-cattail { stroke: #7a4a22; stroke-width: 4.5; stroke-linecap: round; }
+.village-road .sc-plank { fill: #8a5a32; }
+.village-road .sc-hive-yellow { fill: #f2c84b; }
+.village-road .sc-hive-blue { fill: #5b9bd5; }
+.village-road .sc-hive-red { fill: #d9534f; }
+.village-road .sc-hive-roof { fill: #7a4a22; }
+.village-road .sc-ink { fill: #3b3030; }
+.village-road .sc-bee { fill: #3b3030; }
+.village-road .sc-hay { fill: #d9b25a; }
+.village-road .sc-hay-dark { fill: #c29a45; }
+.village-road .sc-hay-line { fill: none; stroke: #b88d3a; stroke-width: 2; stroke-linecap: round; }
+.village-road .sc-cart { fill: #8a5a32; }
+.village-road .sc-shaft { stroke: #8a5a32; stroke-width: 3.5; stroke-linecap: round; }
+.village-road .sc-wheel { fill: none; stroke: #6b4426; stroke-width: 3.5; }
+.village-road .sc-spoke { stroke: #6b4426; stroke-width: 2; }
+.village-road .sc-post { fill: none; stroke: #7a4a22; stroke-width: 4; stroke-linecap: round; }
+.village-road .sc-shirt { fill: #d9534f; }
+.village-road .sc-straw { stroke: #e3c169; stroke-width: 3; stroke-linecap: round; }
+.village-road .sc-sack { fill: #e8d3a2; }
+.village-road .sc-hat { fill: #5a3416; stroke: #5a3416; stroke-width: 2.5; stroke-linejoin: round; }
+.village-road .sc-stem { stroke: #4f8a32; stroke-width: 2.5; }
+.village-road .sc-stem-thin { fill: none; stroke: #4f8a32; stroke-width: 1.6; stroke-linecap: round; }
+.village-road .sc-petals { fill: #ffcf3a; stroke: #f0a020; stroke-width: 2; stroke-dasharray: 2 2; }
+.village-road .sc-seeds { fill: #6b4426; }
+.village-road .sc-cross { fill: none; stroke: #8a5a32; stroke-width: 5; stroke-linecap: round; }
+.village-road .sc-roof-small { fill: #5b3b22; }
+.village-road .sc-icon { fill: #e9c46a; }
+.village-road .sc-soil { fill: #b98a5a; }
+.village-road .sc-sprout { fill: #7cc35a; }
+.village-road .sc-cabbage { fill: #5a9e3e; }
+.village-road .sc-pole { stroke: #7a4a22; stroke-width: 4; stroke-linecap: round; }
+.village-road .sc-nest { fill: #9a6a3a; }
+.village-road .sc-stork { fill: #fbfaf5; }
+.village-road .sc-stork-neck { fill: none; stroke: #fbfaf5; stroke-width: 4; stroke-linecap: round; }
+.village-road .sc-stork-beak { fill: #e8572a; }
+.village-road .sc-log { fill: #a8693a; }
+.village-road .sc-log-ring { fill: #e3c08f; }
+.village-road .sc-house-wall { fill: #f7f3ea; stroke: #ddd5c3; stroke-width: 1; }
+.village-road .sc-house-roof { fill: #6b4a3a; }
+.village-road .sc-house-ridge { stroke: #4e3428; stroke-width: 3; stroke-linecap: round; }
+.village-road .sc-house-base { fill: #8fb7d9; }
+.village-road .sc-house-window { fill: #bfe0f5; stroke: #2f6db0; stroke-width: 2; }
+.village-road .sc-house-cross { stroke: #2f6db0; stroke-width: 1.5; }
+.village-road .sc-house-door { fill: #6b4426; }
+.village-road .sc-house-band { stroke: #2f6db0; stroke-width: 2.5; }
+.village-road .sc-house-post { stroke: #8a5a32; stroke-width: 2.5; }
+.village-road .sc-mill { fill: #b07a45; stroke: #7a4a22; stroke-width: 1.5; }
+.village-road .sc-mill-roof { fill: #5b3b22; }
+.village-road .sc-sail-arm { stroke: #6b4426; stroke-width: 2.5; }
+.village-road .sc-sail { fill: #f3ead7; stroke: #a8936f; stroke-width: 1; }
+.village-road .sc-horse { fill: #8a5532; }
+.village-road .sc-horse-leg { stroke: #6b3f22; stroke-width: 4; stroke-linecap: round; }
+.village-road .sc-mane { fill: #3b2a20; }
+.village-road .sc-horse-tail { fill: none; stroke: #3b2a20; stroke-width: 3.5; stroke-linecap: round; }
+.village-road .sc-kennel { fill: #c7884f; stroke: #7a4a22; stroke-width: 1.5; }
+.village-road .sc-kennel-roof { fill: #b9472f; }
+.village-road .sc-dog { fill: #e3b67a; }
+.village-road .sc-dog-ear { fill: none; stroke: #a8763f; stroke-width: 3; stroke-linecap: round; }
+.village-road .sc-dog-tail { fill: none; stroke: #e3b67a; stroke-width: 3; stroke-linecap: round; }
+.village-road .sc-bench { fill: #9a6a3a; }
+.village-road .sc-bench-leg { stroke: #6b4426; stroke-width: 2.5; stroke-linecap: round; }
+.village-road .sc-line { fill: none; stroke: #8a8f98; stroke-width: 1.2; }
+.village-road .sc-ie { fill: #fbfaf5; stroke: #d9d6cb; stroke-width: 1; }
+.village-road .sc-embroidery { fill: none; stroke: #d9302b; stroke-width: 1.8; stroke-dasharray: 2 1.5; }
+.village-road .sc-embroidery--2 { stroke: #2f2a6a; }
+.village-road .sc-rabbit { fill: #b8a48c; }
+.village-road .sc-tail-white { fill: #fff; }
+.village-road .sc-stalk { fill: #f3ead7; }
+.village-road .sc-cap { fill: #d9302b; }
+.village-road .sc-dot { fill: #fff; }
+.village-road .sc-wing-1 { fill: #ffcf3a; }
+.village-road .sc-wing-2 { fill: #ff9eb5; }
+.village-road .sc-wing-3 { fill: #8fb8ff; }
+.village-road .sc-ink-line { stroke: #3b3030; stroke-width: 1.4; stroke-linecap: round; }
+.village-road .sc-flower-white { fill: #fff; }
+.village-road .sc-flower-yellow { fill: #ffe066; }
+.village-road .sc-flower-pink { fill: #ff9eb5; }
+.village-road .sc-flower-blue { fill: #8fb8ff; }
+
+/* ---------- "Vezi tot satul": a button at the bottom of the screen that shows there is more below ----------
+   shown by assets/js/scroll-hint.js only while the page is at the top and something is hidden below;
+   a tap scrolls to the next buildings */
+.scroll-hint {
+  position: fixed; z-index: 20; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 48px; padding: 10px 22px; border: 0; border-radius: 999px;
+  background: var(--wood-dark); color: #fff;
+  font: 700 1.05rem "Atkinson Hyperlegible", system-ui, sans-serif;
+  box-shadow: 0 6px 16px rgba(43, 42, 58, 0.3);
+  cursor: pointer;
+  transform: translateX(-50%);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.scroll-hint[hidden] { display: none; }
+.scroll-hint.is-gone { opacity: 0; transform: translate(-50%, 20px); pointer-events: none; }
+/* wide screens: in the bottom right corner, where it does not cover a building */
+@media (min-width: 641px) {
+  .scroll-hint { left: auto; right: 24px; transform: none; }
+  .scroll-hint.is-gone { transform: translateY(20px); }
+}
+.scroll-hint__arrow { display: inline-block; animation: hint-bounce 1.4s ease-in-out infinite; }
+@keyframes hint-bounce { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(4px); } }
+
+/* ---------- Footer: a wooden fence and the name of the teacher ---------- */
+.site-footer {
+  position: relative; z-index: 1; margin-top: auto;
+  background: #6d9e45; color: #fff;
+  text-align: center; font-weight: 700; font-size: 1rem;
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+}
+.site-footer::before {   /* the wooden fence on top of the footer: one picket + two rails, repeated */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 40px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 40'%3E%3Crect x='0' y='12' width='32' height='6' fill='%23b5763c'/%3E%3Crect x='0' y='28' width='32' height='6' fill='%23b5763c'/%3E%3Cpath d='M9 40 V8 L16 1 L23 8 V40 Z' fill='%23d39a5c' stroke='%237a4a22' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x left bottom / 32px 40px;
+  pointer-events: none;
+}
+.site-footer p { margin: 0; }
+
+/* ---------- Phones held upright ---------- */
+@media (max-width: 600px) {
+  :root { --land-h: 300px; }
+  body { font-size: 17px; }
+  .landscape__sun { width: 56px; height: 56px; right: 6%; top: 16px; }
+  .sign__bubu { right: -6px; top: -58px; }
+  .bubble { right: 4px; top: -94px; font-size: 0.95rem; }
+}
+
+/* ---------- Phones turned sideways: a short screen, so a small sign on the left
+   and the first buildings visible without scrolling ---------- */
+@media (orientation: landscape) and (max-height: 520px) {
+  :root { --land-h: 190px; }
+  .landscape__sun { width: 46px; height: 46px; top: 8px; }
+  .entrance { justify-content: flex-start; padding-left: 6vw; }
+  .sign__title { font-size: 1.7rem; }
+  .sign__sub { font-size: 0.85rem; }
+  .sign__board { padding: 7px 22px 6px; }
+  .sign__posts { height: 12px; }
+  .sign__bubu { width: 56px; right: -30px; top: -34px; }
+  .cloud { zoom: 0.7; }                     /* smaller clouds (zoom: the animation already uses transform) */
+  .cloud:nth-of-type(4) { display: none; }  /* the lowest cloud would cover the road */
+  .bubble { display: none; }
+  .village { padding-top: 0; }
+  .scroll-hint { bottom: 10px; right: 14px; min-height: 42px; padding: 7px 18px; font-size: 0.95rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@media print {
+  .landscape, .scroll-hint { display: none; }
+  body { background: #fff; }
+}
