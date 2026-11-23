@@ -1,0 +1,4 @@
+[submodule "trenul-lui-bubu"]
+	path = trenul-lui-bubu
+	url = https://github.com/rstefan1/trenul-lui-bubu.git
+	branch = master
