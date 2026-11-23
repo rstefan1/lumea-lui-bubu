@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+  Page shown by Cloudflare Pages when an address does not exist (e.g. /joc-99).
+  Without this file Pages would show the home page for every wrong address.
+  It uses absolute paths ("/assets/...") because it can be served at any address.
+-->
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Pagina nu există – Lumea lui Bubu</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/icon-192.png" type="image/png" sizes="192x192">
+<meta name="theme-color" content="#8fd0f5">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/village.css">
+<link rel="stylesheet" href="/assets/css/buildings.css">
+<style>
+  /* only on this page: the message and the big button back to the village */
+  .lost { position: relative; z-index: 1; flex: 1; display: flex; justify-content: center; padding: 28px 16px 90px; }
+  .lost .place__info { margin-top: 0; }
+  .lost .place__title { font-size: 1.8rem; }
+</style>
+</head>
+<body>
+
+<div class="landscape" aria-hidden="true">
+  <span class="landscape__sun"></span>
+  <span class="cloud" style="top:9%; --dur:110s; --delay:-30s"></span>
+  <span class="cloud" style="top:22%; --dur:140s; --delay:-95s"></span>
+</div>
+
+<header class="entrance">
+  <div class="sign">
+    <p class="bubble">Aici nu e nimic!</p>
+    <img class="sign__bubu" src="/assets/img/bubu.webp" alt="Bubu, buburuza de pluș" width="320" height="320">
+    <div class="sign__board">
+      <p class="sign__title">Lumea lui Bubu</p>
+      <p class="sign__sub">Satul jocurilor</p>
+    </div>
+    <div class="sign__posts" aria-hidden="true"></div>
+  </div>
+</header>
+
+<main class="lost">
+  <a class="place" href="/" style="width:auto">
+    <span class="place__info">
+      <span class="place__title">Pagina nu există</span>
+      <span class="place__desc">Adresa scrisă nu duce nicăieri în satul lui Bubu.</span>
+      <span class="place__btn">Înapoi în sat ➜</span>
+    </span>
+  </a>
+</main>
+
+<footer class="site-footer">
+  <p>prof. ing. Robert Ștefan</p>
+</footer>
+</body>
+</html>

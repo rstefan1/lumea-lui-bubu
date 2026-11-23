@@ -1,0 +1,21 @@
+# Cloudflare Pages: headers added to the files of the site (this file itself is not published).
+
+# Every file: small security settings that do not change how the site works.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# The pictures of the village change very rarely: the browsers keep them for a week,
+# so the children do not download them again at every visit
+# (a changed picture needs a new file name, or it is seen only after a week).
+/assets/img/*
+  Cache-Control: public, max-age=604800
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+# The copy of the site at *.pages.dev must not appear in search engines (only bubu.infoticedu.ro).
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex

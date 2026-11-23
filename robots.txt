@@ -1,0 +1,3 @@
+# Search engines may read the whole site (the sitemap will be added later).
+User-agent: *
+Allow: /
