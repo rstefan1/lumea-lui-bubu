@@ -12,11 +12,13 @@ Plain static HTML, CSS and JavaScript: no build step.
 index.html              the village
 404.html                page for addresses that do not exist
 data/places.js          the buildings of the village (one per game)
+data/modes.js           the mode of the village (winter, Christmas ...): by hand or by calendar
 assets/js/buildings.js  draws the buildings
 assets/js/road.js       the country road between them
 assets/js/scenery.js    fields, trees, animals ... in the free places
 assets/js/season-shapes.js  snow, lights and ornaments carried (hidden) by the drawings
 assets/js/scroll-hint.js  the "Vezi tot satul" button
+assets/js/modes.js      turns on the chosen mode, lets the snowflakes fall
 assets/css/             village.css, buildings.css
 assets/img/landscape.svg  the landscape at the top (drawn by tools/draw-landscape.py)
 _headers, robots.txt    settings for Cloudflare Pages and search engines

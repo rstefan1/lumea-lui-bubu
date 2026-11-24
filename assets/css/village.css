@@ -324,6 +324,42 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 .scroll-hint__arrow { display: inline-block; animation: hint-bounce 1.4s ease-in-out infinite; }
 @keyframes hint-bounce { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(4px); } }
 
+/* ---------- Things falling over the page: snowflakes, petals, leaves ...
+   made by assets/js/modes.js only when a mode asks for them (--falling-count in modes/<name>/mode.css);
+   the mode also says how they look (.falling__item, .falling__item--big).
+   Each one moves only with "transform" (done by the graphics card), in one of three gentle zig-zags. ---------- */
+.falling {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 15;
+  pointer-events: none; overflow: hidden; contain: strict;
+}
+.falling__item {
+  position: absolute; top: -24px; display: block;
+  border-radius: 50%; background: #fff;
+  animation: falling-1 12s linear infinite;
+}
+.falling__item--2 { animation-name: falling-2; }
+.falling__item--3 { animation-name: falling-3; }
+@keyframes falling-1 {
+  0% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(16px, 27vh, 0); }
+  50% { transform: translate3d(-6px, 54vh, 0); }
+  75% { transform: translate3d(14px, 81vh, 0); }
+  100% { transform: translate3d(0, calc(100vh + 48px), 0); }
+}
+@keyframes falling-2 {
+  0% { transform: translate3d(0, 0, 0); }
+  30% { transform: translate3d(-18px, 32vh, 0); }
+  60% { transform: translate3d(4px, 64vh, 0); }
+  100% { transform: translate3d(-12px, calc(100vh + 48px), 0); }
+}
+@keyframes falling-3 {
+  0% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(8px, 21vh, 0); }
+  45% { transform: translate3d(22px, 48vh, 0); }
+  70% { transform: translate3d(6px, 75vh, 0); }
+  100% { transform: translate3d(18px, calc(100vh + 48px), 0); }
+}
+
 /* ---------- Footer: a wooden fence and the name of the teacher ---------- */
 .site-footer {
   position: relative; z-index: 1; margin-top: auto;
@@ -369,6 +405,6 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 @media print {
-  .landscape, .scroll-hint { display: none; }
+  .landscape, .scroll-hint, .falling { display: none; }
   body { background: #fff; }
 }
