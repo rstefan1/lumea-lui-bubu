@@ -13,10 +13,10 @@
                       "june"       the month of the children: flowers, children with balloons, little flags
                       "july"       the wheat harvest: golden fields, sheaves of wheat
                       "august"     watermelons, plums on the trees
-                      "september"  the trees start to turn yellow, pumpkins, grapes
+                      "september"  the beginning of autumn: golden fields, corn, baskets, birds flying south
                       "october"    the colors of autumn, leaves falling
                       "november"   the autumn of October, with puddles after the rain
-                      "december"   Christmas: snow, decorated fir trees, lights on the houses
+                      "december"   Christmas: snow, decorated fir trees, lights on the houses, sleds
                     Every mode is a folder in modes/ (modes/january/, modes/march/ ...);
                     modes/README.md tells how to change one or make a new one.
 

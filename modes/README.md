@@ -14,12 +14,12 @@ The games and the buildings stay the same; only the look changes.
 | `june`      | the month of the children: flowers, children with balloons, little flags on the boards, balloons flying up |
 | `july`      | the wheat harvest: golden fields, sheaves of wheat, a sheaf on the boards |
 | `august`    | watermelons in the grass, plums on the trees, a slice of watermelon on the boards |
-| `september` | the trees start to turn yellow, pumpkins, ripe apples, grapes on the boards |
+| `september` | the beginning of autumn: golden mowed fields, trees turning yellow, stooks of corn stalks, baskets of apples and grapes, pumpkins, flocks of birds flying south, children with school bags |
 | `october`   | yellow, red and copper trees, ochre fields, fallen and falling leaves, garlands of leaves |
 | `november`  | the autumn of October, with puddles everywhere shining with the blue of the sky, full ponds, a muddy road |
-| `december`  | Christmas: the snowy village of January, plus colored balls and a star on every fir tree, lights on the roofs, garlands of lights on the boards |
+| `december`  | Christmas: the snowy village of January, plus colored balls and a star on every fir tree, lights on the roofs, garlands of lights on the boards, children on sleds |
 
-Every mode has the name of its month. With the usual setting the mode changes by itself every month
+Every mode has the name of its month. Children of the village play in every month. With the usual setting the mode changes by itself every month
 (only `december`, with Christmas, lasts until the 7th of January).
 
 ## Choosing the mode
@@ -59,7 +59,8 @@ to see the change. The pictures of a mode (`.svg`) are in its folder too.
    - the hidden shapes carried by every drawing, shown with `display: inline`: `.snow`, `.lights`, `.ornaments`,
      `.bow` and the snowman `.village-road .sc-item--snowman`;
    - small patches in the free places of the village, with `--patches`: `snowdrops`, `blooms`, `puddles`, `sheaves`,
-     `watermelons`, `pumpkins`, `leaves`, `bugs` (bees and ladybugs), `children` (with balloons), `sleds`,
+     `watermelons`, `pumpkins`, `leaves`, `bugs` (bees and ladybugs), `children` (with balloons), `kids` (waving; they wear woolly hats with
+     `.village-road .sc-child-hat { display: inline; }` and school bags with `.sc-child-bag`), `sleds`, `corn`, `baskets`,
      e.g. `--patches: blooms bugs;`; a kind with a `?` after it grows only here and there (`--patches: sleds snowdrops?;`);
    - hiding a thing of the village: `.village-road .sc-item--sunflowers { display: none; }`;
    - things falling over the page: `--falling-count`, `--falling-time`, `--falling-big` and their look,
