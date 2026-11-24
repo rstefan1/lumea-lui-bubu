@@ -332,17 +332,21 @@
       '<path d="M-3.6 0 A3.6 3.6 0 0 1 3.6 0 Z" class="sc-ladybug"/><path d="M0 0 V-3.6" class="sc-ladybug-line"/>' +
       '<path d="' + circle(-1.8, -1.4, 0.7) + circle(1.6, -2.2, 0.7) + circle(1.9, -0.6, 0.6) + '" class="sc-bug-ink"/></g>';
   }
-  // a child of the village with a balloon (on some patches)
+  // a child of the village: with a balloon ("children"), or waving ("kids"); it also carries a woolly hat and
+  // a school bag, hidden until a mode shows them (.sc-child-hat in winter, .sc-child-bag in September)
   var CLOTHES = ["red", "yellow", "blue", "pink", "purple", "white"];
-  function child(random) {
+  function child(random, balloon) {
     var x = -10 + random() * 20, c = CLOTHES[Math.floor(random() * CLOTHES.length)], b = CLOTHES[Math.floor(random() * 5)];
     var dress = random() < 0.5, d = random() < 0.5 ? -1 : 1;
+    var arms = balloon ? "M-3 -15 L" + r(-6 * d) + " -10 M3 -15 L" + r(6 * d) + " -19" : "M-3 -15 L-7 -21 M3 -15 L7 -21";
     return '<g class="sc-child" transform="translate(' + r(x) + ' 0)">' +
-      '<path d="M-2 0 V-7 M2 0 V-7 M-3 -15 L' + r(-6 * d) + " -10 M3 -15 L" + r(6 * d) + " " + r(-19) + '" class="sc-child-limb"/>' +
-      '<path d="M' + r(6 * d) + " -19 Q" + r(8 * d) + " -25 " + r(7 * d) + ' -31" class="sc-child-string"/>' +
-      '<ellipse cx="' + r(7 * d) + '" cy="-35" rx="3.6" ry="4.4" class="sc-bl-' + b + '"/>' +
+      '<path d="M-2 0 V-7 M2 0 V-7 ' + arms + '" class="sc-child-limb"/>' +
+      (balloon ? '<path d="M' + r(6 * d) + " -19 Q" + r(8 * d) + " -25 " + r(7 * d) + ' -31" class="sc-child-string"/>' +
+        '<ellipse cx="' + r(7 * d) + '" cy="-35" rx="3.6" ry="4.4" class="sc-bl-' + b + '"/>' : "") +
+      '<rect x="' + r(-3.5 - 3 * d) + '" y="-17" width="7" height="8" rx="1.5" class="sc-child-bag sc-bl-' + b + '"/>' +
       (dress ? '<path d="M-2.5 -17 H2.5 L5 -6 H-5 Z" class="sc-bl-' + c + '"/>' : '<rect x="-3.5" y="-17" width="7" height="10" rx="2" class="sc-bl-' + c + '"/>') +
-      '<circle cx="0" cy="-20.5" r="3.4" class="sc-child-skin"/><path d="M-3.4 -21 Q0 -26.5 3.4 -21 Q0 -23 -3.4 -21 Z" class="sc-child-hair"/></g>';
+      '<circle cx="0" cy="-20.5" r="3.4" class="sc-child-skin"/><path d="M-3.4 -21 Q0 -26.5 3.4 -21 Q0 -23 -3.4 -21 Z" class="sc-child-hair"/>' +
+      '<g class="sc-child-hat"><path d="M-3.8 -21 Q0 -27.4 3.8 -21 Z" class="sc-bl-' + b + '"/><circle cx="0" cy="-25.6" r="1.3" class="sc-bl-white"/></g></g>';
   }
   // sheaves of wheat standing in the stubble after the harvest
   function sheaves(random) {
@@ -430,7 +434,8 @@
       var sparse = kind === "pumpkins" || kind === "watermelons";                // not on every patch: a field is not a garden
       if (PATCHES[kind] && !(sparse && random() < 0.45)) { out += PATCHES[kind](random); }
       if (kind === "bugs" && random() < 0.4) { out += bug(random); }          // a bee or a ladybug on some patches
-      if (kind === "children" && random() < 0.3) { out += child(random); }    // a child on some patches
+      if (kind === "children" && random() < 0.3) { out += child(random, true); }   // a child with a balloon on some patches
+      if (kind === "kids") { out += child(random, false); }                        // a child waving (use "kids?": here and there)
     });
     return out;
   }

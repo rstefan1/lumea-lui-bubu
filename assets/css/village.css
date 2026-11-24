@@ -326,6 +326,7 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 .village-road .sc-child-skin { fill: #f3c9a6; }
 .village-road .sc-child-hair { fill: #6b4426; }
 .village-road .sc-child-string { fill: none; stroke: #8a8f98; stroke-width: 0.6; }
+.village-road .sc-child-hat, .village-road .sc-child-bag { display: none; }
 .village-road .sc-wheat { fill: #e8c25a; stroke: #c99a35; stroke-width: 0.8; }
 .village-road .sc-wheat-band { stroke: #a8762c; stroke-width: 1.6; }
 .village-road .sc-wheat-ears { stroke: #d9ad45; stroke-width: 1.4; stroke-linecap: round; }
