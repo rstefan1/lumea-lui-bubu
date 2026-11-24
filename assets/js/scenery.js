@@ -4,9 +4,9 @@
    - strips of fields in slightly different greens (and a mowed, yellowish one), like on the hills at the top;
    - next to the games only hens, sheep, a few cows, fruit trees, haystacks and fir trees (the games stay the main thing);
    - under the last game, the rest of a village in Bucovina: trees, an apple tree, fir trees (alone or in groups
-     of 3 and 5), small ponds (bălți, frozen in winter), peasant houses, a windmill, a bench under a tree,
+     of 3 and 5), small ponds, peasant houses, a windmill, a bench under a tree,
      a clothes line with traditional shirts, mushrooms, sheep, cows, hens, a pond, beehives, a cart with hay,
-     a scarecrow, sunflowers, a wayside cross (troiță), a vegetable garden, a pile of wood, flowers.
+     a scarecrow, sunflowers, a wayside cross, a vegetable garden, a pile of wood, flowers.
 
    assets/js/road.js calls window.VILLAGE_SCENERY.fill(...) every time it draws the road, and gives it the
    places that are taken (the buildings with their names and buttons, the road, the paths) and where the games end. The free places
@@ -77,7 +77,7 @@
         '<path d="M44 -18 V-44 M48 -16 V-38 M52 -20 V-40 M-48 -16 V-36 M-44 -18 V-42" class="sc-reed"/>' +
         '<path d="M44 -44 v-8 M-44 -42 v-8" class="sc-cattail"/>';
     } },
-    // small ponds (bălți): an uneven edge, the water, a light reflection, reeds and stones;
+    // small ponds: an uneven edge, the water, a light reflection, reeds and stones;
     // the water has the class "sc-water", so the winter mode can freeze it
     puddle: { w: 64, h: 26, draw: function () {
       return '<path d="M-28 -10 C-30 -20 -14 -24 0 -22 C14 -25 30 -20 29 -11 C30 -2 12 1 -2 0 C-16 1 -27 -2 -28 -10 Z" class="sc-pond-edge"/>' +
@@ -119,7 +119,7 @@
         '<rect x="-17" y="-12" width="34" height="4" rx="1" class="sc-bench"/><rect x="-17" y="-22" width="34" height="4" rx="1" class="sc-bench"/>' +
         '<path d="M-14 -10 V-22 M14 -10 V-22" class="sc-bench-leg"/></g>';
     } },
-    // a clothes line with traditional shirts (ii) and an embroidered towel (ștergar)
+    // a clothes line with traditional embroidered shirts and an embroidered towel
     clothes: { w: 104, h: 58, draw: function () {
       return '<path d="M-48 0 V-52 M48 0 V-52" class="sc-post"/><path d="M-48 -48 Q0 -40 48 -48" class="sc-line"/>' +
         '<g transform="translate(-26 -46)"><path d="M-12 0 H12 L16 8 L10 10 V28 H-10 V10 L-16 8 Z" class="sc-ie"/><path d="M-10 14 H10 M-6 4 V24 M6 4 V24" class="sc-embroidery"/></g>' +

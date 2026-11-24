@@ -41,7 +41,7 @@ def fir(x, base, h, dark="#3f7440", light="#4f8a4a"):
 
 
 def haystack(x, base, h):
-    """A haystack (căpiță): a rounded cone, two darker rings and the pole sticking out at the top."""
+    """A haystack: a rounded cone, two darker rings and the pole sticking out at the top."""
     w = h * 0.78
     return (f'<path d="M{f(x)} {f(base - h - h * 0.16)} V{f(base - h + 3)}" stroke="#7a4a22" stroke-width="{f(max(1.2, h * 0.05))}" stroke-linecap="round"/>'
             f'<path d="M{f(x - w / 2)} {f(base)} Q{f(x - w * 0.52)} {f(base - h * 0.62)} {f(x)} {f(base - h)} '

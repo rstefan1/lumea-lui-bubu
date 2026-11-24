@@ -44,7 +44,7 @@
       '<circle cx="' + x + '" cy="' + (base - r * 0.9) + '" r="' + r + '" class="b-bush-light"/>';
   }
 
-  // a haystack (căpiță de fân) standing at (x, base), h high, with the pole sticking out at the top
+  // a haystack standing at (x, base), h high, with the pole sticking out at the top
   function haystack(x, base, h) {
     var w = h * 0.78;
     return '<path d="M' + x + ' ' + (base - h - 8) + ' V' + (base - h + 4) + '" class="b-hay-pole"/>' +
