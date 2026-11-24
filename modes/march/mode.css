@@ -16,7 +16,7 @@
   --string-white: #ffffff;
 
   /* what grows in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
-  --patches: snowdrops;
+  --patches: snowdrops kids?;
 
   /* the leafy trees: fresh, light green of early spring */
   --young-leaf: #7cc35a;

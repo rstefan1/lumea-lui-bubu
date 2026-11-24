@@ -12,7 +12,7 @@
 /* ============================== SETTINGS ============================== */
 :root {
   /* what grows in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
-  --patches: blooms;
+  --patches: blooms kids?;
 
   /* the fruit trees in blossom */
   --blossom: #f7c6d9;

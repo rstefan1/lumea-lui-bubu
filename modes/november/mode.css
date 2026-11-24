@@ -13,7 +13,7 @@
 /* ============================== SETTINGS ============================== */
 :root {
   /* what is in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
-  --patches: puddles leaves;
+  --patches: puddles leaves kids?;
 
   /* the water of the puddles and of the ponds, with the sky shining in it */
   --puddle: #8ccbee;

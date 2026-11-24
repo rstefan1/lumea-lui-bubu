@@ -15,7 +15,7 @@
   --falling-count: 0;
 
   /* what is in the snow (the kinds: see PATCHES in assets/js/scenery.js; "?" = only here and there) */
-  --patches: sleds snowdrops?;
+  --patches: sleds snowdrops? kids?;
 
   /* a clear sky: at the very top, and down near the hills */
   --sky-top: #6fb4ea;

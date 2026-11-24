@@ -37,6 +37,10 @@
   --falling-count: 45;   /* how many on a big screen (phones and old devices get fewer); 0 = no snowflakes */
   --falling-time: 14;    /* seconds for a snowflake to fall from the top to the bottom: bigger = slower */
   --falling-big: 15;     /* out of 100 snowflakes, how many are big six-armed stars (the rest are small dots) */
+
+  /* what is in the snow: children with woolly hats, here and there (the kinds: see PATCHES in assets/js/scenery.js;
+     "?" = only here and there) */
+  --patches: kids? sleds?;
 }
 /* ====================== no need to change below ======================= */
 
@@ -49,6 +53,7 @@
 /* ---------- The snow on everything (the hidden shapes of assets/js/season-shapes.js) and the snowmen ---------- */
 .snow, .village-road .sc-item--snowman { display: inline; }
 .snow { fill: var(--snow); stroke: var(--snow-shade); }
+.village-road .sc-child-hat { display: inline; }      /* the children wear woolly hats */
 .village-road .sc-snowman { fill: var(--snow); stroke: var(--snow-shade); }
 
 /* ---------- The fields and the yards of the buildings: snow ---------- */

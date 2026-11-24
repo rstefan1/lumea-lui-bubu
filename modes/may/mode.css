@@ -13,7 +13,7 @@
 /* ============================== SETTINGS ============================== */
 :root {
   /* what grows (and lives) in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
-  --patches: blooms bugs;
+  --patches: blooms bugs kids?;
 
   /* all the trees green again (the blossom of April is over) */
   --blossom: #5fae45;

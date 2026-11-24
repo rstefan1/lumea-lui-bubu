@@ -12,7 +12,7 @@
 /* ============================== SETTINGS ============================== */
 :root {
   /* what is in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
-  --patches: blooms children;
+  --patches: blooms children kids?;
 
   /* the balloons flying up over the page */
   --balloon-1: #ff4d6d;
