@@ -1,0 +1,82 @@
+/* =====================================================================
+   modes/october/mode.css – the OCTOBER mode: the colors of autumn.
+   The leafy trees yellow, reddish and copper, ochre and brown fields, fallen leaves in the grass and
+   a few leaves falling, pumpkins, garlands of autumn leaves on the entrance sign and on the boards of the games.
+   It is loaded only when the October mode is on (data/modes.js).
+
+   To change how October looks, change only the SETTINGS just below:
+   a color is written like #e8892a (pick one at https://htmlcolorcodes.com), a number is just a number.
+   The garland is the picture modes/october/leaves.svg; the picture at the top is modes/october/landscape.svg
+   (drawn by tools/draw-landscape.py).
+   ===================================================================== */
+
+/* ============================== SETTINGS ============================== */
+:root {
+  /* what is in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
+  --patches: leaves pumpkins;
+
+  /* the sky: at the very top, and down near the hills (a warm, golden autumn light) */
+  --sky-top: #8fc6ec;
+  --sky-low: #f6ecd6;
+
+  /* the grass of the village
+     (--field must stay the same as the bottom edge of the picture at the top, modes/october/landscape.svg) */
+  --field: #b9c98e;
+  --field-low: #a9bb7c;
+
+  /* the leaves of the trees and of the bushes */
+  --leaf-yellow: #f2b83a;
+  --leaf-red: #d9532b;
+  --leaf-copper: #c8742b;
+
+  /* the leaves falling over the page */
+  --falling-count: 14;   /* how many on a big screen (phones and old devices get fewer); 0 = none */
+  --falling-time: 16;    /* seconds for a leaf to fall from the top to the bottom: bigger = slower */
+  --falling-big: 100;    /* (all of them are big enough to be seen) */
+}
+/* ====================== no need to change below ======================= */
+
+
+.landscape { background-image: url("landscape.svg"); }
+
+/* ---------- The fields and the yards of the buildings ---------- */
+.village-road .sc-field--1 { fill: var(--field); }
+.village-road .sc-field--2 { fill: #c4bf7e; }
+.village-road .sc-field--3 { fill: #b0c486; }
+.village-road .sc-field--4 { fill: #cdb67a; }
+.village-road .sc-field--5 { fill: #bccb90; }
+.village-road .sc-field--6 { fill: #b89a6e; }
+.village-road .vr-yard-in { stop-color: #d6dca8; }
+.village-road .vr-yard-out { stop-color: #c8d29c; }
+.village-road .vr-tuft { stroke: #8a9a4a; }
+.village-road .vr-flower, .village-road .sc-item--flowers, .village-road .sc-item--sunflowers { display: none; }
+
+/* ---------- The trees and the bushes: yellow, red and copper ---------- */
+.village-road .sc-leaf, .village-road .sc-leaf-small { fill: var(--leaf-copper); }
+.village-road .sc-leaf-light { fill: var(--leaf-yellow); }
+.village-road .sc-item--apple .sc-leaf { fill: var(--leaf-red); }
+.village-road .sc-item--apple .sc-leaf-light { fill: #ec8a3a; }
+.village-road .sc-apple { display: none; }
+.place .b-bush { fill: var(--leaf-copper); }
+.place .b-bush-light { fill: var(--leaf-yellow); }
+
+/* ---------- Garlands of autumn leaves on the top of the entrance sign and of the board of every game ---------- */
+.place__info { position: relative; }
+.sign__board::before, .place__info::before {
+  content: ""; position: absolute; z-index: 1; left: 10px; right: 10px; top: -5px; height: 18px; pointer-events: none;
+  background: url("leaves.svg") 0 0 / 48px 18px repeat-x;
+}
+
+/* ---------- Leaves falling (made by assets/js/modes.js) ---------- */
+:root {
+  /* the shape of a leaf (written here, not in a file: browsers load mask pictures only like this everywhere);
+     the colors come from --leaf-yellow, --leaf-red and --leaf-copper */
+  --leaf-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1 C15 4 18 9 16 14 C14.6 17.4 11 18 10 19 C9 18 5.4 17.4 4 14 C2 9 5 4 10 1 Z'/%3E%3C/svg%3E");
+}
+.falling__item {
+  border-radius: 0; box-shadow: none; background: var(--leaf-yellow);
+  -webkit-mask: var(--leaf-shape) center / contain no-repeat;
+  mask: var(--leaf-shape) center / contain no-repeat;
+}
+.falling__item--2 { background: var(--leaf-red); }
+.falling__item--3 { background: var(--leaf-copper); }
