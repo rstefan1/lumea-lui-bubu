@@ -1,0 +1,36 @@
+/* =====================================================================
+   modes/august/mode.css – the AUGUST mode: the time of the fruit in the village.
+   Watermelons ripe in the grass, the plum trees full of plums, the sunflowers, the haystacks,
+   a slice of watermelon on the entrance sign and on the board of every game.
+   It is loaded only when the August mode is on (data/modes.js).
+
+   To change how August looks, change only the SETTINGS just below:
+   a color is written like #6b3fa0 (pick one at https://htmlcolorcodes.com).
+   The slice on the boards is the picture modes/august/watermelon.svg.
+   ===================================================================== */
+
+/* ============================== SETTINGS ============================== */
+:root {
+  /* what is in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
+  --patches: watermelons;
+
+  /* the fruit on the fruit trees: plums */
+  --fruit: #6b3fa0;
+
+  /* the grass, a little dry at the end of the summer */
+  --dry-field: #cfdc98;
+}
+/* ====================== no need to change below ======================= */
+
+
+.village-road .sc-apple circle { fill: var(--fruit); }
+.village-road .sc-field--3, .village-road .sc-field--5 { fill: var(--dry-field); }
+
+/* ---------- A slice of watermelon on the entrance sign and on the board of every game ---------- */
+.place__info { position: relative; }
+.sign__board::before, .place__info::before {
+  content: ""; position: absolute; z-index: 2; width: 36px; height: 22px; pointer-events: none;
+  background: url("watermelon.svg") center / contain no-repeat;
+}
+.sign__board::before { left: -12px; top: -12px; transform: rotate(-14deg); }
+.place__info::before { right: -12px; top: -12px; transform: rotate(14deg); }
