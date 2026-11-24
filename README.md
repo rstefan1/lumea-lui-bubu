@@ -26,8 +26,10 @@ _headers, robots.txt    settings for Cloudflare Pages and search engines
 
 ## The modes
 
-The village can look different for a season or a holiday: `winter` (snow, snowflakes falling) and `christmas`
-(snow, decorated fir trees, lights on the houses). `data/modes.js` chooses the mode by date (or keeps one on);
+The village looks different every month: snow and decorated fir trees at Christmas, snow in January and February,
+the red and white bows of the 1st of March, flowers in April and May, children and balloons in June, the harvest in July,
+watermelons in August, the colors of autumn from September, a cheerful rainy November.
+`data/modes.js` chooses the mode by date (or keeps one on);
 `?mode=<name>` in the address shows one without changing anything. How to change a mode or make a new one:
 [modes/README.md](modes/README.md).
 
