@@ -1,0 +1,37 @@
+/* =====================================================================
+   modes/july/mode.css – the JULY mode: the wheat harvest in the village.
+   Golden fields of ripe wheat, sheaves of wheat standing in the stubble, the haystacks, the sunflowers,
+   a sheaf of wheat on the entrance sign and on the board of every game.
+   It is loaded only when the July mode is on (data/modes.js).
+
+   To change how July looks, change only the SETTINGS just below:
+   a color is written like #e8cf72 (pick one at https://htmlcolorcodes.com).
+   The sheaf on the boards is the picture modes/july/sheaf.svg.
+   ===================================================================== */
+
+/* ============================== SETTINGS ============================== */
+:root {
+  /* what is in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
+  --patches: sheaves;
+
+  /* the fields: some green, some golden with ripe wheat, some pale with stubble after the harvest */
+  --wheat: #e8cf72;
+  --wheat-light: #f0dc8e;
+  --stubble: #e4d9a0;
+}
+/* ====================== no need to change below ======================= */
+
+
+/* ---------- The fields of the village (the first one stays green: it joins the picture at the top) ---------- */
+.village-road .sc-field--2 { fill: var(--wheat); }
+.village-road .sc-field--4 { fill: var(--stubble); }
+.village-road .sc-field--6 { fill: var(--wheat-light); }
+
+/* ---------- A sheaf of wheat on the entrance sign and on the board of every game ---------- */
+.place__info { position: relative; }
+.sign__board::before, .place__info::before {
+  content: ""; position: absolute; z-index: 2; width: 30px; height: 36px; pointer-events: none;
+  background: url("sheaf.svg") center / contain no-repeat;
+}
+.sign__board::before { left: -14px; top: -20px; transform: rotate(-12deg); }
+.place__info::before { right: -10px; top: -22px; transform: rotate(10deg); }

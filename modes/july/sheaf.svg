@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 34">
+  <!-- a sheaf of wheat tied in the middle, as after the harvest (modes/july/mode.css) -->
+  <g stroke="#c99a35" stroke-width="1.6" stroke-linecap="round" fill="none">
+    <path d="M14 33 L14 10 M14 33 L9 10 M14 33 L19 10 M14 33 L5 12 M14 33 L23 12"/>
+  </g>
+  <g fill="#e8c25a" stroke="#c99a35" stroke-width=".8">
+    <ellipse cx="14" cy="6" rx="2.4" ry="5.4"/>
+    <ellipse cx="8.4" cy="7" rx="2.2" ry="5" transform="rotate(-16 8.4 7)"/>
+    <ellipse cx="19.6" cy="7" rx="2.2" ry="5" transform="rotate(16 19.6 7)"/>
+    <ellipse cx="4" cy="9.4" rx="2" ry="4.6" transform="rotate(-30 4 9.4)"/>
+    <ellipse cx="24" cy="9.4" rx="2" ry="4.6" transform="rotate(30 24 9.4)"/>
+  </g>
+  <rect x="9" y="20" width="10" height="3.4" rx="1.2" fill="#a8762c"/>
+</svg>
