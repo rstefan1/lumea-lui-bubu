@@ -12,11 +12,15 @@
    places that are taken (the buildings with their names and buttons, the road, the paths) and where the games end. The free places
    are found on a grid of small squares, so nothing ever covers a building, a text, a button or the road.
    Every drawing stands with its feet at (0, 0); "w" and "h" are the room it needs.
+   Every drawing is a group with the classes "sc-item sc-item--<name>", so a mode of the page can hide it
+   (e.g. no sunflowers in winter); the snowman is hidden until a mode shows it. The drawings also carry
+   the seasonal shapes of assets/js/season-shapes.js (snow, lights, ornaments), hidden too.
    Nothing here moves.
    ===================================================================== */
 (function () {
   "use strict";
 
+  var S = window.SEASON_SHAPES;
   function r(v) { return Math.round(v * 10) / 10; }
 
   function shadow(rx) { return '<ellipse cx="0" cy="0" rx="' + rx + '" ry="4" class="sc-shadow"/>'; }
@@ -24,16 +28,18 @@
   function fir(x, y, h) {
     var w = h * 0.5;
     return '<rect x="' + r(x - 3) + '" y="' + r(y - h * 0.16) + '" width="6" height="' + r(h * 0.16) + '" class="sc-trunk"/>' +
-      '<path d="M' + r(x - w / 2) + " " + r(y - h * 0.14) + " L" + r(x) + " " + r(y - h * 0.62) + " L" + r(x + w / 2) + " " + r(y - h * 0.14) + ' Z" class="sc-fir"/>' +
-      '<path d="M' + r(x - w * 0.38) + " " + r(y - h * 0.42) + " L" + r(x) + " " + r(y - h * 0.84) + " L" + r(x + w * 0.38) + " " + r(y - h * 0.42) + ' Z" class="sc-fir"/>' +
-      '<path d="M' + r(x - w * 0.25) + " " + r(y - h * 0.66) + " L" + r(x) + " " + r(y - h) + " L" + r(x + w * 0.25) + " " + r(y - h * 0.66) + ' Z" class="sc-fir-light"/>';
+      '<path d="M' + r(x - w / 2) + " " + r(y - h * 0.14) + " L" + r(x) + " " + r(y - h * 0.62) + " L" + r(x + w / 2) + " " + r(y - h * 0.14) + ' Z" class="sc-fir"/>' + S.peak(x, y - h * 0.62, w / 2, h * 0.48, 0.45) +
+      '<path d="M' + r(x - w * 0.38) + " " + r(y - h * 0.42) + " L" + r(x) + " " + r(y - h * 0.84) + " L" + r(x + w * 0.38) + " " + r(y - h * 0.42) + ' Z" class="sc-fir"/>' + S.peak(x, y - h * 0.84, w * 0.38, h * 0.42, 0.45) +
+      '<path d="M' + r(x - w * 0.25) + " " + r(y - h * 0.66) + " L" + r(x) + " " + r(y - h) + " L" + r(x + w * 0.25) + " " + r(y - h * 0.66) + ' Z" class="sc-fir-light"/>' + S.peak(x, y - h, w * 0.25, h * 0.34, 0.55) +
+      S.ornaments(x, y, h, w);
   }
 
   /* ---------- The drawings ---------- */
   var ITEMS = {
     tree: { w: 66, h: 80, draw: function () {
       return '<ellipse cx="0" cy="0" rx="22" ry="4" class="sc-shadow"/><rect x="-4" y="-32" width="8" height="32" rx="2" class="sc-trunk"/>' +
-        '<circle cx="-15" cy="-42" r="16" class="sc-leaf"/><circle cx="15" cy="-44" r="15" class="sc-leaf"/><circle cx="0" cy="-58" r="20" class="sc-leaf-light"/>';
+        '<circle cx="-15" cy="-42" r="16" class="sc-leaf"/><circle cx="15" cy="-44" r="15" class="sc-leaf"/><circle cx="0" cy="-58" r="20" class="sc-leaf-light"/>' +
+        S.dome(-15, -42, 16) + S.dome(15, -44, 15) + S.dome(0, -58, 20);
     } },
     apple: { w: 66, h: 80, draw: function () {
       return ITEMS.tree.draw() + '<g class="sc-apple"><circle cx="-12" cy="-48" r="3"/><circle cx="8" cy="-60" r="3"/><circle cx="16" cy="-42" r="3"/>' +
@@ -97,12 +103,13 @@
       return shadow(44) +
         '<rect x="-38" y="-34" width="76" height="34" class="sc-house-wall"/>' +
         '<path d="M-46 -32 L-26 -70 H26 L46 -32 Z" class="sc-house-roof"/><path d="M-26 -70 H26" class="sc-house-ridge"/>' +
+        S.line([[-46, -32], [-26, -70], [26, -70], [46, -32]], 7) + S.lights([[-38, -33], [38, -33]], 11, 2.2) +
         '<rect x="-38" y="-8" width="76" height="8" class="sc-house-base"/>' +
         '<rect x="-30" y="-27" width="13" height="13" class="sc-house-window"/><path d="M-23.5 -27 V-14 M-30 -20.5 H-17" class="sc-house-cross"/>' +
         '<rect x="17" y="-27" width="13" height="13" class="sc-house-window"/><path d="M23.5 -27 V-14 M17 -20.5 H30" class="sc-house-cross"/>' +
         '<rect x="-6" y="-26" width="12" height="26" class="sc-house-door"/>' +
         '<path d="M-38 -34 H38" class="sc-house-band"/><path d="M-12 -34 V0 M12 -34 V0" class="sc-house-post"/>' +
-        '<rect x="-12" y="-82" width="7" height="16" class="sc-chimney"/>';
+        '<rect x="-12" y="-82" width="7" height="16" class="sc-chimney"/>' + S.line([[-12, -82], [-5, -82]], 3);
     } },
     // a wooden windmill with four sails
     windmill: { w: 84, h: 104, draw: function () {
@@ -110,13 +117,13 @@
       for (var a = 0; a < 360; a += 90) {
         sails += '<g transform="rotate(' + (a + 20) + ' 0 -62)"><path d="M0 -62 V-100" class="sc-sail-arm"/><rect x="1" y="-100" width="11" height="32" class="sc-sail"/></g>';
       }
-      return shadow(22) + '<path d="M-18 0 L-12 -58 H12 L18 0 Z" class="sc-mill"/><path d="M-16 -58 L0 -74 L16 -58 Z" class="sc-mill-roof"/>' +
+      return shadow(22) + '<path d="M-18 0 L-12 -58 H12 L18 0 Z" class="sc-mill"/><path d="M-16 -58 L0 -74 L16 -58 Z" class="sc-mill-roof"/>' + S.line([[-16, -58], [0, -74], [16, -58]], 4) +
         '<rect x="-5" y="-16" width="10" height="16" rx="1" class="sc-house-door"/><rect x="-4" y="-42" width="8" height="8" class="sc-house-window"/>' +
         sails + '<circle cx="0" cy="-62" r="3.5" class="sc-ink"/>';
     } },
     bench: { w: 86, h: 82, draw: function () {
       return ITEMS.tree.draw() + '<g transform="translate(26 0)"><path d="M-14 0 V-10 M14 0 V-10" class="sc-bench-leg"/>' +
-        '<rect x="-17" y="-12" width="34" height="4" rx="1" class="sc-bench"/><rect x="-17" y="-22" width="34" height="4" rx="1" class="sc-bench"/>' +
+        '<rect x="-17" y="-12" width="34" height="4" rx="1" class="sc-bench"/><rect x="-17" y="-22" width="34" height="4" rx="1" class="sc-bench"/>' + S.line([[-17, -22], [17, -22]], 3) +
         '<path d="M-14 -10 V-22 M14 -10 V-22" class="sc-bench-leg"/></g>';
     } },
     // a clothes line with traditional embroidered shirts and an embroidered towel
@@ -141,7 +148,8 @@
           " Q" + r(x + w * 0.52) + " -" + r(h * 0.62) + " " + r(x + w / 2) + ' 0 Z" class="sc-hay"/>' +
           '<path d="M' + x + " -" + h + " Q" + r(x + w * 0.52) + " -" + r(h * 0.62) + " " + r(x + w / 2) + " 0 L" + r(x + w * 0.12) + " 0 Q" +
           r(x + w * 0.22) + " -" + r(h * 0.6) + " " + x + " -" + h + ' Z" class="sc-hay-dark"/>' +
-          '<path d="M' + r(x - w * 0.36) + " -" + r(h * 0.32) + " Q" + x + " -" + r(h * 0.4) + " " + r(x + w * 0.36) + " -" + r(h * 0.32) + '" class="sc-hay-line"/>';
+          '<path d="M' + r(x - w * 0.36) + " -" + r(h * 0.32) + " Q" + x + " -" + r(h * 0.4) + " " + r(x + w * 0.36) + " -" + r(h * 0.32) + '" class="sc-hay-line"/>' +
+          S.line([[x - w * 0.33, -h * 0.66], [x - w * 0.19, -h * 0.84], [x, -h], [x + w * 0.19, -h * 0.84], [x + w * 0.33, -h * 0.66]], Math.max(3, h * 0.09));
       }
       return shadow(32) + stack(-12, 46) + stack(18, 34);
     } },
@@ -151,13 +159,14 @@
         var x = -26 + i * 26;
         out += '<rect x="' + (x - 9) + '" y="-24" width="18" height="18" rx="1.5" class="' + cls + '"/>' +
           '<path d="M' + (x - 12) + " -24 L" + x + " -31 L" + (x + 12) + ' -24 Z" class="sc-hive-roof"/>' +
-          '<rect x="' + (x - 3) + '" y="-11" width="6" height="2" class="sc-ink"/>';
+          '<rect x="' + (x - 3) + '" y="-11" width="6" height="2" class="sc-ink"/>' + S.line([[x - 12, -24], [x, -31], [x + 12, -24]], 3);
       });
       return out;
     } },
     cart: { w: 92, h: 60, draw: function () {
       return '<ellipse cx="0" cy="0" rx="40" ry="4" class="sc-shadow"/>' +
         '<path d="M-30 -30 Q-24 -60 2 -58 Q30 -60 34 -30 Z" class="sc-hay"/><path d="M-20 -40 q20 -6 44 0 M-14 -50 q16 -4 32 0" class="sc-hay-line"/>' +
+        S.line([[-29, -36], [-24, -50], [-12, -57], [2, -58], [18, -58], [29, -49], [33, -36]], 6) +
         '<rect x="-34" y="-32" width="70" height="10" rx="2" class="sc-cart"/>' +
         '<path d="M36 -26 L54 -18" class="sc-shaft"/>' +
         '<circle cx="-20" cy="-12" r="12" class="sc-wheel"/><circle cx="-20" cy="-12" r="3" class="sc-cart"/>' +
@@ -180,7 +189,7 @@
     } },
     waysideCross: { w: 36, h: 76, draw: function () {
       return '<ellipse cx="0" cy="0" rx="12" ry="3" class="sc-shadow"/><path d="M0 0 V-58 M-13 -42 H13" class="sc-cross"/>' +
-        '<path d="M-16 -56 L0 -70 L16 -56 Z" class="sc-roof-small"/><rect x="-4" y="-50" width="8" height="10" rx="1" class="sc-icon"/>' +
+        '<path d="M-16 -56 L0 -70 L16 -56 Z" class="sc-roof-small"/>' + S.line([[-16, -56], [0, -70], [16, -56]], 3) + '<rect x="-4" y="-50" width="8" height="10" rx="1" class="sc-icon"/>' +
         '<path d="M-6 -2 h12" class="sc-post"/>';
     } },
     garden: { w: 104, h: 40, draw: function () {
@@ -201,7 +210,18 @@
           out += '<circle cx="' + r(x) + '" cy="' + y + '" r="6" class="sc-log"/><circle cx="' + r(x) + '" cy="' + y + '" r="2.5" class="sc-log-ring"/>';
         }
       });
-      return out;
+      return out + S.line([[-13, -31], [-6.5, -35], [6.5, -35], [13, -31]], 3);
+    } },
+    // a snowman (hidden until a mode of the page shows it)
+    snowman: { w: 48, h: 74, draw: function () {
+      return shadow(16) +
+        '<circle cx="0" cy="-14" r="14" class="sc-snowman"/><circle cx="0" cy="-36" r="10.5" class="sc-snowman"/><circle cx="0" cy="-53" r="7.5" class="sc-snowman"/>' +
+        '<path d="M-10 -38 L-22 -47 M-18 -44 l-1 -5 M10 -38 L22 -45 M18 -42.5 l3 -4" class="sc-twig"/>' +
+        '<path d="M-8 -46 Q0 -42 8 -46 V-43 Q0 -39 -8 -43 Z M3 -44 L7 -35 H3 Z" class="sc-scarf"/>' +
+        '<rect x="-9" y="-61" width="18" height="3" rx="1" class="sc-ink"/><rect x="-6" y="-71" width="12" height="11" rx="1.5" class="sc-ink"/>' +
+        '<circle cx="-2.6" cy="-55" r="1.1" class="sc-ink"/><circle cx="2.6" cy="-55" r="1.1" class="sc-ink"/>' +
+        '<path d="M0 -52.5 L9 -51 L0 -49.5 Z" class="sc-carrot"/>' +
+        '<circle cx="0" cy="-38" r="1.4" class="sc-ink"/><circle cx="0" cy="-32" r="1.4" class="sc-ink"/><circle cx="0" cy="-20" r="1.6" class="sc-ink"/>';
     } },
     flowers: { w: 34, h: 16, draw: function () {
       return '<path d="M-12 0 q1 -6 0 -9 M-3 0 q-1 -7 0 -11 M6 0 q1 -6 0 -8 M13 0 q-1 -5 0 -7" class="sc-stem-thin"/>' +
@@ -212,26 +232,27 @@
   // things a village has only one of (or two)
   var MAX = { pond: 1, cart: 1, garden: 1, waysideCross: 1, scarecrow: 1, hives: 1, cow: 2,
     lakelet: 2, puddle: 3, woodpile: 2, sunflowers: 2,
-    windmill: 1, clothes: 1, bench: 1, house: 2, mushrooms: 3 };
+    windmill: 1, clothes: 1, bench: 1, house: 2, mushrooms: 3, snowman: 2 };
   // the big things first (they need more room), the small ones fill the rest
   // next to the games only hens, sheep, a few cows, fruit trees, haystacks and fir trees (the games stay the main thing);
   // the rest of the village comes under the last game
-  var CENTER = ["firs3", "haystacks", "sheep", "apple", "fir", "cow", "hens", "firs5", "haystacks", "apple", "fir",
+  var CENTER = ["firs3", "haystacks", "snowman", "sheep", "apple", "fir", "cow", "hens", "firs5", "haystacks", "apple", "fir",
     "sheep", "firs3", "haystacks", "hens", "apple", "fir"];
   var ORDER = ["windmill", "house", "firs5", "pond", "cart", "lakelet", "clothes", "garden", "fir", "sheep", "puddle", "house", "apple",
     "firs3", "cow", "fir", "mushrooms", "lakelet", "hives", "bench", "tree", "waysideCross", "firs5", "puddle",
-    "scarecrow", "sunflowers", "fir", "woodpile", "hens", "firs3", "puddle", "mushrooms", "haystacks", "tree", "sheep", "fir",
+    "scarecrow", "snowman", "sunflowers", "fir", "woodpile", "hens", "firs3", "puddle", "mushrooms", "haystacks", "tree", "sheep", "fir",
     "apple", "flowers"];
 
   /* ---------- The strips of fields (behind everything); the first one has the color of the field
-     at the bottom of the landscape, so the village starts without a line ---------- */
+     at the bottom of the landscape, so the village starts without a line.
+     Their classes sc-field--1 ... sc-field--6 let a mode of the page give them other colors ---------- */
   var FIELDS = ["#bfe29a", "#c4e3a1", "#b2d98b", "#cfe3a0", "#bddf98", "#d6dd98"];
   function fields(width, height, random) {
     var out = "", y = 0, i = 0;
     while (y < height) {
       var h = 150 + random() * 120, a = 10 + random() * 16, b = 10 + random() * 16;
       out += '<path d="M-20 ' + r(y) + " C" + r(width * 0.3) + " " + r(y - a) + " " + r(width * 0.7) + " " + r(y + b) + " " + r(width + 20) + " " + r(y) +
-        " V" + r(y + h + 30) + " H-20 Z" + '" fill="' + FIELDS[i % FIELDS.length] + '"/>';
+        " V" + r(y + h + 30) + " H-20 Z" + '" fill="' + FIELDS[i % FIELDS.length] + '" class="sc-field sc-field--' + (i % FIELDS.length + 1) + '"/>';
       y += h; i++;
     }
     return out;
@@ -287,7 +308,8 @@
     placed.sort(function (a, b) { return a.y - b.y; });
     var front = placed.map(function (p) {
       var flip = p.flip && p.name !== "waysideCross" ? -1 : 1;
-      return '<g transform="translate(' + r(p.x) + " " + r(p.y) + ") scale(" + r(k * flip) + " " + r(k) + ')">' + ITEMS[p.name].draw() + "</g>";
+      return '<g transform="translate(' + r(p.x) + " " + r(p.y) + ") scale(" + r(k * flip) + " " + r(k) + ')" class="sc-item sc-item--' + p.name + '">' +
+        ITEMS[p.name].draw() + "</g>";
     }).join("");
     return { back: fields(width, height, random), front: front };
   }

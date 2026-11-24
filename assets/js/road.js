@@ -147,6 +147,7 @@
     return '<g transform="translate(' + r(x) + " " + r(y) + ") scale(" + r(dir * k) + " " + k + ')">' +
       '<ellipse cx="0" cy="0" rx="8" ry="2.5" class="vr-shadow"/><rect x="-2.5" y="-44" width="5" height="44" rx="1.5" class="vr-sign-post"/>' +
       '<path d="M-14 -44 H10 L20 -36 L10 -28 H-14 Z" fill="' + color + '" class="vr-sign-board"/>' +
+      (window.SEASON_SHAPES ? window.SEASON_SHAPES.line([[-14, -44], [10, -44], [16, -39]], 3) : "") +
       '<path d="M-6 -36 H8 M3 -40 L8 -36 L3 -32" class="vr-sign-arrow"/></g>';
   }
   /* ---------- Drawing everything ---------- */
@@ -210,8 +211,10 @@
     });
 
     // a light, soft "yard" under every building: the eye goes to the games first
-    var html = '<defs><radialGradient id="vr-yard"><stop offset="0" stop-color="#e4f3c6"/><stop offset=".65" stop-color="#d6edb4" stop-opacity=".85"/>' +
-      '<stop offset="1" stop-color="#d6edb4" stop-opacity="0"/></radialGradient></defs>';
+    // (the classes of the stops let a mode of the page give it other colors)
+    var html = '<defs><radialGradient id="vr-yard"><stop offset="0" stop-color="#e4f3c6" class="vr-yard-in"/>' +
+      '<stop offset=".65" stop-color="#d6edb4" stop-opacity=".85" class="vr-yard-out"/>' +
+      '<stop offset="1" stop-color="#d6edb4" stop-opacity="0" class="vr-yard-out"/></radialGradient></defs>';
     places.forEach(function (place) {
       var b = place.querySelector(".place__svg").getBoundingClientRect();
       html += '<ellipse cx="' + r(b.left + b.width / 2 - box.left) + '" cy="' + r(b.bottom - box.top - b.height * 0.18) + '" rx="' + r(b.width * 0.68) +

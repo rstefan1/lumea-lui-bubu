@@ -9,6 +9,8 @@
    The drawings use these classes, so the color of the building (.place--<color>) and later
    the special modes can change them: b-main / b-dark / b-light (the color of the building),
    b-roof, b-wall, b-glass, b-wood ... (see assets/css/buildings.css).
+   They also carry the seasonal shapes of assets/js/season-shapes.js (snow on the roofs and the trees,
+   lights along the roofs, ornaments on the fir trees): hidden, until a mode of the page shows them.
    All the texts of the drawings (GARA, the numbers of the windows) are SVG text: they grow with the drawing.
    ===================================================================== */
 (function () {
@@ -17,6 +19,7 @@
   var holder = document.getElementById("village");
   if (!holder) { return; }
 
+  var S = window.SEASON_SHAPES;   // snow, lights and ornaments, hidden until a mode shows them (assets/js/season-shapes.js)
   var COLORS = ["red", "blue", "green", "yellow", "orange", "pink", "teal", "purple"];
 
   function esc(text) {
@@ -32,16 +35,18 @@
   function pine(x, base, h) {
     var w = h * 0.55;
     return '<rect x="' + (x - 3) + '" y="' + (base - h * 0.18) + '" width="6" height="' + (h * 0.18) + '" class="b-trunk"/>' +
-      '<path d="M' + (x - w / 2) + " " + (base - h * 0.15) + " L" + x + " " + (base - h * 0.62) + " L" + (x + w / 2) + " " + (base - h * 0.15) + ' Z" class="b-pine"/>' +
-      '<path d="M' + (x - w * 0.4) + " " + (base - h * 0.45) + " L" + x + " " + (base - h * 0.85) + " L" + (x + w * 0.4) + " " + (base - h * 0.45) + ' Z" class="b-pine"/>' +
-      '<path d="M' + (x - w * 0.27) + " " + (base - h * 0.7) + " L" + x + " " + (base - h) + " L" + (x + w * 0.27) + " " + (base - h * 0.7) + ' Z" class="b-pine-light"/>';
+      '<path d="M' + (x - w / 2) + " " + (base - h * 0.15) + " L" + x + " " + (base - h * 0.62) + " L" + (x + w / 2) + " " + (base - h * 0.15) + ' Z" class="b-pine"/>' + S.peak(x, base - h * 0.62, w / 2, h * 0.47, 0.45) +
+      '<path d="M' + (x - w * 0.4) + " " + (base - h * 0.45) + " L" + x + " " + (base - h * 0.85) + " L" + (x + w * 0.4) + " " + (base - h * 0.45) + ' Z" class="b-pine"/>' + S.peak(x, base - h * 0.85, w * 0.4, h * 0.4, 0.45) +
+      '<path d="M' + (x - w * 0.27) + " " + (base - h * 0.7) + " L" + x + " " + (base - h) + " L" + (x + w * 0.27) + " " + (base - h * 0.7) + ' Z" class="b-pine-light"/>' + S.peak(x, base - h, w * 0.27, h * 0.3, 0.55) +
+      S.ornaments(x, base, h, w);
   }
 
   // a round bush at (x, base)
   function bush(x, base, r) {
     return '<circle cx="' + (x - r * 0.6) + '" cy="' + (base - r * 0.6) + '" r="' + (r * 0.7) + '" class="b-bush"/>' +
       '<circle cx="' + (x + r * 0.6) + '" cy="' + (base - r * 0.6) + '" r="' + (r * 0.7) + '" class="b-bush"/>' +
-      '<circle cx="' + x + '" cy="' + (base - r * 0.9) + '" r="' + r + '" class="b-bush-light"/>';
+      '<circle cx="' + x + '" cy="' + (base - r * 0.9) + '" r="' + r + '" class="b-bush-light"/>' +
+      S.dome(x - r * 0.6, base - r * 0.6, r * 0.7) + S.dome(x + r * 0.6, base - r * 0.6, r * 0.7) + S.dome(x, base - r * 0.9, r);
   }
 
   // a haystack standing at (x, base), h high, with the pole sticking out at the top
@@ -51,7 +56,8 @@
       '<path d="M' + (x - w / 2) + ' ' + base + ' Q' + (x - w * 0.52) + ' ' + (base - h * 0.62) + ' ' + x + ' ' + (base - h) +
       ' Q' + (x + w * 0.52) + ' ' + (base - h * 0.62) + ' ' + (x + w / 2) + ' ' + base + ' Z" class="b-hay"/>' +
       '<path d="M' + (x - w * 0.36) + ' ' + (base - h * 0.32) + ' Q' + x + ' ' + (base - h * 0.4) + ' ' + (x + w * 0.36) + ' ' + (base - h * 0.32) +
-      ' M' + (x - w * 0.24) + ' ' + (base - h * 0.62) + ' Q' + x + ' ' + (base - h * 0.69) + ' ' + (x + w * 0.24) + ' ' + (base - h * 0.62) + '" class="b-hay-line"/>';
+      ' M' + (x - w * 0.24) + ' ' + (base - h * 0.62) + ' Q' + x + ' ' + (base - h * 0.69) + ' ' + (x + w * 0.24) + ' ' + (base - h * 0.62) + '" class="b-hay-line"/>' +
+      S.line([[x - w * 0.33, base - h * 0.66], [x - w * 0.19, base - h * 0.84], [x, base - h], [x + w * 0.19, base - h * 0.84], [x + w * 0.33, base - h * 0.66]], Math.max(3, h * 0.09));
   }
 
   // a leafy tree at (x, base)
@@ -59,7 +65,8 @@
     return '<rect x="' + (x - 4) + '" y="' + (base - h * 0.4) + '" width="8" height="' + (h * 0.4) + '" class="b-trunk"/>' +
       '<circle cx="' + (x - h * 0.16) + '" cy="' + (base - h * 0.55) + '" r="' + (h * 0.22) + '" class="b-bush"/>' +
       '<circle cx="' + (x + h * 0.17) + '" cy="' + (base - h * 0.58) + '" r="' + (h * 0.21) + '" class="b-bush"/>' +
-      '<circle cx="' + x + '" cy="' + (base - h * 0.78) + '" r="' + (h * 0.24) + '" class="b-bush-light"/>';
+      '<circle cx="' + x + '" cy="' + (base - h * 0.78) + '" r="' + (h * 0.24) + '" class="b-bush-light"/>' +
+      S.dome(x - h * 0.16, base - h * 0.55, h * 0.22) + S.dome(x + h * 0.17, base - h * 0.58, h * 0.21) + S.dome(x, base - h * 0.78, h * 0.24);
   }
 
   /* ---------- The railway station, with a train in front of it ---------- */
@@ -75,13 +82,14 @@
       '<rect x="44" y="200" width="232" height="10" class="b-wall-base"/>' +
       '<path d="M30 122 L62 80 L258 80 L290 122 Z" class="b-roof"/>' +
       '<rect x="30" y="120" width="260" height="5" class="b-roof-edge"/>' +
+      S.lights([[32, 124], [288, 124]]) + S.line([[30, 122], [62, 80], [258, 80], [290, 122]], 7) +
       '<rect x="134" y="56" width="52" height="66" class="b-wall"/>' +
-      '<path d="M126 60 L160 26 L194 60 Z" class="b-roof"/>' +
+      '<path d="M126 60 L160 26 L194 60 Z" class="b-roof"/>' + S.line([[126, 60], [160, 26], [194, 60]], 6) +
       '<circle cx="160" cy="86" r="14" class="b-clock"/>' +
       '<path d="M160 86 V76 M160 86 L167 90" class="b-clock-hands"/>' +
       // the board with the name
       '<rect x="98" y="128" width="124" height="22" rx="4" class="b-board-dark"/>' +
-      boardText(160, 140, 15, p.sign || "GARA", "b-board-text--light") +
+      boardText(160, 140, 15, p.sign || "GARA", "b-board-text--light") + S.line([[98, 128], [222, 128]], 3) +
       // windows and the big door
       '<path d="M200 196 V170 A14 14 0 0 1 228 170 V196 Z" class="b-glass"/>' +
       '<path d="M238 196 V170 A14 14 0 0 1 266 170 V196 Z" class="b-glass"/>' +
@@ -100,6 +108,7 @@
       '<rect x="16" y="166" width="40" height="48" rx="4" class="b-main"/>' +
       '<rect x="10" y="160" width="52" height="9" rx="4" class="b-dark"/>' +
       '<rect x="24" y="176" width="24" height="18" rx="3" class="b-glass-light"/>' +
+      S.line([[12, 160], [60, 160]], 4) + S.line([[54, 184], [70, 184]], 3) + S.line([[100, 184], [118, 184]], 3) +
       '<rect x="12" y="211" width="124" height="7" rx="3" class="b-ink"/>' +
       '<path d="M131 211 L146 232 L131 232 Z" class="b-dark"/>' +
       [30, 56, 82].map(function (cx) {
@@ -120,14 +129,15 @@
     return haystack(36, 232, 52) + bush(282, 232, 14) +
       '<rect x="68" y="64" width="184" height="168" class="b-main"/>' +
       '<rect x="68" y="64" width="12" height="168" class="b-dark" opacity=".35"/>' +
-      '<rect x="202" y="20" width="18" height="34" class="b-chimney"/><rect x="198" y="16" width="26" height="7" class="b-chimney"/>' +
+      '<rect x="202" y="20" width="18" height="34" class="b-chimney"/><rect x="198" y="16" width="26" height="7" class="b-chimney"/>' + S.line([[198, 16], [224, 16]], 4) +
       '<path d="M56 70 L160 12 L264 70 Z" class="b-dark"/>' +
       '<rect x="56" y="66" width="208" height="6" class="b-roof-edge"/>' +
+      S.line([[56, 70], [160, 12], [264, 70]], 8) + S.lights([[60, 70], [160, 16], [260, 70]]) +
       '<circle cx="160" cy="46" r="12" class="b-window-warm"/>' +
       '<path d="M160 38 l2.4 5 l5.4 .6 l-4 3.7 l1.1 5.3 l-4.9 -2.7 l-4.9 2.7 l1.1 -5.3 l-4 -3.7 l5.4 -.6 Z" class="b-gold"/>' +
       windows +
       '<rect x="106" y="185" width="108" height="17" rx="4" class="b-board"/>' +
-      boardText(160, 193.5, 11, p.sign || "CALENDAR") +
+      boardText(160, 193.5, 11, p.sign || "CALENDAR") + S.line([[106, 185], [214, 185]], 3) +
       '<path d="M146 232 V214 A14 14 0 0 1 174 214 V232 Z" class="b-door"/>' +
       '<circle cx="168" cy="222" r="1.8" class="b-gold"/>';
   }
@@ -142,14 +152,15 @@
       pine(26, 232, 96) + pine(58, 232, 66) + pine(296, 232, 84) +
       // smoke from the chimney (stands still)
       '<circle cx="207" cy="76" r="6" class="b-steam"/><circle cx="215" cy="63" r="8" class="b-steam"/><circle cx="228" cy="50" r="10" class="b-steam"/>' +
-      '<rect x="200" y="84" width="14" height="36" class="b-chimney"/>' +
+      '<rect x="200" y="84" width="14" height="36" class="b-chimney"/>' + S.line([[200, 84], [214, 84]], 3) +
       // log walls, roof, gable with a round window
       '<rect x="86" y="138" width="148" height="94" class="b-logs"/>' + logs +
       '<path d="M104 140 L160 94 L216 140 Z" class="b-gable"/>' +
       '<circle cx="160" cy="120" r="10" class="b-window-warm b-frame-wood"/>' +
       '<path d="M68 144 L160 70 L252 144 L240 146 L160 82 L80 146 Z" class="b-roof-wood"/>' +
+      S.line([[68, 144], [160, 70], [252, 144]], 8) + S.lights([[80, 146], [160, 82], [240, 146]], 12) +
       '<rect x="118" y="146" width="84" height="17" rx="4" class="b-board"/>' +
-      boardText(160, 154.5, 11.5, p.sign || "CABANA") +
+      boardText(160, 154.5, 11.5, p.sign || "CABANA") + S.line([[118, 146], [202, 146]], 3) +
       // windows with shutters, door
       '<rect x="98" y="174" width="30" height="26" class="b-window-warm"/><path d="M113 174 V200 M98 187 H128" class="b-window-bars"/>' +
       '<rect x="90" y="172" width="8" height="30" class="b-main"/><rect x="128" y="172" width="8" height="30" class="b-main"/>' +
@@ -162,20 +173,20 @@
       // the trail sign: white board with a red stripe (a marked mountain trail)
       '<rect x="266" y="170" width="6" height="62" class="b-trunk"/>' +
       '<path d="M246 172 H290 L298 181 L290 190 H246 Z" class="b-trail"/>' +
-      '<rect x="252" y="178" width="34" height="6" class="b-trail-mark"/>';
+      '<rect x="252" y="178" width="34" height="6" class="b-trail-mark"/>' + S.line([[246, 172], [290, 172]], 3);
   }
 
   /* ---------- The post office, with a mailbox in front ---------- */
   function postOffice(p) {
     return haystack(298, 232, 44) +
       '<rect x="52" y="104" width="216" height="128" class="b-wall-post"/>' +
-      '<path d="M40 108 L70 72 L250 72 L280 108 Z" class="b-dark"/>' +
-      '<path d="M118 74 L160 40 L202 74 Z" class="b-dark"/>' +
+      '<path d="M40 108 L70 72 L250 72 L280 108 Z" class="b-dark"/>' + S.line([[40, 108], [70, 72], [250, 72], [280, 108]], 7) +
+      '<path d="M118 74 L160 40 L202 74 Z" class="b-dark"/>' + S.line([[118, 74], [160, 40], [202, 74]], 6) +
       '<circle cx="160" cy="62" r="12" class="b-paper"/>' +
       '<rect x="151" y="56" width="18" height="12" rx="1.5" class="b-main"/><path d="M151 57 L160 63.5 L169 57" class="b-envelope-flap"/>' +
-      '<rect x="44" y="104" width="232" height="7" class="b-cornice"/>' +
+      '<rect x="44" y="104" width="232" height="7" class="b-cornice"/>' + S.lights([[46, 110], [274, 110]]) +
       '<rect x="102" y="118" width="116" height="22" rx="4" class="b-board"/>' +
-      boardText(160, 129.5, 15, p.sign || "POȘTA") +
+      boardText(160, 129.5, 15, p.sign || "POȘTA") + S.line([[102, 118], [218, 118]], 3) +
       '<rect x="72" y="150" width="36" height="44" rx="3" class="b-glass"/><path d="M90 150 V194 M72 170 H108" class="b-window-bars-light"/>' +
       '<rect x="212" y="150" width="36" height="44" rx="3" class="b-glass"/><path d="M230 150 V194 M212 170 H248" class="b-window-bars-light"/>' +
       '<rect x="138" y="150" width="44" height="70" rx="3" class="b-main"/><path d="M160 152 V218" class="b-door-line"/>' +
@@ -183,7 +194,7 @@
       '<rect x="130" y="220" width="60" height="6" class="b-step"/><rect x="124" y="226" width="72" height="6" class="b-step"/>' +
       // the mailbox on its post (Bubu's letters go here)
       '<rect x="30" y="196" width="7" height="36" class="b-post-pole"/>' +
-      '<rect x="14" y="158" width="38" height="44" rx="9" class="b-mailbox"/>' +
+      '<rect x="14" y="158" width="38" height="44" rx="9" class="b-mailbox"/>' + S.line([[16, 162], [22, 158], [44, 158], [50, 162]], 4) +
       '<rect x="21" y="170" width="24" height="4" rx="2" class="b-ink"/>' +
       '<rect x="24" y="182" width="18" height="12" rx="1.5" class="b-paper"/><path d="M24 183 L33 189 L42 183" class="b-envelope-flap-dark"/>';
   }
@@ -194,12 +205,13 @@
       '<rect x="84" y="132" width="152" height="100" class="b-light"/>' +
       '<path d="M68 138 L160 60 L252 138 Z" class="b-dark"/>' +
       '<rect x="68" y="134" width="184" height="6" class="b-roof-edge"/>' +
+      S.line([[68, 138], [160, 60], [252, 138]], 8) + S.lights([[72, 139], [248, 139]]) +
       '<circle cx="160" cy="108" r="17" class="b-paper"/>' +
       (p.icon ? '<text x="160" y="109" font-size="20" text-anchor="middle" dominant-baseline="central">' + esc(p.icon) + "</text>" : "") +
       '<rect x="116" y="146" width="88" height="17" rx="4" class="b-board"/>' +
-      boardText(160, 154.5, 11.5, p.sign || "JOC") +
-      '<rect x="100" y="174" width="30" height="28" class="b-glass"/><rect x="96" y="202" width="38" height="6" class="b-main"/>' +
-      '<rect x="190" y="174" width="30" height="28" class="b-glass"/><rect x="186" y="202" width="38" height="6" class="b-main"/>' +
+      boardText(160, 154.5, 11.5, p.sign || "JOC") + S.line([[116, 146], [204, 146]], 3) +
+      '<rect x="100" y="174" width="30" height="28" class="b-glass"/><rect x="96" y="202" width="38" height="6" class="b-main"/>' + S.line([[96, 202], [134, 202]], 3) +
+      '<rect x="190" y="174" width="30" height="28" class="b-glass"/><rect x="186" y="202" width="38" height="6" class="b-main"/>' + S.line([[186, 202], [224, 202]], 3) +
       '<rect x="146" y="178" width="28" height="54" rx="3" class="b-door"/><circle cx="168" cy="206" r="2" class="b-gold"/>';
   }
 
@@ -222,7 +234,7 @@
       // the board at the edge of the forest
       '<rect x="190" y="196" width="6" height="42" class="b-trunk"/>' +
       '<rect x="162" y="186" width="62" height="18" rx="4" class="b-board"/>' +
-      boardText(193, 195, 10, p.sign || "PĂDUREA");
+      boardText(193, 195, 10, p.sign || "PĂDUREA") + S.line([[162, 186], [224, 186]], 3);
   }
 
   var DRAW = { station: station, advent: advent, cabin: cabin, "post-office": postOffice, house: house, forest: forest };

@@ -283,6 +283,22 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 .village-road .sc-flower-yellow { fill: #ffe066; }
 .village-road .sc-flower-pink { fill: #ff9eb5; }
 .village-road .sc-flower-blue { fill: #8fb8ff; }
+.village-road .sc-snowman { fill: #fbfdff; stroke: #c9d8e6; stroke-width: 1; }
+.village-road .sc-twig { fill: none; stroke: #6b4426; stroke-width: 2; stroke-linecap: round; }
+.village-road .sc-scarf { fill: #d9302b; }
+.village-road .sc-carrot { fill: #f08a24; }
+
+/* ---------- The seasonal shapes (assets/js/season-shapes.js): snow, lights, ornaments and the snowman ----------
+   They are drawn with the buildings and the things of the village, but hidden here;
+   a mode of the page (modes/<name>/mode.css) shows the ones it needs and gives them their colors. */
+.snow, .lights, .ornaments, .village-road .sc-item--snowman { display: none; }
+.snow { fill: #fbfdff; stroke: #c9d8e6; stroke-width: 1; stroke-linejoin: round; }
+.lights__wire { fill: none; stroke: #3b3030; stroke-width: 1; }
+.bulb--1 { fill: #ff4d4d; }
+.bulb--2 { fill: #ffd23f; }
+.bulb--3 { fill: #4dd2ff; }
+.bulb--4 { fill: #7ee06a; }
+.tree-star { fill: #ffd23f; stroke: #e0a020; stroke-width: 1; stroke-linejoin: round; }
 
 /* ---------- "Vezi tot satul": a button at the bottom of the screen that shows there is more below ----------
    shown by assets/js/scroll-hint.js only while the page is at the top and something is hidden below;

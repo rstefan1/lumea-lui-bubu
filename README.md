@@ -15,6 +15,7 @@ data/places.js          the buildings of the village (one per game)
 assets/js/buildings.js  draws the buildings
 assets/js/road.js       the country road between them
 assets/js/scenery.js    fields, trees, animals ... in the free places
+assets/js/season-shapes.js  snow, lights and ornaments carried (hidden) by the drawings
 assets/js/scroll-hint.js  the "Vezi tot satul" button
 assets/css/             village.css, buildings.css
 assets/img/landscape.svg  the landscape at the top (drawn by tools/draw-landscape.py)
