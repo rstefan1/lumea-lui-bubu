@@ -261,7 +261,8 @@
   }
   draw();
   window.addEventListener("resize", later);
-  window.addEventListener("load", later);                       // the pictures and the fonts change the sizes
+  window.addEventListener("load", later);
+  window.addEventListener("village-mode", later);               // the mode of the page is loaded (assets/js/modes.js)                       // the pictures and the fonts change the sizes
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(later); }
   if (window.ResizeObserver) { new ResizeObserver(later).observe(village); }
 })();

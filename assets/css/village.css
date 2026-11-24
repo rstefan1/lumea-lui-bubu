@@ -303,6 +303,43 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 .bow__red { fill: #d6202a; }
 .bow__string { fill: none; stroke: #ffffff; stroke-width: 2.2; stroke-linecap: round; }
 .bow__twist { fill: none; stroke: #d6202a; stroke-width: 2.2; stroke-dasharray: 2 2; }
+/* the patches of the season in the free places of the village (assets/js/scenery.js, drawn only when a mode asks for them):
+   snowdrops, spring flowers, puddles, sheaves of wheat, watermelons, pumpkins, fallen leaves, insects, children */
+.village-road .sc-sd-green, .village-road .sc-bl-green { fill: none; stroke: #4f9a3e; stroke-width: 1.6; stroke-linecap: round; }
+.village-road .sc-sd-bell { fill: #ffffff; stroke: #b9c7b0; stroke-width: 0.6; }
+.village-road .sc-bl-red { fill: #e8413a; }
+.village-road .sc-bl-yellow { fill: #ffd23f; }
+.village-road .sc-bl-pink { fill: #ff8fb5; }
+.village-road .sc-bl-purple { fill: #a36be0; }
+.village-road .sc-bl-white { fill: #ffffff; }
+.village-road .sc-bl-blue { fill: #6aa8ff; }
+.village-road .sc-bl-center { fill: #f0a020; }
+.village-road .sc-puddle { fill: #8fb9d6; }
+.village-road .sc-puddle-shine { fill: none; stroke: #e3f2fb; stroke-width: 1.6; stroke-linecap: round; }
+.village-road .sc-bee { fill: #ffcf3a; }
+.village-road .sc-bee-stripe { stroke: #3b3030; stroke-width: 1.2; }
+.village-road .sc-bug-wing { fill: rgba(255, 255, 255, 0.85); stroke: #b9c7d4; stroke-width: 0.5; }
+.village-road .sc-bug-ink { fill: #3b3030; }
+.village-road .sc-ladybug { fill: #e3262b; }
+.village-road .sc-ladybug-line { stroke: #3b3030; stroke-width: 0.6; }
+.village-road .sc-child-limb { fill: none; stroke: #e8b48f; stroke-width: 2; stroke-linecap: round; }
+.village-road .sc-child-skin { fill: #f3c9a6; }
+.village-road .sc-child-hair { fill: #6b4426; }
+.village-road .sc-child-string { fill: none; stroke: #8a8f98; stroke-width: 0.6; }
+.village-road .sc-wheat { fill: #e8c25a; stroke: #c99a35; stroke-width: 0.8; }
+.village-road .sc-wheat-band { stroke: #a8762c; stroke-width: 1.6; }
+.village-road .sc-wheat-ears { stroke: #d9ad45; stroke-width: 1.4; stroke-linecap: round; }
+.village-road .sc-melon { fill: #3f8a3a; }
+.village-road .sc-melon-stripe { fill: none; stroke: #2a5f2a; stroke-width: 1.2; }
+.village-road .sc-melon-rind { fill: #3f8a3a; }
+.village-road .sc-melon-red { fill: #ec4a4a; }
+.village-road .sc-pumpkin { fill: #f08a24; }
+.village-road .sc-pumpkin-rib { fill: none; stroke: #c96a12; stroke-width: 1.2; }
+.village-road .sc-pumpkin-stem { fill: none; stroke: #5f7a2a; stroke-width: 2; stroke-linecap: round; }
+.village-road .sc-fallen--1 { fill: #e8892a; }
+.village-road .sc-fallen--2 { fill: #d9532b; }
+.village-road .sc-fallen--3 { fill: #f2c13c; }
+.village-road .sc-fallen--4 { fill: #a8692e; }
 
 /* ---------- "Vezi tot satul": a button at the bottom of the screen that shows there is more below ----------
    shown by assets/js/scroll-hint.js only while the page is at the top and something is hidden below;

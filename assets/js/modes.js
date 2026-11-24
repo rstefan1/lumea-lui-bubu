@@ -55,7 +55,12 @@
   link.setAttribute("blocking", "render");   // the village is not shown green first (where browsers know it)
 
   var cssReady = false, domReady = document.readyState !== "loading";
-  link.onload = function () { cssReady = true; start(); };
+  link.onload = function () {
+    cssReady = true;
+    start();
+    // the village draws again with the patches of the mode (assets/js/road.js and scenery.js)
+    window.dispatchEvent(new Event("village-mode"));
+  };
   document.head.appendChild(link);
   if (!domReady) { document.addEventListener("DOMContentLoaded", function () { domReady = true; start(); }); }
 

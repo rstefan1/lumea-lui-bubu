@@ -15,6 +15,9 @@
    Every drawing is a group with the classes "sc-item sc-item--<name>", so a mode of the page can hide it
    (e.g. no sunflowers in winter); the snowman is hidden until a mode shows it. The drawings also carry
    the seasonal shapes of assets/js/season-shapes.js (snow, lights, ornaments, bows), hidden too.
+   In the places still free at the end: small PATCHES of the season, only when the mode of the page asks for
+   them with --patches in its modes/<name>/mode.css, e.g.  --patches: blooms bugs;  (the kinds: see PATCHES below).
+   They are placed after everything else, so the rest of the village looks the same with or without them.
    Nothing here moves.
    ===================================================================== */
 (function () {
@@ -258,6 +261,144 @@
     return out;
   }
 
+  /* ---------- The patches in the free places: every variant hidden (assets/css/village.css) ---------- */
+  function circle(cx, cy, rad) {
+    return "M" + r(cx - rad) + " " + r(cy) + " a" + rad + " " + rad + " 0 1 0 " + 2 * rad + " 0 a" + rad + " " + rad + " 0 1 0 " + -2 * rad + " 0";
+  }
+  // snowdrops: drooping white bells on thin bent stems, narrow leaves
+  function snowdrops(random) {
+    var green = "", bells = "";
+    for (var i = 0, n = 3 + Math.floor(random() * 3); i < n; i++) {
+      var x = -14 + i * (28 / (n - 1)) + (random() - 0.5) * 3, h = 11 + random() * 6, d = random() < 0.5 ? -1 : 1, tx = x + d * 3, ty = -h;
+      green += "M" + r(x) + " 0 Q" + r(x - d) + " " + r(-h * 0.7) + " " + r(tx) + " " + r(ty) +
+        " M" + r(x - 1) + " 0 q" + r(-3 * d) + " -5 " + r(-2 * d) + " " + r(-h * 0.6) + " q1 4 " + r(1.5 * d) + " " + r(h * 0.6);
+      bells += "M" + r(tx) + " " + r(ty) + " c-2.6 0.6 -3 4.6 -1.2 6.4 q1.2 -0.8 1.2 0 q0 -0.8 1.2 0 c1.8 -1.8 1.4 -5.8 -1.2 -6.4 z";
+    }
+    return '<g class="patch patch--snowdrops"><path d="' + green + '" class="sc-sd-green"/><path d="' + bells + '" class="sc-sd-bell"/></g>';
+  }
+  // spring flowers: tulips, daisies, crocuses and forget-me-nots
+  var BLOOM_COLORS = ["red", "yellow", "pink", "purple", "white", "blue"];
+  function blooms(random) {
+    var green = "", heads = {}, centers = "";
+    function add(color, d) { heads[color] = (heads[color] || "") + d; }
+    for (var i = 0, n = 4 + Math.floor(random() * 3); i < n; i++) {
+      var x = -16 + i * (32 / (n - 1)) + (random() - 0.5) * 3, h = 8 + random() * 9, y = -h;
+      var kind = Math.floor(random() * 4), color = BLOOM_COLORS[Math.floor(random() * BLOOM_COLORS.length)];
+      green += "M" + r(x) + " 0 V" + r(y) + " M" + r(x) + " -1.5 q-4.5 -3 -3.6 -" + r(h * 0.6) + " q1.6 " + r(h * 0.3) + " 3.6 " + r(h * 0.5);
+      if (kind === 0) {          // a tulip
+        add(color === "white" || color === "blue" ? "red" : color, "M" + r(x - 3.4) + " " + r(y - 6) + " L" + r(x - 1.7) + " " + r(y - 3.6) + " L" + r(x) + " " + r(y - 6.4) +
+          " L" + r(x + 1.7) + " " + r(y - 3.6) + " L" + r(x + 3.4) + " " + r(y - 6) + " Q" + r(x + 3.7) + " " + r(y + 0.6) + " " + r(x) + " " + r(y + 0.8) +
+          " Q" + r(x - 3.7) + " " + r(y + 0.6) + " " + r(x - 3.4) + " " + r(y - 6) + " Z");
+      } else if (kind === 1) {   // a daisy: five round petals and a yellow middle
+        for (var a = 0; a < 5; a++) {
+          var ang = a * Math.PI * 2 / 5 - Math.PI / 2;
+          add(color === "yellow" ? "white" : color === "red" ? "pink" : color, circle(x + Math.cos(ang) * 2.4, y + Math.sin(ang) * 2.4, 1.7));
+        }
+        centers += circle(x, y, 1.4);
+      } else if (kind === 2) {   // a crocus: a slim cup
+        add(color === "red" ? "purple" : color, "M" + r(x - 2.2) + " " + r(y - 6) + " Q" + r(x) + " " + r(y - 8) + " " + r(x + 2.2) + " " + r(y - 6) +
+          " Q" + r(x + 2.6) + " " + r(y) + " " + r(x) + " " + r(y + 0.6) + " Q" + r(x - 2.6) + " " + r(y) + " " + r(x - 2.2) + " " + r(y - 6) + " Z");
+      } else {                   // forget-me-nots: three small blue flowers
+        add("blue", circle(x - 1.8, y, 1.4) + circle(x + 1.8, y + 0.4, 1.4) + circle(x, y - 2.2, 1.4));
+        centers += circle(x, y - 0.6, 0.6);
+      }
+    }
+    var out = '<g class="patch patch--blooms"><path d="' + green + '" class="sc-bl-green"/>';
+    Object.keys(heads).forEach(function (c) { out += '<path d="' + heads[c] + '" class="sc-bl-' + c + '"/>'; });
+    return out + (centers ? '<path d="' + centers + '" class="sc-bl-center"/>' : "") + "</g>";
+  }
+  // a puddle after the rain: a soft blue shape with a light reflection
+  function puddle(random) {
+    var w = 15 + random() * 5, h = 3.6 + random() * 1.4;
+    return '<g class="patch patch--puddle"><path d="M' + r(-w) + " -3 C" + r(-w) + " " + r(-3 - h * 1.6) + " " + r(w * 0.4) + " " + r(-3 - h * 1.8) + " " + r(w) + " " + r(-3 - h * 0.5) +
+      " C" + r(w + 1) + " " + r(-1) + " " + r(w * 0.2) + " 1 " + r(-w * 0.4) + " 0.6 C" + r(-w * 0.8) + " 0.4 " + r(-w) + " -1 " + r(-w) + ' -3 Z" class="sc-puddle"/>' +
+      '<path d="M' + r(-w * 0.5) + " " + r(-3 - h * 0.6) + " q" + r(w * 0.3) + " -1.6 " + r(w * 0.6) + ' 0" class="sc-puddle-shine"/></g>';
+  }
+  // a bee flying over the flowers, or a ladybug sitting in the grass (only on some patches)
+  function bug(random) {
+    if (random() < 0.5) {
+      var x = -6 + random() * 12, y = -24 - random() * 6;
+      return '<g class="bugs" transform="translate(' + r(x) + " " + r(y) + ')"><ellipse cx="-1.5" cy="-3.2" rx="2.6" ry="1.8" class="sc-bug-wing"/>' +
+        '<ellipse cx="1.5" cy="-3.4" rx="2.6" ry="1.8" class="sc-bug-wing"/><ellipse cx="0" cy="0" rx="4.2" ry="2.8" class="sc-bee"/>' +
+        '<path d="M-1.2 -2.6 V2.6 M1.4 -2.6 V2.6" class="sc-bee-stripe"/><circle cx="4.2" cy="-0.4" r="1.6" class="sc-bug-ink"/></g>';
+    }
+    var lx = -14 + random() * 28;
+    return '<g class="bugs" transform="translate(' + r(lx) + ' -1)"><circle cx="3.4" cy="-2" r="1.6" class="sc-bug-ink"/>' +
+      '<path d="M-3.6 0 A3.6 3.6 0 0 1 3.6 0 Z" class="sc-ladybug"/><path d="M0 0 V-3.6" class="sc-ladybug-line"/>' +
+      '<path d="' + circle(-1.8, -1.4, 0.7) + circle(1.6, -2.2, 0.7) + circle(1.9, -0.6, 0.6) + '" class="sc-bug-ink"/></g>';
+  }
+  // a child of the village with a balloon (on some patches)
+  var CLOTHES = ["red", "yellow", "blue", "pink", "purple", "white"];
+  function child(random) {
+    var x = -10 + random() * 20, c = CLOTHES[Math.floor(random() * CLOTHES.length)], b = CLOTHES[Math.floor(random() * 5)];
+    var dress = random() < 0.5, d = random() < 0.5 ? -1 : 1;
+    return '<g class="sc-child" transform="translate(' + r(x) + ' 0)">' +
+      '<path d="M-2 0 V-7 M2 0 V-7 M-3 -15 L' + r(-6 * d) + " -10 M3 -15 L" + r(6 * d) + " " + r(-19) + '" class="sc-child-limb"/>' +
+      '<path d="M' + r(6 * d) + " -19 Q" + r(8 * d) + " -25 " + r(7 * d) + ' -31" class="sc-child-string"/>' +
+      '<ellipse cx="' + r(7 * d) + '" cy="-35" rx="3.6" ry="4.4" class="sc-bl-' + b + '"/>' +
+      (dress ? '<path d="M-2.5 -17 H2.5 L5 -6 H-5 Z" class="sc-bl-' + c + '"/>' : '<rect x="-3.5" y="-17" width="7" height="10" rx="2" class="sc-bl-' + c + '"/>') +
+      '<circle cx="0" cy="-20.5" r="3.4" class="sc-child-skin"/><path d="M-3.4 -21 Q0 -26.5 3.4 -21 Q0 -23 -3.4 -21 Z" class="sc-child-hair"/></g>';
+  }
+  // sheaves of wheat standing in the stubble after the harvest
+  function sheaves(random) {
+    var out = "";
+    [-9, 9].forEach(function (x0) {
+      var x = x0 + (random() - 0.5) * 4, h = 16 + random() * 4;
+      out += '<path d="M' + r(x - 4) + " 0 L" + r(x - 2) + " " + r(-h * 0.6) + " L" + r(x - 6) + " " + r(-h) + " L" + r(x + 6) + " " + r(-h) + " L" + r(x + 2) + " " + r(-h * 0.6) +
+        " L" + r(x + 4) + ' 0 Z" class="sc-wheat"/><path d="M' + r(x - 2.6) + " " + r(-h * 0.55) + " H" + r(x + 2.6) + '" class="sc-wheat-band"/>' +
+        '<path d="M' + r(x - 5) + " " + r(-h) + " l-1 -3 M" + r(x - 1.6) + " " + r(-h) + " l-0.4 -3.4 M" + r(x + 1.6) + " " + r(-h) + " l0.4 -3.4 M" + r(x + 5) + " " + r(-h) + ' l1 -3" class="sc-wheat-ears"/>';
+    });
+    return '<g class="patch patch--sheaves">' + out + "</g>";
+  }
+  // watermelons in the grass, and a slice to eat
+  function watermelons(random) {
+    var out = "";
+    [[-10, 0], [6, 1]].forEach(function (m) {
+      var x = m[0] + (random() - 0.5) * 3, rx = 6 + random() * 1.5;
+      out += '<ellipse cx="' + r(x) + '" cy="-4.4" rx="' + r(rx) + '" ry="4.4" class="sc-melon"/>' +
+        '<path d="M' + r(x - rx * 0.6) + " -7.4 q" + r(rx * 0.6) + " 2 " + r(rx * 1.2) + " 0 M" + r(x - rx * 0.8) + " -4.4 q" + r(rx * 0.8) + " 2 " + r(rx * 1.6) + ' 0" class="sc-melon-stripe"/>';
+    });
+    return '<g class="patch patch--watermelons">' + out + '<path d="M11 -1 A6 6 0 0 0 23 -1 Z" class="sc-melon-rind"/><path d="M12.2 -1.4 A4.8 4.8 0 0 0 21.8 -1.4 Z" class="sc-melon-red"/>' +
+      '<path d="' + circle(15, -3, 0.5) + circle(17, -4.4, 0.5) + circle(19, -3, 0.5) + '" class="sc-bug-ink"/></g>';
+  }
+  // pumpkins with their stems
+  function pumpkins(random) {
+    var out = "";
+    [[-9, 1], [6, 0.8], [15, 0.6]].forEach(function (q) {
+      if (q[1] < 0.7 && random() < 0.5) { return; }
+      var x = q[0] + (random() - 0.5) * 3, k = q[1];
+      out += '<g transform="translate(' + r(x) + " 0) scale(" + k + ')"><path d="M0 -10 q1 -3 3 -4" class="sc-pumpkin-stem"/>' +
+        '<ellipse cx="0" cy="-5.2" rx="8" ry="5.4" class="sc-pumpkin"/><path d="M-3 -10 q-2 4.8 0 9.6 M3 -10 q2 4.8 0 9.6" class="sc-pumpkin-rib"/></g>';
+    });
+    return '<g class="patch patch--pumpkins">' + out + "</g>";
+  }
+  // fallen leaves on the grass
+  function leaves(random) {
+    var out = "";
+    for (var i = 0; i < 6; i++) {
+      var x = -16 + random() * 32, y = -1 - random() * 8, a = Math.round(random() * 360);
+      out += '<path d="M0 -3 Q2.6 -1 0 3 Q-2.6 -1 0 -3 Z" transform="translate(' + r(x) + " " + r(y) + ") rotate(" + a + ')" class="sc-fallen sc-fallen--' + (i % 4 + 1) + '"/>';
+    }
+    return '<g class="patch patch--leaves">' + out + "</g>";
+  }
+  // the kinds of patches a mode can ask for (--patches in modes/<name>/mode.css)
+  var PATCHES = { snowdrops: snowdrops, blooms: blooms, puddles: puddle, sheaves: sheaves, watermelons: watermelons,
+    pumpkins: pumpkins, leaves: leaves };
+  function patch(random, kinds) {
+    var out = "";
+    kinds.forEach(function (kind) {
+      var sparse = kind === "pumpkins" || kind === "watermelons";                // not on every patch: a field is not a garden
+      if (PATCHES[kind] && !(sparse && random() < 0.45)) { out += PATCHES[kind](random); }
+      if (kind === "bugs" && random() < 0.4) { out += bug(random); }          // a bee or a ladybug on some patches
+      if (kind === "children" && random() < 0.3) { out += child(random); }    // a child on some patches
+    });
+    return out;
+  }
+  function askedPatches() {
+    var value = getComputedStyle(document.documentElement).getPropertyValue("--patches") || "";
+    return value.replace(/["']/g, " ").trim().split(/[\s,]+/).filter(Boolean);
+  }
+
   /* ---------- Finding the free places ---------- */
   function fill(ctx) {
     var width = ctx.width, height = ctx.height, random = ctx.random;
@@ -304,12 +445,24 @@
         turn[zone]++;   // this one does not fit anywhere any more: try the next kind
       }
     }
+    // the patches of the season, in the places that are still free (after everything else: the village stays the same)
+    var kinds = askedPatches();
+    var pk = k * 1.25, pw = 40 * pk, ph = 38 * pk, pgap = ctx.phone ? 8 : 14;   // a little bigger than the rest
+    var patches = kinds.length ? Math.round(width * height / (ctx.phone ? 20000 : 26000)) : 0;
+    for (var u = 0, n2 = 0; u < tries && n2 < patches; u++) {
+      var px = random() * (width - pw), py = 20 + random() * (height - 80);
+      if (free(px - pgap / 2, py - pgap / 2, pw + pgap, ph + pgap)) {
+        mark(px - pgap / 2, py - pgap / 2, pw + pgap, ph + pgap);
+        placed.push({ x: px + pw / 2, y: py + ph, name: "patch", flip: random() < 0.5 });
+        n2++;
+      }
+    }
     // drawn from the top down, so the lower ones stand in front
     placed.sort(function (a, b) { return a.y - b.y; });
     var front = placed.map(function (p) {
-      var flip = p.flip && p.name !== "waysideCross" ? -1 : 1;
-      return '<g transform="translate(' + r(p.x) + " " + r(p.y) + ") scale(" + r(k * flip) + " " + r(k) + ')" class="sc-item sc-item--' + p.name + '">' +
-        ITEMS[p.name].draw() + "</g>";
+      var flip = p.flip && p.name !== "waysideCross" ? -1 : 1, sk = p.name === "patch" ? pk : k;
+      return '<g transform="translate(' + r(p.x) + " " + r(p.y) + ") scale(" + r(sk * flip) + " " + r(sk) + ')" class="sc-item sc-item--' + p.name + '">' +
+        (p.name === "patch" ? patch(random, kinds) : ITEMS[p.name].draw()) + "</g>";
     }).join("");
     return { back: fields(width, height, random), front: front };
   }
