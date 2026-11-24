@@ -493,7 +493,7 @@
     // the patches of the season, in the places that are still free (after everything else: the village stays the same)
     var kinds = askedPatches();
     // a little bigger than the rest, and on phones bigger and closer together still, so they are seen on a small screen
-    var pk = ctx.phone ? 1.15 : k * 1.25, pw = 40 * pk, ph = 38 * pk, pgap = ctx.phone ? 6 : 14;
+    var pk = ctx.phone ? 1.4 : k * 1.25, pw = 40 * pk, ph = 38 * pk, pgap = ctx.phone ? 6 : 14;
     var patches = kinds.length ? Math.round(width * height / (ctx.phone ? 11000 : 26000)) : 0;
     for (var u = 0, n2 = 0; u < tries && n2 < patches; u++) {
       var px = random() * (width - pw), py = 20 + random() * (height - 80);

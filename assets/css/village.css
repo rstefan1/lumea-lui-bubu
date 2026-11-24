@@ -150,6 +150,11 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 @media (max-width: 640px)  {
   .village { --w: 82%; --side: 0%; --overlap: -34px; }   /* no overlap: one under the other, 34px apart */
 }
+/* phones held upright: there is no room next to the buildings, so under the last game there is a meadow
+   with the rest of the village and the things of the month (fir trees, fruit trees, snowdrops, flowers, children ...) */
+@media (max-width: 640px) and (orientation: portrait) {
+  .village { padding-bottom: clamp(260px, 48vh, 420px); }
+}
 @media (orientation: landscape) and (max-height: 520px) { .village { --w: 41%; --overlap: 110px; } }
 
 /* the country road and what stands next to it (drawn by assets/js/road.js; the colors of the road
