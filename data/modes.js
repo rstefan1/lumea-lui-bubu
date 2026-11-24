@@ -19,7 +19,7 @@
 window.MODE = "auto";
 
 window.MODE_CALENDAR = [
-  { mode: "winter",    from: "15 November", to: "30 November" },
+  { mode: "normal",    from: "1 November", to: "30 November" },
   { mode: "christmas", from: "1 December",  to: "7 January" },
   { mode: "winter",    from: "8 January",   to: "29 February" }
 ];
