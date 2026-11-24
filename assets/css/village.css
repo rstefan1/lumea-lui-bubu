@@ -304,7 +304,7 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 .bow__string { fill: none; stroke: #ffffff; stroke-width: 2.2; stroke-linecap: round; }
 .bow__twist { fill: none; stroke: #d6202a; stroke-width: 2.2; stroke-dasharray: 2 2; }
 /* the patches of the season in the free places of the village (assets/js/scenery.js, drawn only when a mode asks for them):
-   snowdrops, spring flowers, puddles, sheaves of wheat, watermelons, pumpkins, fallen leaves, insects, children, sleds */
+   snowdrops, spring flowers, puddles, sheaves of wheat, watermelons, pumpkins, fallen leaves, insects, children, sleds, corn, baskets */
 .village-road .sc-sd-green, .village-road .sc-bl-green { fill: none; stroke: #4f9a3e; stroke-width: 1.6; stroke-linecap: round; }
 .village-road .sc-sd-bell { fill: #ffffff; stroke: #b9c7b0; stroke-width: 0.6; }
 .village-road .sc-bl-red { fill: #e8413a; }
@@ -340,6 +340,14 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 .village-road .sc-sled-seat { fill: #c0392b; }
 .village-road .sc-sled-rope { fill: none; stroke: #8a8f98; stroke-width: 0.8; }
 .village-road .sc-sled-scarf { stroke: #ffd23f; stroke-width: 1.8; stroke-linecap: round; }
+.village-road .sc-corn { fill: #d9c08a; stroke: #b39461; stroke-width: 0.8; stroke-linejoin: round; }
+.village-road .sc-corn-line { fill: none; stroke: #b39461; stroke-width: 1; stroke-linecap: round; }
+.village-road .sc-cob { fill: #f2c13c; stroke: #d9a020; stroke-width: 0.6; }
+.village-road .sc-basket { fill: #c08a4a; stroke: #8a5a2a; stroke-width: 0.8; }
+.village-road .sc-basket-weave { stroke: #8a5a2a; stroke-width: 0.8; }
+.village-road .sc-basket-handle { fill: none; stroke: #8a5a2a; stroke-width: 1.6; stroke-linecap: round; }
+.village-road .sc-apple-red { fill: #d9302b; }
+.village-road .sc-grapes { fill: #7b4ab0; }
 .village-road .sc-fallen--1 { fill: #e8892a; }
 .village-road .sc-fallen--2 { fill: #d9532b; }
 .village-road .sc-fallen--3 { fill: #f2c13c; }

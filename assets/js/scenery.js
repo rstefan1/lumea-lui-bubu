@@ -395,10 +395,33 @@
       '<circle cx="-1.5" cy="-18" r="3.3" class="sc-child-skin"/><path d="M-4.9 -18.4 Q-1.5 -24.4 1.9 -18.4 Z" class="sc-scarf"/>' +
       '<circle cx="-1.5" cy="-22.8" r="1.3" class="sc-bl-white"/><path d="M-4.4 -15.2 H1.4" class="sc-sled-scarf"/></g>';
   }
+  // stooks of dried corn stalks standing in the field after the corn harvest, and a few cobs on the ground
+  function corn(random) {
+    var out = "";
+    [-9, 9].forEach(function (x0) {
+      var x = x0 + (random() - 0.5) * 4, h = 20 + random() * 6;
+      out += '<path d="M' + r(x - 7) + " 0 L" + r(x - 1) + " " + r(-h) + " L" + r(x + 1) + " " + r(-h) + " L" + r(x + 7) + ' 0 Z" class="sc-corn"/>' +
+        '<path d="M' + r(x - 3) + " 0 L" + r(x - 0.4) + " " + r(-h + 2) + " M" + r(x + 3) + " 0 L" + r(x + 0.4) + " " + r(-h + 2) +
+        " M" + r(x - 1) + " " + r(-h) + " l-4 -4 M" + r(x + 1) + " " + r(-h) + ' l4 -5" class="sc-corn-line"/>' +
+        '<path d="M' + r(x - 3.4) + " " + r(-h * 0.62) + " H" + r(x + 3.4) + '" class="sc-wheat-band"/>';
+    });
+    return '<g class="patch patch--corn">' + out + '<ellipse cx="2" cy="-1.6" rx="3.6" ry="1.6" class="sc-cob"/><ellipse cx="-1" cy="-1" rx="3.2" ry="1.4" class="sc-cob"/></g>';
+  }
+  // a wicker basket full of apples or of grapes, just picked
+  function basket(random) {
+    var x = -8 + random() * 16, grapes = random() < 0.5, fruit = "";
+    for (var i = 0; i < 5; i++) {
+      fruit += circle(x - 5 + i * 2.5, -9.4 - (i % 2) * 1.6, grapes ? 1.6 : 2.2);
+    }
+    return '<g class="patch patch--baskets"><path d="M' + r(x - 7) + " -10 Q" + r(x) + " -22 " + r(x + 7) + ' -10" class="sc-basket-handle"/>' +
+      '<path d="' + fruit + '" class="' + (grapes ? "sc-grapes" : "sc-apple-red") + '"/>' +
+      '<path d="M' + r(x - 8) + " -10 H" + r(x + 8) + " L" + r(x + 6) + " 0 H" + r(x - 6) + ' Z" class="sc-basket"/>' +
+      '<path d="M' + r(x - 7.4) + " -6.6 H" + r(x + 7.4) + " M" + r(x - 6.8) + " -3.3 H" + r(x + 6.8) + '" class="sc-basket-weave"/></g>';
+  }
   // the kinds of patches a mode can ask for (--patches in modes/<name>/mode.css);
   // a kind written with a "?" after it (e.g. snowdrops?) grows only here and there
   var PATCHES = { snowdrops: snowdrops, blooms: blooms, puddles: puddle, sheaves: sheaves, watermelons: watermelons,
-    pumpkins: pumpkins, leaves: leaves, sleds: sled };
+    pumpkins: pumpkins, leaves: leaves, sleds: sled, corn: corn, baskets: basket };
   function patch(random, kinds) {
     var out = "";
     kinds.forEach(function (asked) {
