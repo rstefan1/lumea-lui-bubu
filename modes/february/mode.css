@@ -1,10 +1,11 @@
 /* =====================================================================
-   modes/february/mode.css – the FEBRUARY mode: the snowy village of winter, but no snow falling any more.
+   modes/february/mode.css – the FEBRUARY mode: the snowy village of January, on a clear, sunny winter day.
+   No snow falling any more, a deep blue sky and a bright sun, children on sleds in the snow,
+   and here and there the first snowdrops coming out through the snow: spring is on its way.
    It is loaded only when the February mode is on (data/modes.js).
 
-   Everything comes from the January mode, modes/january/mode.css: a change there changes February too.
-   To change something only in February, write it in the SETTINGS below
-   (e.g. add the line   --sky-top: #b7d3e8;   for a lighter sky only in February).
+   The snow comes from the January mode, modes/january/mode.css: a change there changes February too.
+   To change something only in February, write it in the SETTINGS below.
    ===================================================================== */
 @import url("../january/mode.css");
 
@@ -12,4 +13,20 @@
 :root {
   /* no snowflakes falling (write a number, e.g. 15, for a few) */
   --falling-count: 0;
+
+  /* what is in the snow (the kinds: see PATCHES in assets/js/scenery.js; "?" = only here and there) */
+  --patches: sleds snowdrops?;
+
+  /* a clear sky: at the very top, and down near the hills */
+  --sky-top: #6fb4ea;
+  --sky-low: #e6f4fd;
+
+  /* the band at the very bottom of the page, under the fence (the text on it is white) */
+  --footer: #3f7fb8;
 }
+/* ====================== no need to change below ======================= */
+
+
+/* a bright sun and white clouds (January has a pale sun and grey-white clouds) */
+.landscape__sun { background: radial-gradient(circle, #fff9d6 0 45%, #ffe066 60%, rgba(255, 224, 102, 0) 72%); }
+.cloud, .cloud::before, .cloud::after { background: #ffffff; }
