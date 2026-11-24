@@ -17,6 +17,7 @@ It also draws the same landscape for some modes of the page, each with a bottom 
 --field in its modes/<name>/mode.css:
   - modes/january/landscape.svg (December, January, February): snow on the hills, the trees, the roofs and
     the haystacks, lit windows;
+  - modes/september/landscape.svg: the beginning of autumn, the fields mowed and golden, no flowers;
   - modes/october/landscape.svg (October, November): autumn, ochre and brown fields, no flowers, lit windows.
 
 Run from the root of the repository:   python3 tools/draw-landscape.py
@@ -63,6 +64,12 @@ AUTUMN = dict(SUMMER, **{
     "window": "#ffd77a", "hay-shadow": "rgba(60,70,40,.25)",
     "road-shadow": "rgba(60,70,40,.2)", "road": "#cfae80", "road-rim": "#a57d4c", "road-light": "#dcc196",
     "rut": "#a8875a", "tuft": "#8a9a4a",
+    "flowers": False,
+})
+EARLY_AUTUMN = dict(SUMMER, **{
+    "out": ROOT / "modes" / "september" / "landscape.svg",
+    "field": "#c3d48e", "meadow": "#b8cc82", "hill": "#b0c77a",
+    "strips": ["#b5cc78", "#dcc77a", "#e6d38e", "#a7c46e", "#c9b06a", "#d8cf86"],
     "flowers": False,
 })
 SNOW = "#fbfdff"
@@ -314,4 +321,5 @@ def draw(colors):
 
 draw(SUMMER)
 draw(WINTER)
+draw(EARLY_AUTUMN)
 draw(AUTUMN)
