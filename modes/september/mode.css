@@ -1,0 +1,37 @@
+/* =====================================================================
+   modes/september/mode.css – the SEPTEMBER mode: the beginning of autumn in the village.
+   The leafy trees start to turn yellow, the apple trees are full of ripe apples, pumpkins in the grass,
+   a bunch of grapes (the grape harvest) on the entrance sign and on the board of every game.
+   It is loaded only when the September mode is on (data/modes.js).
+
+   To change how September looks, change only the SETTINGS just below:
+   a color is written like #c9c24a (pick one at https://htmlcolorcodes.com).
+   The grapes on the boards are the picture modes/september/grapes.svg.
+   ===================================================================== */
+
+/* ============================== SETTINGS ============================== */
+:root {
+  /* what is in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
+  --patches: pumpkins;
+
+  /* the leafy trees and the bushes: still green below, yellowing on the top */
+  --leaf: #6aa848;
+  --leaf-turning: #d4c447;
+}
+/* ====================== no need to change below ======================= */
+
+
+.village-road .sc-leaf, .village-road .sc-leaf-small { fill: var(--leaf); }
+.village-road .sc-leaf-light { fill: var(--leaf-turning); }
+.place .b-bush { fill: var(--leaf); }
+.place .b-bush-light { fill: var(--leaf-turning); }
+.village-road .sc-item--flowers { display: none; }
+
+/* ---------- A bunch of grapes on the entrance sign and on the board of every game ---------- */
+.place__info { position: relative; }
+.sign__board::before, .place__info::before {
+  content: ""; position: absolute; z-index: 2; width: 26px; height: 34px; pointer-events: none;
+  background: url("grapes.svg") center / contain no-repeat;
+}
+.sign__board::before { left: -10px; top: -14px; transform: rotate(-10deg); }
+.place__info::before { right: -8px; top: -16px; transform: rotate(10deg); }
