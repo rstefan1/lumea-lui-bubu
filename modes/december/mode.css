@@ -12,6 +12,10 @@
 
 /* ============================== SETTINGS ============================== */
 :root {
+  /* what is in the snow: children on sleds and children playing (the kinds: see PATCHES in assets/js/scenery.js;
+     "?" = only here and there) */
+  --patches: sleds kids?;
+
   /* the colors of the light bulbs and of the balls on the fir trees (they take turns: 1, 2, 3, 4, 1, 2 ...) */
   --light-1: #ff3b3b;
   --light-2: #ffd23f;
