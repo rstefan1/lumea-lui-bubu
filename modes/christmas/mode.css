@@ -1,0 +1,52 @@
+/* =====================================================================
+   modes/christmas/mode.css – the CHRISTMAS mode: the snowy village of winter, decorated for Christmas:
+   colored balls and a star on every fir tree, strings of lights along the roofs of the houses,
+   garlands of lights under the entrance sign and under the boards of the games, a red band at the bottom.
+   It is loaded only when the Christmas mode is on (data/modes.js).
+
+   Everything about the snow (the colors, the snowflakes) comes from the winter mode, modes/winter/mode.css:
+   a change there changes Christmas too. To change something only at Christmas, write it in the SETTINGS below
+   (e.g. add the line   --falling-count: 60;   for more snowflakes only at Christmas).
+   ===================================================================== */
+@import url("../winter/mode.css");
+
+/* ============================== SETTINGS ============================== */
+:root {
+  /* the colors of the light bulbs and of the balls on the fir trees (they take turns: 1, 2, 3, 4, 1, 2 ...) */
+  --light-1: #ff3b3b;
+  --light-2: #ffd23f;
+  --light-3: #3fc8ff;
+  --light-4: #6fe05a;
+
+  /* the star on the top of every fir tree */
+  --tree-star: #ffd23f;
+
+  /* the band at the very bottom of the page, under the fence (the text on it is white) */
+  --footer: #a8262f;
+}
+/* ====================== no need to change below ======================= */
+
+
+/* ---------- The decorations of the drawings (the hidden shapes of assets/js/season-shapes.js) ---------- */
+.lights, .ornaments { display: inline; }
+.bulb--1 { fill: var(--light-1); }
+.bulb--2 { fill: var(--light-2); }
+.bulb--3 { fill: var(--light-3); }
+.bulb--4 { fill: var(--light-4); }
+.tree-star { fill: var(--tree-star); }
+.lights__wire { stroke: #2f4f3a; }
+
+/* ---------- Garlands of lights under the entrance sign and under the board of every game ----------
+   (a picture repeated along the board: the wire, and four bulbs in the colors of the settings; they do not blink,
+   so they cost nothing to old phones) */
+.sign__board::after, .place__info::after {
+  content: ""; position: absolute; z-index: 1; left: 16px; right: 16px; bottom: -10px; height: 15px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 6px 10px, var(--light-1) 0 3.6px, transparent 4.3px) 0 0 / 48px 100% repeat-x,
+    radial-gradient(circle at 18px 10px, var(--light-2) 0 3.6px, transparent 4.3px) 0 0 / 48px 100% repeat-x,
+    radial-gradient(circle at 30px 10px, var(--light-3) 0 3.6px, transparent 4.3px) 0 0 / 48px 100% repeat-x,
+    radial-gradient(circle at 42px 10px, var(--light-4) 0 3.6px, transparent 4.3px) 0 0 / 48px 100% repeat-x,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 15'%3E%3Cpath d='M0 2 Q6 11 12 2 Q18 11 24 2 Q30 11 36 2 Q42 11 48 2' fill='none' stroke='%232f4f3a' stroke-width='1.4'/%3E%3C/svg%3E") 0 0 / 48px 100% repeat-x;
+}
+.sign__board::after { bottom: -8px; }
