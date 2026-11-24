@@ -205,7 +205,7 @@
     places.forEach(function (place) {
       // a wide free space around every building and its name, so the games stand out
       blocks.push(rel(place.querySelector(".place__svg"), phone ? 14 : 34));
-      Array.prototype.forEach.call(place.querySelectorAll(".place__info, .place__badge"), function (el) {
+      Array.prototype.forEach.call(place.querySelectorAll(".place__info, .place__posts, .place__badge"), function (el) {
         blocks.push(rel(el, phone ? 10 : 22));
       });
     });

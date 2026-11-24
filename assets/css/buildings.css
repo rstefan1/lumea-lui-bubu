@@ -91,17 +91,40 @@
 .place__svg { transition: transform 0.2s ease; transform-origin: 50% 100%; }
 @media (hover: hover) { a.place:hover .place__svg { transform: translateY(-4px) scale(1.02); } }
 
-/* the name, one line and the button, on a light board under the building: easy to read over the village */
+/* the name, one line and the button, on a notice board of the village under the building:
+   a sheet of paper in a wooden frame with a nail in every corner, standing on two posts in the grass
+   (like the entrance sign); the paper keeps the text easy to read over the village */
 .place__info {
+  --frame: 10px;
+  position: relative;
   align-self: center;
   display: flex; flex-direction: column; align-items: center; text-align: center;
-  margin-top: 36px; padding: 12px 22px 16px; max-width: calc(100% - 16px);   /* room for the path to the door (assets/js/road.js) */
-  background: rgba(255, 250, 240, 0.94); border-radius: 20px;
-  box-shadow: 0 6px 16px rgba(43, 42, 58, 0.12);
+  margin-top: 36px; margin-bottom: 18px; padding: 14px 22px 14px; max-width: calc(100% - 16px);   /* room for the path to the door (assets/js/road.js) */
+  border: var(--frame) solid transparent; border-radius: 14px;
+  background:
+    radial-gradient(circle, #5a3416 0 2.2px, transparent 2.9px) left top / var(--frame) var(--frame) no-repeat border-box,
+    radial-gradient(circle, #5a3416 0 2.2px, transparent 2.9px) right top / var(--frame) var(--frame) no-repeat border-box,
+    radial-gradient(circle, #5a3416 0 2.2px, transparent 2.9px) left bottom / var(--frame) var(--frame) no-repeat border-box,
+    radial-gradient(circle, #5a3416 0 2.2px, transparent 2.9px) right bottom / var(--frame) var(--frame) no-repeat border-box,
+    linear-gradient(180deg, #fffdf6, var(--paper) 70%, #f7ecd6) padding-box,
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 3px, transparent 3px 11px) border-box,
+    linear-gradient(180deg, var(--wood-light), var(--wood) 60%, #a5682f) border-box;
+  box-shadow: 0 0 0 2px var(--wood-dark), inset 0 0 0 2px rgba(90, 52, 22, 0.25),
+    0 6px 0 rgba(90, 52, 22, 0.3), 0 14px 24px rgba(43, 42, 58, 0.2);
 }
-/* a game that can be played: a frame in its color and a soft ring that pulses around "Intră"
+/* the boards lean a little, each to its side of the road, like the entrance sign */
+.place--right .place__info { transform: rotate(-1.2deg); }
+.place--left .place__info { transform: rotate(1.2deg); }
+/* the two posts of the board, going down into the grass */
+.place__posts {
+  position: absolute; left: 18%; right: 18%; top: calc(100% + var(--frame) + 2px); height: 18px;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--wood-dark), var(--wood) 50%, var(--wood-dark)) left top / 14px 100% no-repeat,
+    linear-gradient(90deg, var(--wood-dark), var(--wood) 50%, var(--wood-dark)) right top / 14px 100% no-repeat;
+}
+/* a game that can be played: a soft ring that pulses around "Intră"
    (only transform / opacity; nothing moves with "reduce motion") */
-a.place .place__info { box-shadow: 0 0 0 4px var(--main), 0 10px 24px rgba(43, 42, 58, 0.2); }
 a.place .place__btn { position: relative; }
 a.place .place__btn::after {
   content: ""; position: absolute; inset: -4px; border-radius: inherit;
@@ -112,7 +135,7 @@ a.place .place__btn::after {
 @keyframes btn-ring { 0% { transform: scale(1); opacity: 0.7; } 70%, 100% { transform: scale(1.35, 1.6); opacity: 0; } }
 /* not open yet: a little paler, so the eye goes first to the games that can be played */
 .place--soon .place__svg { filter: saturate(0.6); opacity: 0.88; }
-.place--soon .place__info { background: rgba(255, 250, 240, 0.78); box-shadow: none; }
+.place--soon .place__info { filter: saturate(0.55); opacity: 0.9; }
 .place--soon .place__title { color: #4a4860; }
 .place__title {
   font-family: "Fredoka", "Atkinson Hyperlegible", sans-serif; font-weight: 600;

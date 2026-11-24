@@ -3,7 +3,8 @@
 
    Every building is one card in the street:
      .place__scene   the drawing (SVG, 320 x 240, the ground is at the bottom), and a ribbon ("Nou!")
-     .place__info    the name of the game, one line about it and the "Intră" button
+     .place__info    the name of the game, one line about it and the "Intră" button,
+                     on a notice board with two posts (.place__posts)
    With an url the whole card is a link (<a>); without one it is a <div> with "În curând".
 
    The drawings use these classes, so the color of the building (.place--<color>) and later
@@ -257,6 +258,7 @@
         '<span class="place__title">' + esc(p.title) + "</span>" +
         (p.description ? '<span class="place__desc">' + esc(p.description) + "</span>" : "") +
         '<span class="place__btn">' + (open ? "Intră ➜" : "În curând") + "</span>" +
+        '<span class="place__posts" aria-hidden="true"></span>' +
       "</span>" +
       "</" + tag + ">";
   }
