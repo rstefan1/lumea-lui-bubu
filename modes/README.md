@@ -7,7 +7,7 @@ The games and the buildings stay the same; only the look changes.
 |-------------|--------------------|
 | `normal`    | the village as always: green, with flowers |
 | `january`   | winter: everything covered with snow, frozen ponds, snowmen, snowflakes falling |
-| `february`  | the snowy village of January, but no snow falling |
+| `february`  | the snowy village of January under a clear, sunny sky: no snow falling, children on sleds, the first snowdrops |
 | `march`     | red and white bows of the 1st of March on the boards, the buildings and the trees; snowdrops in the grass |
 | `april`     | flowers everywhere, fruit trees in blossom, rows of flowers on the boards, petals in the wind |
 | `may`       | the flowers of April, little bees and ladybugs on them and flying over the page |
@@ -16,7 +16,7 @@ The games and the buildings stay the same; only the look changes.
 | `august`    | watermelons in the grass, plums on the trees, a slice of watermelon on the boards |
 | `september` | the trees start to turn yellow, pumpkins, ripe apples, grapes on the boards |
 | `october`   | yellow, red and copper trees, ochre fields, fallen and falling leaves, garlands of leaves |
-| `november`  | just after the rain, but cheerful: puddles shining in the sun, a rainbow, copper trees, umbrellas on the boards |
+| `november`  | the autumn of October, with puddles everywhere shining with the blue of the sky, full ponds, a muddy road |
 | `december`  | Christmas: the snowy village of January, plus colored balls and a star on every fir tree, lights on the roofs, garlands of lights on the boards |
 
 Every mode has the name of its month. With the usual setting the mode changes by itself every month
@@ -47,7 +47,7 @@ to see the change. The pictures of a mode (`.svg`) are in its folder too.
 - `january/landscape.svg`: the snowy picture at the top, drawn by `tools/draw-landscape.py` (`python3 tools/draw-landscape.py`).
 - `january/snowflake.svg`: the big snowflake.
 - Some modes start from another one (the first line of their `mode.css`, `@import`): December and February from January,
-  May from April. November uses the picture at the top of October.
+  May from April, November from October.
 
 ## Making a new mode (Easter, a holiday ...)
 
@@ -59,12 +59,13 @@ to see the change. The pictures of a mode (`.svg`) are in its folder too.
    - the hidden shapes carried by every drawing, shown with `display: inline`: `.snow`, `.lights`, `.ornaments`,
      `.bow` and the snowman `.village-road .sc-item--snowman`;
    - small patches in the free places of the village, with `--patches`: `snowdrops`, `blooms`, `puddles`, `sheaves`,
-     `watermelons`, `pumpkins`, `leaves`, `bugs` (bees and ladybugs), `children` (with balloons), e.g. `--patches: blooms bugs;`;
+     `watermelons`, `pumpkins`, `leaves`, `bugs` (bees and ladybugs), `children` (with balloons), `sleds`,
+     e.g. `--patches: blooms bugs;`; a kind with a `?` after it grows only here and there (`--patches: sleds snowdrops?;`);
    - hiding a thing of the village: `.village-road .sc-item--sunflowers { display: none; }`;
    - things falling over the page: `--falling-count`, `--falling-time`, `--falling-big` and their look,
      `.falling__item` and `.falling__item--big` (petals, leaves ... instead of snowflakes); with other keyframes
      they can fly across (the bees of May) or up (the balloons of June);
-   - a little picture on the boards: `.sign__board::before`, `.place__info::before` (see `march`, `july`, `november`);
+   - a little picture on the boards: `.sign__board::before`, `.place__info::before` (see `march`, `july`, `august`);
    - another picture at the top: `.landscape { background-image: url("landscape.svg"); }`, with the file in the folder.
 3. Add it to the calendar in `data/modes.js` and try it with `?mode=<name>`.
 

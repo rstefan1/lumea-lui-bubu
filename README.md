@@ -28,7 +28,7 @@ _headers, robots.txt    settings for Cloudflare Pages and search engines
 
 The village looks different every month: snow and decorated fir trees at Christmas, snow in January and February,
 the red and white bows of the 1st of March, flowers in April and May, children and balloons in June, the harvest in July,
-watermelons in August, the colors of autumn from September, a cheerful rainy November.
+watermelons in August, the colors of autumn from September, puddles after the rain in November.
 `data/modes.js` chooses the mode by date (or keeps one on);
 `?mode=<name>` in the address shows one without changing anything. How to change a mode or make a new one:
 [modes/README.md](modes/README.md).

@@ -6,7 +6,7 @@
                       "normal"     the village as always: green, with flowers
                       or the name of one month, to keep its mode on whatever the date:
                       "january"    winter: everything covered with snow, snowflakes falling
-                      "february"   the snow of January, but no snow falling
+                      "february"   the snow of January in the sun: sleds, the first snowdrops
                       "march"      red and white bows of the 1st of March, snowdrops
                       "april"      flowers everywhere, fruit trees in blossom
                       "may"        flowers, little bees and ladybugs
@@ -15,7 +15,7 @@
                       "august"     watermelons, plums on the trees
                       "september"  the trees start to turn yellow, pumpkins, grapes
                       "october"    the colors of autumn, leaves falling
-                      "november"   after the rain: puddles, a rainbow, umbrellas
+                      "november"   the autumn of October, with puddles after the rain
                       "december"   Christmas: snow, decorated fir trees, lights on the houses
                     Every mode is a folder in modes/ (modes/january/, modes/march/ ...);
                     modes/README.md tells how to change one or make a new one.
