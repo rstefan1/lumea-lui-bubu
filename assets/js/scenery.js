@@ -18,6 +18,8 @@
    In the places still free at the end: small PATCHES of the season, only when the mode of the page asks for
    them with --patches in its modes/<name>/mode.css, e.g.  --patches: blooms bugs;  (the kinds: see PATCHES below).
    They are placed after everything else, so the rest of the village looks the same with or without them.
+   Behind every game there is also a row of trees and patches in the background (behind(), called by assets/js/road.js),
+   so the month is seen right away around the first building, also on a phone held upright.
    Nothing here moves.
    ===================================================================== */
 (function () {
@@ -513,5 +515,42 @@
     return { back: fields(width, height, random), front: front };
   }
 
-  window.VILLAGE_SCENERY = { fill: fill };
+  /* ---------- Behind every game: a row of trees and patches of the season in the background ----------
+     So the month is seen right away, around the first building, even on a phone held upright.
+     The places are in units of the drawing of a building (320 x 240): the trees stand a little behind
+     the roof (the top of their crowns shows over it, and they are whole at the sides), the patches lie
+     on the far grass just at the top of the roof and at the two sides.
+     They are drawn under the road and under the buildings, so nothing of a game is ever covered. */
+  var BEHIND_TREES = [[-4, 106, "fir"], [36, 100, "tree"], [86, 96, "apple"], [118, 92, "fir"],
+    [214, 94, "tree"], [262, 98, "apple"], [318, 104, "firs3"]];
+  var BEHIND_PATCHES = [[62, 82], [104, 80], [218, 80], [258, 82], [10, 124], [306, 128]];
+  function behind(ctx) {
+    var kinds = askedPatches(), random = ctx.random, out = "";
+    // nothing on the road (it comes down from the landscape, maybe right next to a building)
+    function onRoad(x, y, w, h) {
+      return ctx.lines.some(function (l) {
+        return l.pts.some(function (p) {
+          var d = l.half(p) + 4;
+          return p.x + d > x && p.x - d < x + w && p.y + d > y && p.y - d < y + h;
+        });
+      });
+    }
+    function put(name, x, y, s, inner) {
+      var it = ITEMS[name] || { w: 46, h: 40 }, w = it.w * s, h = it.h * s;
+      x = Math.max(w / 2 + 2, Math.min(ctx.width - w / 2 - 2, x));   // a building at the edge of the screen: the tree moves in a little
+      if (onRoad(x - w / 2, y - h, w, h)) { return; }
+      var flip = random() < 0.5 ? -1 : 1;
+      out += '<g transform="translate(' + r(x) + " " + r(y) + ") scale(" + r(s * flip) + " " + r(s) + ')" class="sc-item sc-item--' + name + '">' + inner + "</g>";
+    }
+    ctx.scenes.forEach(function (b) {
+      var u = b.w / 320;   // one unit of the drawing, in pixels
+      BEHIND_TREES.forEach(function (t) { put(t[2], b.x + t[0] * u, b.y + t[1] * u, 0.78 * u, ITEMS[t[2]].draw()); });
+      if (kinds.length) {
+        BEHIND_PATCHES.forEach(function (p) { put("patch", b.x + p[0] * u, b.y + p[1] * u, 1.05 * u, patch(random, kinds)); });
+      }
+    });
+    return out;
+  }
+
+  window.VILLAGE_SCENERY = { fill: fill, behind: behind };
 })();

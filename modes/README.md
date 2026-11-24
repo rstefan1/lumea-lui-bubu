@@ -62,6 +62,7 @@ to see the change. The pictures of a mode (`.svg`) are in its folder too.
      `watermelons`, `pumpkins`, `leaves`, `bugs` (bees and ladybugs), `children` (with balloons), `kids` (waving; they wear woolly hats with
      `.village-road .sc-child-hat { display: inline; }` and school bags with `.sc-child-bag`), `sleds`, `corn`, `baskets`,
      e.g. `--patches: blooms bugs;`; a kind with a `?` after it grows only here and there (`--patches: sleds snowdrops?;`);
+     they grow in the free places and also in the background behind every game, next to a row of trees;
    - hiding a thing of the village: `.village-road .sc-item--sunflowers { display: none; }`;
    - things falling over the page: `--falling-count`, `--falling-time`, `--falling-big` and their look,
      `.falling__item` and `.falling__item--big` (petals, leaves ... instead of snowflakes); with other keyframes

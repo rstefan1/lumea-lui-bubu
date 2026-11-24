@@ -220,6 +220,7 @@
       html += '<ellipse cx="' + r(b.left + b.width / 2 - box.left) + '" cy="' + r(b.bottom - box.top - b.height * 0.18) + '" rx="' + r(b.width * 0.68) +
         '" ry="' + r(b.height * 0.5) + '" fill="url(#vr-yard)"/>';
     });
+    var behindAt = html.length;   // the trees and the patches behind the buildings go here (under the paths and the road)
     // the paths to the doors (under the main road, which covers the place where they meet)
     doors.forEach(function (d, i) {
       // the path dips only a little, so it stays above the name of the game (.place__info, assets/css/buildings.css)
@@ -246,7 +247,11 @@
       var lastBottom = places[places.length - 1].getBoundingClientRect().bottom - box.top + 20;
       var scenery = window.VILLAGE_SCENERY.fill({ width: width, height: height, phone: phone, blocks: blocks, lines: lines,
         gamesEnd: lastBottom, random: rng(11) });
-      html = scenery.back + html + '<g class="vr-scenery">' + scenery.front + "</g>";
+      // behind every game: trees and patches of the season in the background, so the month is seen right away
+      var behind = window.VILLAGE_SCENERY.behind({ width: width, lines: lines, random: rng(13),
+        scenes: places.map(function (place) { var b = rel(place.querySelector(".place__svg"), 0); return { x: b.x, y: b.y, w: b.w }; }) });
+      html = scenery.back + html.slice(0, behindAt) + '<g class="vr-scenery vr-behind">' + behind + "</g>" + html.slice(behindAt) +
+        '<g class="vr-scenery">' + scenery.front + "</g>";
     }
 
     svg.setAttribute("viewBox", "0 0 " + r(width) + " " + r(height));
