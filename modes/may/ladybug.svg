@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11 -10 22 20">
+  <!-- a little ladybug, a friend of Bubu (modes/may/mode.css): seen from above, its head to the right -->
+  <path d="M6 -3 L9 -6 M6 3 L9 6" stroke="#3b3030" stroke-width="1.2" stroke-linecap="round"/>
+  <circle cx="5.6" cy="0" r="3.6" fill="#3b3030"/>
+  <circle cx="-0.6" cy="0" r="7.4" fill="#e3262b" stroke="#3b3030" stroke-width="1"/>
+  <path d="M5 0 H-8" stroke="#3b3030" stroke-width="1"/>
+  <g fill="#3b3030">
+    <circle cx="-3.6" cy="-3.4" r="1.6"/><circle cx="1.6" cy="-4.2" r="1.4"/><circle cx="-4" cy="3.2" r="1.5"/>
+    <circle cx="1.4" cy="4" r="1.4"/><circle cx="-0.8" cy="0" r="1.1"/>
+  </g>
+  <circle cx="6.8" cy="-1.4" r=".7" fill="#ffffff"/><circle cx="6.8" cy="1.4" r=".7" fill="#ffffff"/>
+</svg>

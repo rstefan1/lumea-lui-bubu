@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -10 24 20">
+  <!-- a little bee flying to the right (modes/may/mode.css) -->
+  <ellipse cx="-2" cy="-4.5" rx="4" ry="3" fill="#ffffff" fill-opacity=".9" stroke="#9fb3c6" stroke-width=".8"/>
+  <ellipse cx="2.5" cy="-5" rx="4" ry="3" fill="#ffffff" fill-opacity=".9" stroke="#9fb3c6" stroke-width=".8"/>
+  <ellipse cx="0" cy="1" rx="7" ry="4.6" fill="#ffcf3a" stroke="#3b3030" stroke-width="1"/>
+  <path d="M-2 -3.4 V5.4 M2 -3.4 V5.4" stroke="#3b3030" stroke-width="1.8"/>
+  <path d="M-7 1 L-9.5 1" stroke="#3b3030" stroke-width="1.4" stroke-linecap="round"/>
+  <circle cx="6.8" cy="0" r="2.8" fill="#3b3030"/>
+  <circle cx="7.6" cy="-0.6" r=".8" fill="#ffffff"/>
+</svg>
