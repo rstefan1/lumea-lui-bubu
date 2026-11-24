@@ -200,7 +200,7 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 .village-road .sc-beak { fill: #f0a020; }
 .village-road .sc-comb { fill: #d9302b; stroke: #d9302b; stroke-width: 1.5; }
 .village-road .sc-pond-edge { fill: #a7cf7f; }
-.village-road .sc-water { fill: #8ccbe8; }          /* the winter mode turns it to ice */
+.village-road .sc-water { fill: #8ccbe8; }          /* the January mode turns it to ice */
 .village-road .sc-stone { fill: #a39b8e; }
 .village-road .sc-ripple { fill: none; stroke: #c9e9f7; stroke-width: 2; stroke-linecap: round; }
 .village-road .sc-duck { fill: #fbfaf5; }

@@ -6,9 +6,8 @@ The games and the buildings stay the same; only the look changes.
 | mode        | what it looks like |
 |-------------|--------------------|
 | `normal`    | the village as always: green, with flowers |
-| `winter`    | everything covered with snow, frozen ponds, snowmen, snowflakes falling |
-| `christmas` | the winter village, plus colored balls and a star on every fir tree, lights on the roofs, garlands of lights on the boards |
-| `february`  | the winter village, but no snow falling |
+| `january`   | winter: everything covered with snow, frozen ponds, snowmen, snowflakes falling |
+| `february`  | the snowy village of January, but no snow falling |
 | `march`     | red and white bows of the 1st of March on the boards, the buildings and the trees; snowdrops in the grass |
 | `april`     | flowers everywhere, fruit trees in blossom, rows of flowers on the boards, petals in the wind |
 | `may`       | the flowers of April, little bees and ladybugs on them and flying over the page |
@@ -18,21 +17,22 @@ The games and the buildings stay the same; only the look changes.
 | `september` | the trees start to turn yellow, pumpkins, ripe apples, grapes on the boards |
 | `october`   | yellow, red and copper trees, ochre fields, fallen and falling leaves, garlands of leaves |
 | `november`  | just after the rain, but cheerful: puddles shining in the sun, a rainbow, copper trees, umbrellas on the boards |
+| `december`  | Christmas: the snowy village of January, plus colored balls and a star on every fir tree, lights on the roofs, garlands of lights on the boards |
 
-With the usual setting the mode changes by itself every month (`christmas` from the 1st of December to the 7th of January,
-then `winter` until the end of January, then one mode for every month).
+Every mode has the name of its month. With the usual setting the mode changes by itself every month
+(only `december`, with Christmas, lasts until the 7th of January).
 
 ## Choosing the mode
 
 Open `data/modes.js`:
 
 - `window.MODE = "auto";` lets the calendar below it choose the mode by date: a different one every month (the usual setting).
-- `window.MODE = "winter";` (or any other mode) keeps that mode on, whatever the date.
-- In `MODE_CALENDAR` every line is one period: `{ mode: "christmas", from: "1 December", to: "7 January" }`.
+- `window.MODE = "march";` (or any other month) keeps that mode on, whatever the date.
+- In `MODE_CALENDAR` every line is one period: `{ mode: "december", from: "1 December", to: "7 January" }`.
   The days are written with the month in English. Outside all the periods the village is `normal`.
 
 To see a mode without changing anything, add `?mode=<name>` to the address:
-`http://localhost:8000/?mode=winter` (or the same `?mode=winter` after the address of the site).
+`http://localhost:8000/?mode=march` (or the same `?mode=march` after the address of the site).
 
 ## Changing a mode
 
@@ -41,12 +41,12 @@ the colors (written like `#f4f8fb`), what grows in the free places of the villag
 how many things fall (or fly) and how fast. Change only that part, save, and reload the page with `?mode=<name>`
 to see the change. The pictures of a mode (`.svg`) are in its folder too.
 
-- `winter/mode.css`: the sky, the snow, the ice, the frost on the trees, the band at the bottom, the snowflakes.
-- `christmas/mode.css`: the colors of the light bulbs and of the balls, the star, the band at the bottom.
-  Christmas takes everything else from winter: a change of the snow in `winter/mode.css` changes Christmas too.
-- `winter/landscape.svg`: the snowy picture at the top, drawn by `tools/draw-landscape.py` (`python3 tools/draw-landscape.py`).
-- `winter/snowflake.svg`: the big snowflake.
-- Some modes start from another one (the first line of their `mode.css`, `@import`): Christmas and February from winter,
+- `january/mode.css`: the sky, the snow, the ice, the frost on the trees, the band at the bottom, the snowflakes.
+- `december/mode.css`: the colors of the light bulbs and of the balls, the star, the band at the bottom.
+  December takes everything else from January: a change of the snow in `january/mode.css` changes December too.
+- `january/landscape.svg`: the snowy picture at the top, drawn by `tools/draw-landscape.py` (`python3 tools/draw-landscape.py`).
+- `january/snowflake.svg`: the big snowflake.
+- Some modes start from another one (the first line of their `mode.css`, `@import`): December and February from January,
   May from April. November uses the picture at the top of October.
 
 ## Making a new mode (Easter, a holiday ...)

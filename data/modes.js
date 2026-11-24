@@ -4,10 +4,9 @@
      MODE           which mode is on:
                       "auto"       the calendar below chooses: a different mode every month (the usual setting)
                       "normal"     the village as always: green, with flowers
-                      or the name of one mode, to keep it on whatever the date:
-                      "winter"     everything covered with snow, snowflakes falling
-                      "christmas"  snow, decorated fir trees, lights on the houses
-                      "february"   the snow of winter, but no snow falling
+                      or the name of one month, to keep its mode on whatever the date:
+                      "january"    winter: everything covered with snow, snowflakes falling
+                      "february"   the snow of January, but no snow falling
                       "march"      red and white bows of the 1st of March, snowdrops
                       "april"      flowers everywhere, fruit trees in blossom
                       "may"        flowers, little bees and ladybugs
@@ -17,7 +16,8 @@
                       "september"  the trees start to turn yellow, pumpkins, grapes
                       "october"    the colors of autumn, leaves falling
                       "november"   after the rain: puddles, a rainbow, umbrellas
-                    Every mode is a folder in modes/ (modes/winter/, modes/march/ ...);
+                      "december"   Christmas: snow, decorated fir trees, lights on the houses
+                    Every mode is a folder in modes/ (modes/january/, modes/march/ ...);
                     modes/README.md tells how to change one or make a new one.
 
      MODE_CALENDAR  with MODE "auto": the mode that is on between two days of the year, both included.
@@ -25,13 +25,13 @@
                     and outside all of them the village is "normal".
 
    To see a mode without changing this file, add ?mode=<name> to the address of the page,
-   e.g. http://localhost:8000/?mode=christmas
+   e.g. http://localhost:8000/?mode=december
    ===================================================================== */
 window.MODE = "auto";
 
 window.MODE_CALENDAR = [
-  { mode: "christmas", from: "1 December",  to: "7 January" },
-  { mode: "winter",    from: "8 January",   to: "31 January" },
+  { mode: "december",  from: "1 December",  to: "7 January" },     // Christmas lasts until the 7th of January
+  { mode: "january",   from: "8 January",   to: "31 January" },
   { mode: "february",  from: "1 February",  to: "29 February" },
   { mode: "march",     from: "1 March",     to: "31 March" },
   { mode: "april",     from: "1 April",     to: "30 April" },

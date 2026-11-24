@@ -1,7 +1,8 @@
 /* =====================================================================
-   modes/winter/mode.css – the WINTER mode: the whole village covered with snow, snowflakes falling.
-   It is loaded only when the winter mode is on (data/modes.js), over assets/css/village.css and buildings.css.
-   No decorations for Christmas here: those are in modes/christmas/mode.css.
+   modes/january/mode.css – the JANUARY mode: winter, the whole village covered with snow, snowflakes falling.
+   It is loaded only when the January mode is on (data/modes.js), over assets/css/village.css and buildings.css.
+   No decorations for Christmas here: those are in modes/december/mode.css.
+   The December and February modes start from this one.
 
    To change how winter looks, change only the SETTINGS just below:
    a color is written like #f4f8fb (pick one at https://htmlcolorcodes.com), a number is just a number.
@@ -14,7 +15,7 @@
   --sky-low: #e6eef5;
 
   /* the snow on the ground of the village
-     (--field must stay the same as the bottom edge of the picture at the top, modes/winter/landscape.svg) */
+     (--field must stay the same as the bottom edge of the picture at the top, modes/january/landscape.svg) */
   --field: #f4f8fb;
   --field-low: #e8eff5;
 

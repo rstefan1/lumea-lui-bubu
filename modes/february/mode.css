@@ -2,11 +2,11 @@
    modes/february/mode.css – the FEBRUARY mode: the snowy village of winter, but no snow falling any more.
    It is loaded only when the February mode is on (data/modes.js).
 
-   Everything comes from the winter mode, modes/winter/mode.css: a change there changes February too.
+   Everything comes from the January mode, modes/january/mode.css: a change there changes February too.
    To change something only in February, write it in the SETTINGS below
    (e.g. add the line   --sky-top: #b7d3e8;   for a lighter sky only in February).
    ===================================================================== */
-@import url("../winter/mode.css");
+@import url("../january/mode.css");
 
 /* ============================== SETTINGS ============================== */
 :root {

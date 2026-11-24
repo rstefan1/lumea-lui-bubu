@@ -87,7 +87,7 @@
         '<path d="M44 -44 v-8 M-44 -42 v-8" class="sc-cattail"/>';
     } },
     // small ponds: an uneven edge, the water, a light reflection, reeds and stones;
-    // the water has the class "sc-water", so the winter mode can freeze it
+    // the water has the class "sc-water", so the January mode can freeze it
     puddle: { w: 64, h: 26, draw: function () {
       return '<path d="M-28 -10 C-30 -20 -14 -24 0 -22 C14 -25 30 -20 29 -11 C30 -2 12 1 -2 0 C-16 1 -27 -2 -28 -10 Z" class="sc-pond-edge"/>' +
         '<path d="M-24 -10 C-25 -17 -12 -20 0 -18.5 C12 -21 25 -17 24 -10.5 C25 -4 10 -2.5 -2 -3.5 C-14 -2.5 -23 -4 -24 -10 Z" class="sc-water"/>' +

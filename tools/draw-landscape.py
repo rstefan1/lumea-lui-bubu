@@ -15,7 +15,7 @@ The random numbers use a fixed seed: running the script again gives exactly the 
 
 It also draws the same landscape for some modes of the page, each with a bottom edge of the color of
 --field in its modes/<name>/mode.css:
-  - modes/winter/landscape.svg (winter, Christmas, February): snow on the hills, the trees, the roofs and
+  - modes/january/landscape.svg (December, January, February): snow on the hills, the trees, the roofs and
     the haystacks, lit windows;
   - modes/october/landscape.svg (October, November): autumn, ochre and brown fields, no flowers, lit windows.
 
@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 W, H = 1600, 420
 
 # the colors of the two pictures; "field" is the field of the page (--field in assets/css/village.css
-# and in modes/winter/mode.css), so the picture and the page join without a line
+# and in modes/january/mode.css), so the picture and the page join without a line
 SUMMER = {
     "out": ROOT / "assets" / "img" / "landscape.svg",
     "field": "#bfe29a", "meadow": "#b2db8c", "hill": "#a3cf78",
@@ -43,7 +43,7 @@ SUMMER = {
     "flowers": True,
 }
 WINTER = dict(SUMMER, **{
-    "out": ROOT / "modes" / "winter" / "landscape.svg",
+    "out": ROOT / "modes" / "january" / "landscape.svg",
     "field": "#f4f8fb", "meadow": "#edf3f8", "hill": "#edf3f8",
     "strips": ["#f3f7fa", "#e8eff5", "#f7fafc", "#e3ebf2", "#eef3f8", "#f1f5f9"],
     "mountain-far": "#d3dfeb", "mountain-near": "#b9cadb",

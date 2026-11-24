@@ -1,5 +1,5 @@
 /* =====================================================================
-   assets/js/modes.js – turns on the MODE of the village chosen in data/modes.js (winter, Christmas ...).
+   assets/js/modes.js – turns on the MODE of the village chosen in data/modes.js (one for every month: december, january ...).
 
    It runs in <head>, before the page is drawn:
      - chooses the mode: ?mode=<name> in the address, else MODE, else (with "auto") MODE_CALENDAR;

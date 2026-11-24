@@ -1,14 +1,14 @@
 /* =====================================================================
-   modes/christmas/mode.css – the CHRISTMAS mode: the snowy village of winter, decorated for Christmas:
+   modes/december/mode.css – the DECEMBER mode: Christmas, the snowy village of winter decorated for Christmas:
    colored balls and a star on every fir tree, strings of lights along the roofs of the houses,
    garlands of lights under the entrance sign and under the boards of the games, a red band at the bottom.
-   It is loaded only when the Christmas mode is on (data/modes.js).
+   It is loaded only when the December mode is on (data/modes.js).
 
-   Everything about the snow (the colors, the snowflakes) comes from the winter mode, modes/winter/mode.css:
+   Everything about the snow (the colors, the snowflakes) comes from the January mode, modes/january/mode.css:
    a change there changes Christmas too. To change something only at Christmas, write it in the SETTINGS below
    (e.g. add the line   --falling-count: 60;   for more snowflakes only at Christmas).
    ===================================================================== */
-@import url("../winter/mode.css");
+@import url("../january/mode.css");
 
 /* ============================== SETTINGS ============================== */
 :root {
