@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-tools/genereaza-peisaj.py – draws assets/img/peisaj.svg, the landscape at the top of the home page.
+tools/draw-landscape.py – draws assets/img/landscape.svg, the landscape at the top of the home page.
 
 A landscape like in Bucovina: mountains in the distance (a little snow on the highest peaks),
 a ridge covered with fir forest, rolling hills with strips of fields, haystacks, a small forest,
@@ -13,14 +13,14 @@ The bottom edge has exactly the color of the field of the page (#bfe29a), so the
 Nothing moves in it (a moving SVG background would keep the processor busy).
 The random numbers use a fixed seed: running the script again gives exactly the same picture.
 
-Run from the root of the repository:   python3 tools/genereaza-peisaj.py
+Run from the root of the repository:   python3 tools/draw-landscape.py
 """
 import math
 import random
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "assets" / "img" / "peisaj.svg"
+OUT = ROOT / "assets" / "img" / "landscape.svg"
 W, H = 1600, 420
 FIELD = "#bfe29a"          # the field of the page (assets/css/village.css, --field)
 

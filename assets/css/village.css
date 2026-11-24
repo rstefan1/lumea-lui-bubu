@@ -45,12 +45,12 @@ h1, h2 { font-family: "Fredoka", "Atkinson Hyperlegible", sans-serif; }
 a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); outline-offset: 4px; }
 
 /* ---------- The landscape at the top: sun, clouds and the hills of Bucovina ----------
-   assets/img/peisaj.svg (tools/genereaza-peisaj.py) does not move; it is "cut" at the sides on narrow screens
+   assets/img/landscape.svg (tools/draw-landscape.py) does not move; it is "cut" at the sides on narrow screens
    (the middle, with the road and the houses, stays). Only the clouds move, slowly. */
 .landscape {
   position: absolute; left: 0; right: 0; top: 0; height: var(--land-h); z-index: 0;
   pointer-events: none; overflow: hidden;
-  background: url("../img/peisaj.svg") center bottom / cover no-repeat;
+  background: url("../img/landscape.svg") center bottom / cover no-repeat;
 }
 .landscape__sun {
   position: absolute; right: 8%; top: 28px; width: 86px; height: 86px; border-radius: 50%;
@@ -153,7 +153,7 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 @media (orientation: landscape) and (max-height: 520px) { .village { --w: 41%; --overlap: 110px; } }
 
 /* the country road and what stands next to it (drawn by assets/js/road.js; the colors of the road
-   are the ones of the road in assets/img/peisaj.svg, so the two look like one road) */
+   are the ones of the road in assets/img/landscape.svg, so the two look like one road) */
 .village-road { position: absolute; left: 0; top: 0; width: 100%; z-index: 0; pointer-events: none; overflow: visible; }
 /* the things of the village are a little paler than the buildings of the games */
 .village-road .vr-scenery { opacity: 0.82; }

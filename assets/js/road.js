@@ -1,9 +1,9 @@
 /* =====================================================================
    assets/js/road.js – the COUNTRY ROAD that winds down through the middle of the village.
 
-   It is drawn like the road of the landscape at the top (assets/img/peisaj.svg), so the two look like one:
+   It is drawn like the road of the landscape at the top (assets/img/landscape.svg), so the two look like one:
      - it starts exactly where the road of the landscape ends, just as wide (same numbers as in
-       tools/genereaza-peisaj.py), and winds down between the buildings (one on the left, one on the right);
+       tools/draw-landscape.py), and winds down between the buildings (one on the left, one on the right);
      - it is packed earth with an uneven edge and a width that changes a little, like a real road;
      - the wheel tracks and the grass in the middle are there only here and there, as on a road in the village;
      - tufts of grass grow over its edges, a few pebbles lie on it;
@@ -24,7 +24,7 @@
   var landscape = document.querySelector(".landscape");
   var NS = "http://www.w3.org/2000/svg";
 
-  // the end of the road of the landscape (tools/genereaza-peisaj.py): picture 1600 x 420, shown with "cover"
+  // the end of the road of the landscape (tools/draw-landscape.py): picture 1600 x 420, shown with "cover"
   // centered at the bottom; the road ends at x = 800, 60 wide
   var PANO_W = 1600, PANO_H = 420, ROAD_END_X = 800, ROAD_END_W = 60;
 

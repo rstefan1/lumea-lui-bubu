@@ -17,7 +17,7 @@ assets/js/road.js       the country road between them
 assets/js/scenery.js    fields, trees, animals ... in the free places
 assets/js/scroll-hint.js  the "Vezi tot satul" button
 assets/css/             village.css, buildings.css
-assets/img/peisaj.svg   the landscape at the top (drawn by tools/genereaza-peisaj.py)
+assets/img/landscape.svg  the landscape at the top (drawn by tools/draw-landscape.py)
 _headers, robots.txt    settings for Cloudflare Pages and search engines
 <game>/                 every game in its own folder: a git submodule
 ```
