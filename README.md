@@ -21,9 +21,17 @@ assets/js/scroll-hint.js  the "Vezi tot satul" button
 assets/js/modes.js      turns on the chosen mode, lets the snowflakes fall
 assets/css/             village.css, buildings.css
 assets/img/landscape.svg  the landscape at the top (drawn by tools/draw-landscape.py)
+modes/                  the modes of the village: winter, Christmas ... (see modes/README.md)
 _headers, robots.txt    settings for Cloudflare Pages and search engines
 <game>/                 every game in its own folder: a git submodule
 ```
+
+## The modes
+
+The village can look different for a season or a holiday: `winter` (snow, snowflakes falling) and `christmas`
+(snow, decorated fir trees, lights on the houses). `data/modes.js` chooses the mode by date (or keeps one on);
+`?mode=<name>` in the address shows one without changing anything. How to change a mode or make a new one:
+[modes/README.md](modes/README.md).
 
 ## The games
 
