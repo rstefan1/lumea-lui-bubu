@@ -14,7 +14,7 @@
 /favicon.ico
   Cache-Control: public, max-age=604800
 
-# The copy of the site at *.pages.dev must not appear in search engines (only bubu.infoticedu.ro).
+# The copy of the site at *.pages.dev must not appear in search engines (only the custom domain).
 https://:project.pages.dev/*
   X-Robots-Tag: noindex
 https://:version.:project.pages.dev/*

@@ -14,7 +14,7 @@
                     and outside all of them the village is "normal".
 
    To see a mode without changing this file, add ?mode=<name> to the address of the page,
-   e.g. https://bubu.infoticedu.ro/?mode=christmas
+   e.g. http://localhost:8000/?mode=christmas
    ===================================================================== */
 window.MODE = "auto";
 

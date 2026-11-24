@@ -2,8 +2,6 @@
 
 "Lumea lui Bubu" – a village in Bucovina where every game with Bubu, the plush ladybug, is a building.
 
-Site: https://bubu.infoticedu.ro
-
 Plain static HTML, CSS and JavaScript: no build step.
 
 ## Structure
@@ -72,15 +70,15 @@ One-time setup in the Cloudflare dashboard:
 3. **Save and Deploy**. Check that `https://<project>.pages.dev/trenul-lui-bubu/` opens the game
    (Cloudflare must download the submodules; if the folder is empty, the games have to be published
    by a GitHub Action with `wrangler pages deploy` instead).
-4. **Custom domains → Set up a custom domain → `bubu.infoticedu.ro`**.
-   If the DNS of `infoticedu.ro` is at Cloudflare, the record is made automatically; otherwise add at the DNS provider
-   a `CNAME` record `bubu` → `<project>.pages.dev`.
+4. **Custom domains → Set up a custom domain** (the subdomain of the site, e.g. `<subdomain>.<domain>`).
+   If the DNS of the domain is at Cloudflare, the record is made automatically; otherwise add at the DNS provider
+   a `CNAME` record `<subdomain>` → `<project>.pages.dev`.
 5. **Settings → Builds → Branch control**: production branch only, no preview branches
    (fewer builds; the free plan has 500 builds a month).
 
 What the files do:
 - `_headers`: small security headers, pictures kept a week in the browsers, and `noindex` for the copy at `*.pages.dev`
-  (only `bubu.infoticedu.ro` should appear in search engines).
+  (only the custom domain should appear in search engines).
 - `404.html`: shown for wrong addresses (without it Pages would show the home page for every address).
 - `robots.txt`: search engines may read everything; the sitemap will be added later.
 - Static files are free and unlimited on Cloudflare Pages; only the builds are counted.

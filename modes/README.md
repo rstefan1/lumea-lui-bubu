@@ -19,7 +19,7 @@ Open `data/modes.js`:
   The days are written with the month in English. Outside all the periods the village is `normal`.
 
 To see a mode without changing anything, add `?mode=<name>` to the address:
-`https://bubu.infoticedu.ro/?mode=winter`, `http://localhost:8000/?mode=christmas`.
+`http://localhost:8000/?mode=winter` (or the same `?mode=winter` after the address of the site).
 
 ## Changing a mode
 
