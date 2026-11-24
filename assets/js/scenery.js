@@ -386,12 +386,24 @@
     }
     return '<g class="patch patch--leaves">' + out + "</g>";
   }
-  // the kinds of patches a mode can ask for (--patches in modes/<name>/mode.css)
+  // a child in a woolly hat, sitting on a wooden sled in the snow
+  function sled(random) {
+    var x = -8 + random() * 12, c = CLOTHES[Math.floor(random() * 5)];
+    return '<g class="patch patch--sleds" transform="translate(' + r(x) + ' 0)"><path d="M10 -4 Q15 -2 17 -8" class="sc-sled-rope"/>' +
+      '<path d="M-12 -1 H8 Q12 -1 11.4 -5 M-9 -1.5 V-4 M5 -1.5 V-4" class="sc-sled-runner"/><rect x="-11" y="-7" width="18" height="3" rx="1" class="sc-sled-seat"/>' +
+      '<path d="M-6 -6.5 Q-6 -15 -1.5 -15 Q3 -15 3 -6.5 Z M1 -9.6 H7.4 V-6.6 H1 Z" class="sc-bl-' + c + '"/>' +
+      '<circle cx="-1.5" cy="-18" r="3.3" class="sc-child-skin"/><path d="M-4.9 -18.4 Q-1.5 -24.4 1.9 -18.4 Z" class="sc-scarf"/>' +
+      '<circle cx="-1.5" cy="-22.8" r="1.3" class="sc-bl-white"/><path d="M-4.4 -15.2 H1.4" class="sc-sled-scarf"/></g>';
+  }
+  // the kinds of patches a mode can ask for (--patches in modes/<name>/mode.css);
+  // a kind written with a "?" after it (e.g. snowdrops?) grows only here and there
   var PATCHES = { snowdrops: snowdrops, blooms: blooms, puddles: puddle, sheaves: sheaves, watermelons: watermelons,
-    pumpkins: pumpkins, leaves: leaves };
+    pumpkins: pumpkins, leaves: leaves, sleds: sled };
   function patch(random, kinds) {
     var out = "";
-    kinds.forEach(function (kind) {
+    kinds.forEach(function (asked) {
+      var kind = asked.replace("?", "");
+      if (kind !== asked && random() >= 0.3) { return; }                         // "kind?": only on some patches
       var sparse = kind === "pumpkins" || kind === "watermelons";                // not on every patch: a field is not a garden
       if (PATCHES[kind] && !(sparse && random() < 0.45)) { out += PATCHES[kind](random); }
       if (kind === "bugs" && random() < 0.4) { out += bug(random); }          // a bee or a ladybug on some patches
