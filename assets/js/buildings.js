@@ -99,7 +99,7 @@
       // track
       '<rect x="0" y="232" width="320" height="4" class="b-rail"/>' + sleepers +
       // the locomotive (front to the right): steam, chimney, boiler, cab, wheels
-      '<circle cx="80" cy="128" r="11" class="b-steam"/><circle cx="96" cy="140" r="9" class="b-steam"/><circle cx="108" cy="153" r="7" class="b-steam"/>' +
+      '<circle cx="80" cy="128" r="11" class="b-steam b-puff b-puff--3"/><circle cx="96" cy="140" r="9" class="b-steam b-puff b-puff--2"/><circle cx="108" cy="153" r="7" class="b-steam b-puff"/>' +
       '<path d="M100 186 L102 168 L96 163 L118 163 L112 168 L114 186 Z" class="b-ink"/>' +
       '<path d="M74 186 Q83 172 92 186 Z" class="b-gold"/>' +
       '<rect x="52" y="184" width="72" height="30" rx="8" class="b-main"/>' +

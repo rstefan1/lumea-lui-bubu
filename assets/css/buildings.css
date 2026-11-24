@@ -91,6 +91,36 @@
 .place__svg { transition: transform 0.2s ease; transform-origin: 50% 100%; }
 @media (hover: hover) { a.place:hover .place__svg { transform: translateY(-4px) scale(1.02); } }
 
+/* a game that can be played stands out from the village, so the eye goes to it first:
+   - rays of sun turning slowly behind the drawing (a big, soft picture; only transform moves)
+   - a white edge around the drawing, like a sticker on the page (a static filter: drawn once)
+   - the steam of the train rises from the chimney (.b-puff) (only transform / opacity)
+   With "reduce motion" the rays and the steam stand still. */
+a.place .place__scene::before {
+  content: ""; position: absolute; z-index: -1; left: 50%; top: 52%;
+  width: min(150%, 560px); aspect-ratio: 1; margin-left: calc(min(150%, 560px) / -2); translate: 0 -50%;
+  border-radius: 50%; pointer-events: none;
+  background:
+    radial-gradient(closest-side, rgba(255, 246, 200, 0.75), rgba(255, 236, 160, 0.35) 45%, rgba(255, 236, 160, 0) 100%),
+    repeating-conic-gradient(rgba(255, 224, 110, 0.55) 0 7deg, rgba(255, 224, 110, 0) 7deg 18deg);
+  -webkit-mask: radial-gradient(closest-side, #000 30%, transparent 100%);
+  mask: radial-gradient(closest-side, #000 30%, transparent 100%);
+  animation: place-rays 60s linear infinite;
+}
+@keyframes place-rays { to { transform: rotate(1turn); } }
+a.place .place__svg {
+  filter: drop-shadow(2.5px 0 0 #fff) drop-shadow(-2.5px 0 0 #fff) drop-shadow(0 2.5px 0 #fff) drop-shadow(0 -2.5px 0 #fff)
+    drop-shadow(0 10px 12px rgba(43, 42, 58, 0.25));
+}
+a.place .b-puff { transform-box: fill-box; transform-origin: center; animation: steam-puff 2.4s ease-out infinite; }
+a.place .b-puff--2 { animation-delay: -0.8s; }
+a.place .b-puff--3 { animation-delay: -1.6s; }
+@keyframes steam-puff {
+  0% { transform: translate(14px, 14px) scale(0.5); opacity: 0; }
+  25% { opacity: 0.95; }
+  100% { transform: translate(-10px, -16px) scale(1.25); opacity: 0; }
+}
+
 /* the name, one line and the button, on a notice board of the village under the building:
    a sheet of paper in a wooden frame with a nail in every corner, standing on two posts in the grass
    (like the entrance sign); the paper keeps the text easy to read over the village */
