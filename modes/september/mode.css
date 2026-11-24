@@ -1,31 +1,62 @@
 /* =====================================================================
    modes/september/mode.css – the SEPTEMBER mode: the beginning of autumn in the village.
-   The leafy trees start to turn yellow, the apple trees are full of ripe apples, pumpkins in the grass,
-   a bunch of grapes (the grape harvest) on the entrance sign and on the board of every game.
+   The fields mowed and golden, the leafy trees turning yellow and orange, stooks of corn stalks after the corn harvest,
+   baskets full of apples and grapes, pumpkins, the first leaves falling, flocks of birds flying south,
+   children with their school bags (school starts), a bunch of grapes on the entrance sign and on the boards.
    It is loaded only when the September mode is on (data/modes.js).
 
    To change how September looks, change only the SETTINGS just below:
-   a color is written like #c9c24a (pick one at https://htmlcolorcodes.com).
-   The grapes on the boards are the picture modes/september/grapes.svg.
+   a color is written like #e6b83a (pick one at https://htmlcolorcodes.com), a number is just a number.
+   The pictures: modes/september/grapes.svg (on the boards), birds.svg (the flocks), landscape.svg (at the top,
+   drawn by tools/draw-landscape.py).
    ===================================================================== */
 
 /* ============================== SETTINGS ============================== */
 :root {
-  /* what is in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
-  --patches: pumpkins;
+  /* what is in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js; "?" = here and there) */
+  --patches: corn? baskets? pumpkins leaves? kids?;
 
-  /* the leafy trees and the bushes: still green below, yellowing on the top */
-  --leaf: #6aa848;
-  --leaf-turning: #d4c447;
+  /* the grass of the village
+     (--field must stay the same as the bottom edge of the picture at the top, modes/september/landscape.svg) */
+  --field: #c3d48e;
+  --field-low: #b6c982;
+
+  /* the leafy trees and the bushes: some green still, most of them turning yellow and orange */
+  --leaf: #a9b84a;
+  --leaf-turning: #e6b83a;
+  --leaf-orange: #e8892a;
+
+  /* the first leaves falling, and the flocks of birds flying south */
+  --falling-count: 9;    /* how many on a big screen (phones and old devices get fewer); 0 = none */
+  --falling-time: 20;    /* seconds for one to cross the screen: bigger = slower */
+  --falling-big: 100;    /* (all of them are big enough to be seen) */
 }
 /* ====================== no need to change below ======================= */
 
 
+.landscape { background-image: url("landscape.svg"); }
+
+/* ---------- The fields: some still green, some mowed and golden ---------- */
+.village-road .sc-field--1 { fill: var(--field); }
+.village-road .sc-field--2 { fill: #d9cd86; }
+.village-road .sc-field--3 { fill: #bccf86; }
+.village-road .sc-field--4 { fill: #e2d394; }
+.village-road .sc-field--5 { fill: #c8d48e; }
+.village-road .sc-field--6 { fill: #d4bf7c; }
+.village-road .vr-yard-in { stop-color: #dfe6b0; }
+.village-road .vr-yard-out { stop-color: #d2dca4; }
+.village-road .vr-tuft { stroke: #9aa64a; }
+.village-road .vr-flower--3, .village-road .sc-item--flowers { display: none; }
+
+/* ---------- The trees turning yellow and orange (the apple trees keep their ripe apples) ---------- */
 .village-road .sc-leaf, .village-road .sc-leaf-small { fill: var(--leaf); }
 .village-road .sc-leaf-light { fill: var(--leaf-turning); }
+.village-road .sc-item--tree .sc-leaf { fill: var(--leaf-orange); }
 .place .b-bush { fill: var(--leaf); }
 .place .b-bush-light { fill: var(--leaf-turning); }
-.village-road .sc-item--flowers { display: none; }
+
+/* ---------- School starts: the children carry their school bags ---------- */
+.village-road .sc-child-bag { display: inline; }
 
 /* ---------- A bunch of grapes on the entrance sign and on the board of every game ---------- */
 .place__info { position: relative; }
@@ -35,3 +66,25 @@
 }
 .sign__board::before { left: -10px; top: -14px; transform: rotate(-10deg); }
 .place__info::before { right: -8px; top: -16px; transform: rotate(10deg); }
+
+/* ---------- The first leaves falling, and flocks of birds flying south high in the sky (made by assets/js/modes.js) ---------- */
+:root {
+  /* the shape of a leaf (written here, not in a file: browsers load mask pictures only like this everywhere) */
+  --leaf-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1 C15 4 18 9 16 14 C14.6 17.4 11 18 10 19 C9 18 5.4 17.4 4 14 C2 9 5 4 10 1 Z'/%3E%3C/svg%3E");
+}
+.falling__item {
+  border-radius: 0; box-shadow: none; background: var(--leaf-turning);
+  -webkit-mask: var(--leaf-shape) center / contain no-repeat;
+  mask: var(--leaf-shape) center / contain no-repeat;
+}
+.falling__item--2 { background: var(--leaf-orange); }
+.falling__item--3 {
+  width: 46px !important; height: 24px !important; opacity: 0.8 !important;
+  background: url("birds.svg") center / contain no-repeat; -webkit-mask: none; mask: none;
+  animation-name: flock;
+}
+@keyframes flock {
+  0% { transform: translate3d(60vw, 12vh, 0); }
+  50% { transform: translate3d(0, 8vh, 0); }
+  100% { transform: translate3d(-60vw, 13vh, 0); }
+}
