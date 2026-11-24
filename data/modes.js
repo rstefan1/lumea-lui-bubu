@@ -2,11 +2,22 @@
    data/modes.js – the MODE of the village: how it looks in a season or at a holiday (content only, no logic here).
 
      MODE           which mode is on:
-                      "auto"       the calendar below chooses (the usual setting)
+                      "auto"       the calendar below chooses: a different mode every month (the usual setting)
                       "normal"     the village as always: green, with flowers
+                      or the name of one mode, to keep it on whatever the date:
                       "winter"     everything covered with snow, snowflakes falling
                       "christmas"  snow, decorated fir trees, lights on the houses
-                    Every mode is a folder in modes/ (modes/winter/, modes/christmas/ ...);
+                      "february"   the snow of winter, but no snow falling
+                      "march"      red and white bows of the 1st of March, snowdrops
+                      "april"      flowers everywhere, fruit trees in blossom
+                      "may"        flowers, little bees and ladybugs
+                      "june"       the month of the children: flowers, children with balloons, little flags
+                      "july"       the wheat harvest: golden fields, sheaves of wheat
+                      "august"     watermelons, plums on the trees
+                      "september"  the trees start to turn yellow, pumpkins, grapes
+                      "october"    the colors of autumn, leaves falling
+                      "november"   after the rain: puddles, a rainbow, umbrellas
+                    Every mode is a folder in modes/ (modes/winter/, modes/march/ ...);
                     modes/README.md tells how to change one or make a new one.
 
      MODE_CALENDAR  with MODE "auto": the mode that is on between two days of the year, both included.
@@ -19,7 +30,16 @@
 window.MODE = "auto";
 
 window.MODE_CALENDAR = [
-  { mode: "normal",    from: "1 November", to: "30 November" },
   { mode: "christmas", from: "1 December",  to: "7 January" },
-  { mode: "winter",    from: "8 January",   to: "29 February" }
+  { mode: "winter",    from: "8 January",   to: "31 January" },
+  { mode: "february",  from: "1 February",  to: "29 February" },
+  { mode: "march",     from: "1 March",     to: "31 March" },
+  { mode: "april",     from: "1 April",     to: "30 April" },
+  { mode: "may",       from: "1 May",       to: "31 May" },
+  { mode: "june",      from: "1 June",      to: "30 June" },
+  { mode: "july",      from: "1 July",      to: "31 July" },
+  { mode: "august",    from: "1 August",    to: "31 August" },
+  { mode: "september", from: "1 September", to: "30 September" },
+  { mode: "october",   from: "1 October",   to: "31 October" },
+  { mode: "november",  from: "1 November",  to: "30 November" }
 ];
