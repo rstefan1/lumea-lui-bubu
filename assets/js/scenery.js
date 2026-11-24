@@ -245,6 +245,11 @@
     "firs3", "cow", "fir", "mushrooms", "lakelet", "hives", "bench", "tree", "waysideCross", "firs5", "puddle",
     "scarecrow", "snowman", "sunflowers", "fir", "woodpile", "hens", "firs3", "puddle", "mushrooms", "haystacks", "tree", "sheep", "fir",
     "apple", "flowers"];
+  // phones have room for only a few things under the games: first the ones that change most with the modes of the page
+  // (the leafy trees, a house, the snowman, the fir trees, the ponds), then the others
+  var PHONE_ORDER = ["apple", "house", "snowman", "tree", "firs3", "pond", "windmill", "sheep", "apple", "puddle", "haystacks",
+    "fir", "cart", "tree", "hens", "lakelet", "mushrooms", "garden", "bench", "cow", "firs5", "sunflowers", "hives", "fir",
+    "woodpile", "flowers"];
 
   /* ---------- The strips of fields (behind everything); the first one has the color of the field
      at the bottom of the landscape, so the village starts without a line.
@@ -423,14 +428,14 @@
     var k = ctx.phone ? 0.75 : width < 1051 ? 0.85 : 1;       // smaller drawings on smaller screens
     var gap = ctx.phone ? 22 : 46;                             // room left around every drawing
     // not too many: the buildings of the games must stay the most visible things of the village
-    var most = Math.round(width * height / (ctx.phone ? 60000 : 72000));
+    var most = Math.round(width * height / (ctx.phone ? 45000 : 72000));
     var placed = [], n = 0, count = {}, tries = Math.round(width * height / (ctx.phone ? 900 : 1400));
     var turn = { center: 0, rest: 0 };
     for (var t = 0; t < tries && placed.length < most; t++) {
       // first a place, then a thing that may stand there
       var y0 = 20 + random() * (height - 80);
       var zone = y0 < ctx.gamesEnd ? "center" : "rest";
-      var list = zone === "center" ? CENTER : ORDER;
+      var list = zone === "center" ? CENTER : ctx.phone ? PHONE_ORDER : ORDER;
       var name = list[turn[zone] % list.length], item = ITEMS[name];
       if ((count[name] || 0) >= (MAX[name] || 99)) { turn[zone]++; continue; }   // this one is already in the village
       var w = item.w * k, h = item.h * k;
@@ -447,8 +452,9 @@
     }
     // the patches of the season, in the places that are still free (after everything else: the village stays the same)
     var kinds = askedPatches();
-    var pk = k * 1.25, pw = 40 * pk, ph = 38 * pk, pgap = ctx.phone ? 8 : 14;   // a little bigger than the rest
-    var patches = kinds.length ? Math.round(width * height / (ctx.phone ? 20000 : 26000)) : 0;
+    // a little bigger than the rest, and on phones bigger and closer together still, so they are seen on a small screen
+    var pk = ctx.phone ? 1.15 : k * 1.25, pw = 40 * pk, ph = 38 * pk, pgap = ctx.phone ? 6 : 14;
+    var patches = kinds.length ? Math.round(width * height / (ctx.phone ? 11000 : 26000)) : 0;
     for (var u = 0, n2 = 0; u < tries && n2 < patches; u++) {
       var px = random() * (width - pw), py = 20 + random() * (height - 80);
       if (free(px - pgap / 2, py - pgap / 2, pw + pgap, ph + pgap)) {
