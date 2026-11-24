@@ -13,9 +13,11 @@ The bottom edge has exactly the color of the field of the page (#bfe29a), so the
 Nothing moves in it (a moving SVG background would keep the processor busy).
 The random numbers use a fixed seed: running the script again gives exactly the same picture.
 
-It also draws the same landscape in winter, for the winter and Christmas modes of the page:
-modes/winter/landscape.svg, with snow on the hills, the trees, the roofs and the haystacks, lit windows,
-and a bottom edge with the color of the snow of the page in winter (WINTER["field"], --field in modes/winter/mode.css).
+It also draws the same landscape for some modes of the page, each with a bottom edge of the color of
+--field in its modes/<name>/mode.css:
+  - modes/winter/landscape.svg (winter, Christmas, February): snow on the hills, the trees, the roofs and
+    the haystacks, lit windows;
+  - modes/october/landscape.svg (October, November): autumn, ochre and brown fields, no flowers, lit windows.
 
 Run from the root of the repository:   python3 tools/draw-landscape.py
 """
@@ -38,6 +40,7 @@ SUMMER = {
     "window": "#7fb2d6", "hay-shadow": "rgba(60,80,30,.25)",
     "road-shadow": "rgba(70,100,40,.2)", "road": "#dcc196", "road-rim": "#b98f5a", "road-light": "#e8d4ab",
     "rut": "#c4a06a", "stone": "#cfc4b2", "stone-rim": "#a99a83", "tuft": "#6aa84a",
+    "flowers": True,
 }
 WINTER = dict(SUMMER, **{
     "out": ROOT / "modes" / "winter" / "landscape.svg",
@@ -49,6 +52,18 @@ WINTER = dict(SUMMER, **{
     "window": "#ffd77a", "hay-shadow": "rgba(90,120,160,.2)",
     "road-shadow": "rgba(90,120,160,.18)", "road": "#e9edf1", "road-rim": "#c3ceda", "road-light": "#f6f8fa",
     "rut": "#b9a78a", "stone": "#f6f9fb", "stone-rim": "#b3bfcc", "tuft": "#b3a27a",
+    "flowers": False,
+})
+AUTUMN = dict(SUMMER, **{
+    "out": ROOT / "modes" / "october" / "landscape.svg",
+    "field": "#b9c98e", "meadow": "#adbf80", "hill": "#a9b978",
+    "strips": ["#b3bd76", "#c9b26a", "#a0815a", "#9fb36c", "#c4a35e", "#8d7552"],
+    "mountain-far": "#b4c0cc", "mountain-near": "#9eadbb",
+    "ridge": "#55784a",
+    "window": "#ffd77a", "hay-shadow": "rgba(60,70,40,.25)",
+    "road-shadow": "rgba(60,70,40,.2)", "road": "#cfae80", "road-rim": "#a57d4c", "road-light": "#dcc196",
+    "rut": "#a8875a", "tuft": "#8a9a4a",
+    "flowers": False,
 })
 SNOW = "#fbfdff"
 SNOW_SHADE = "#c9d8e6"
@@ -282,12 +297,12 @@ def draw(colors):
     for hx, hy, hh in [(150, 404, 78), (250, 396, 58), (600, 392, 44), (1060, 392, 46), (1360, 398, 62), (1460, 406, 80)]:
         parts.append(haystack(hx, hy, hh))
 
-    # small flowers in the meadow (none in winter)
+    # small flowers in the meadow (none in winter and in autumn)
     for _ in range(90):
         fx, fy = rnd.uniform(0, W), rnd.uniform(370, 414)
         col = rnd.choice(["#ffffff", "#ffe066", "#ff9eb5", "#c9a3ff"])
         r = rnd.uniform(1.6, 2.6)
-        if not winter():   # under the snow in winter (the random numbers are still drawn: the rest stays the same)
+        if C["flowers"]:   # none in winter and in autumn (the random numbers are still drawn: the rest stays the same)
             parts.append(f'<circle cx="{f(fx)}" cy="{f(fy)}" r="{f(r)}" fill="{col}"/>')
 
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMax slice">'
@@ -299,3 +314,4 @@ def draw(colors):
 
 draw(SUMMER)
 draw(WINTER)
+draw(AUTUMN)
