@@ -291,7 +291,7 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 /* ---------- The seasonal shapes (assets/js/season-shapes.js): snow, lights, ornaments and the snowman ----------
    They are drawn with the buildings and the things of the village, but hidden here;
    a mode of the page (modes/<name>/mode.css) shows the ones it needs and gives them their colors. */
-.snow, .lights, .ornaments, .village-road .sc-item--snowman { display: none; }
+.snow, .lights, .ornaments, .bow, .village-road .sc-item--snowman { display: none; }
 .snow { fill: #fbfdff; stroke: #c9d8e6; stroke-width: 1; stroke-linejoin: round; }
 .lights__wire { fill: none; stroke: #3b3030; stroke-width: 1; }
 .bulb--1 { fill: #ff4d4d; }
@@ -299,6 +299,10 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
 .bulb--3 { fill: #4dd2ff; }
 .bulb--4 { fill: #7ee06a; }
 .tree-star { fill: #ffd23f; stroke: #e0a020; stroke-width: 1; stroke-linejoin: round; }
+.bow__white { fill: #ffffff; stroke: #c8202a; stroke-width: 0.8; }
+.bow__red { fill: #d6202a; }
+.bow__string { fill: none; stroke: #ffffff; stroke-width: 2.2; stroke-linecap: round; }
+.bow__twist { fill: none; stroke: #d6202a; stroke-width: 2.2; stroke-dasharray: 2 2; }
 
 /* ---------- "Vezi tot satul": a button at the bottom of the screen that shows there is more below ----------
    shown by assets/js/scroll-hint.js only while the page is at the top and something is hidden below;

@@ -10,7 +10,7 @@
    the special modes can change them: b-main / b-dark / b-light (the color of the building),
    b-roof, b-wall, b-glass, b-wood ... (see assets/css/buildings.css).
    They also carry the seasonal shapes of assets/js/season-shapes.js (snow on the roofs and the trees,
-   lights along the roofs, ornaments on the fir trees): hidden, until a mode of the page shows them.
+   lights along the roofs, ornaments on the fir trees, a red and white bow on the board): hidden, until a mode of the page shows them.
    All the texts of the drawings (GARA, the numbers of the windows) are SVG text: they grow with the drawing.
    ===================================================================== */
 (function () {
@@ -89,7 +89,7 @@
       '<path d="M160 86 V76 M160 86 L167 90" class="b-clock-hands"/>' +
       // the board with the name
       '<rect x="98" y="128" width="124" height="22" rx="4" class="b-board-dark"/>' +
-      boardText(160, 140, 15, p.sign || "GARA", "b-board-text--light") + S.line([[98, 128], [222, 128]], 3) +
+      boardText(160, 140, 15, p.sign || "GARA", "b-board-text--light") + S.line([[98, 128], [222, 128]], 3) + S.bow(104, 131, 0.8) +
       // windows and the big door
       '<path d="M200 196 V170 A14 14 0 0 1 228 170 V196 Z" class="b-glass"/>' +
       '<path d="M238 196 V170 A14 14 0 0 1 266 170 V196 Z" class="b-glass"/>' +
@@ -137,7 +137,7 @@
       '<path d="M160 38 l2.4 5 l5.4 .6 l-4 3.7 l1.1 5.3 l-4.9 -2.7 l-4.9 2.7 l1.1 -5.3 l-4 -3.7 l5.4 -.6 Z" class="b-gold"/>' +
       windows +
       '<rect x="106" y="185" width="108" height="17" rx="4" class="b-board"/>' +
-      boardText(160, 193.5, 11, p.sign || "CALENDAR") + S.line([[106, 185], [214, 185]], 3) +
+      boardText(160, 193.5, 11, p.sign || "CALENDAR") + S.line([[106, 185], [214, 185]], 3) + S.bow(110, 187, 0.7) +
       '<path d="M146 232 V214 A14 14 0 0 1 174 214 V232 Z" class="b-door"/>' +
       '<circle cx="168" cy="222" r="1.8" class="b-gold"/>';
   }
@@ -160,7 +160,7 @@
       '<path d="M68 144 L160 70 L252 144 L240 146 L160 82 L80 146 Z" class="b-roof-wood"/>' +
       S.line([[68, 144], [160, 70], [252, 144]], 8) + S.lights([[80, 146], [160, 82], [240, 146]], 12) +
       '<rect x="118" y="146" width="84" height="17" rx="4" class="b-board"/>' +
-      boardText(160, 154.5, 11.5, p.sign || "CABANA") + S.line([[118, 146], [202, 146]], 3) +
+      boardText(160, 154.5, 11.5, p.sign || "CABANA") + S.line([[118, 146], [202, 146]], 3) + S.bow(122, 148, 0.7) +
       // windows with shutters, door
       '<rect x="98" y="174" width="30" height="26" class="b-window-warm"/><path d="M113 174 V200 M98 187 H128" class="b-window-bars"/>' +
       '<rect x="90" y="172" width="8" height="30" class="b-main"/><rect x="128" y="172" width="8" height="30" class="b-main"/>' +
@@ -186,7 +186,7 @@
       '<rect x="151" y="56" width="18" height="12" rx="1.5" class="b-main"/><path d="M151 57 L160 63.5 L169 57" class="b-envelope-flap"/>' +
       '<rect x="44" y="104" width="232" height="7" class="b-cornice"/>' + S.lights([[46, 110], [274, 110]]) +
       '<rect x="102" y="118" width="116" height="22" rx="4" class="b-board"/>' +
-      boardText(160, 129.5, 15, p.sign || "POȘTA") + S.line([[102, 118], [218, 118]], 3) +
+      boardText(160, 129.5, 15, p.sign || "POȘTA") + S.line([[102, 118], [218, 118]], 3) + S.bow(106, 121, 0.8) +
       '<rect x="72" y="150" width="36" height="44" rx="3" class="b-glass"/><path d="M90 150 V194 M72 170 H108" class="b-window-bars-light"/>' +
       '<rect x="212" y="150" width="36" height="44" rx="3" class="b-glass"/><path d="M230 150 V194 M212 170 H248" class="b-window-bars-light"/>' +
       '<rect x="138" y="150" width="44" height="70" rx="3" class="b-main"/><path d="M160 152 V218" class="b-door-line"/>' +
@@ -209,7 +209,7 @@
       '<circle cx="160" cy="108" r="17" class="b-paper"/>' +
       (p.icon ? '<text x="160" y="109" font-size="20" text-anchor="middle" dominant-baseline="central">' + esc(p.icon) + "</text>" : "") +
       '<rect x="116" y="146" width="88" height="17" rx="4" class="b-board"/>' +
-      boardText(160, 154.5, 11.5, p.sign || "JOC") + S.line([[116, 146], [204, 146]], 3) +
+      boardText(160, 154.5, 11.5, p.sign || "JOC") + S.line([[116, 146], [204, 146]], 3) + S.bow(120, 148, 0.7) +
       '<rect x="100" y="174" width="30" height="28" class="b-glass"/><rect x="96" y="202" width="38" height="6" class="b-main"/>' + S.line([[96, 202], [134, 202]], 3) +
       '<rect x="190" y="174" width="30" height="28" class="b-glass"/><rect x="186" y="202" width="38" height="6" class="b-main"/>' + S.line([[186, 202], [224, 202]], 3) +
       '<rect x="146" y="178" width="28" height="54" rx="3" class="b-door"/><circle cx="168" cy="206" r="2" class="b-gold"/>';
@@ -234,7 +234,7 @@
       // the board at the edge of the forest
       '<rect x="190" y="196" width="6" height="42" class="b-trunk"/>' +
       '<rect x="162" y="186" width="62" height="18" rx="4" class="b-board"/>' +
-      boardText(193, 195, 10, p.sign || "PĂDUREA") + S.line([[162, 186], [224, 186]], 3);
+      boardText(193, 195, 10, p.sign || "PĂDUREA") + S.line([[162, 186], [224, 186]], 3) + S.bow(166, 188, 0.7);
   }
 
   var DRAW = { station: station, advent: advent, cabin: cabin, "post-office": postOffice, house: house, forest: forest };

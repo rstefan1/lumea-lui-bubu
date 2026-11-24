@@ -14,7 +14,7 @@
    Every drawing stands with its feet at (0, 0); "w" and "h" are the room it needs.
    Every drawing is a group with the classes "sc-item sc-item--<name>", so a mode of the page can hide it
    (e.g. no sunflowers in winter); the snowman is hidden until a mode shows it. The drawings also carry
-   the seasonal shapes of assets/js/season-shapes.js (snow, lights, ornaments), hidden too.
+   the seasonal shapes of assets/js/season-shapes.js (snow, lights, ornaments, bows), hidden too.
    Nothing here moves.
    ===================================================================== */
 (function () {
@@ -39,7 +39,7 @@
     tree: { w: 66, h: 80, draw: function () {
       return '<ellipse cx="0" cy="0" rx="22" ry="4" class="sc-shadow"/><rect x="-4" y="-32" width="8" height="32" rx="2" class="sc-trunk"/>' +
         '<circle cx="-15" cy="-42" r="16" class="sc-leaf"/><circle cx="15" cy="-44" r="15" class="sc-leaf"/><circle cx="0" cy="-58" r="20" class="sc-leaf-light"/>' +
-        S.dome(-15, -42, 16) + S.dome(15, -44, 15) + S.dome(0, -58, 20);
+        S.dome(-15, -42, 16) + S.dome(15, -44, 15) + S.dome(0, -58, 20) + S.bow(-14, -32, 0.9);
     } },
     apple: { w: 66, h: 80, draw: function () {
       return ITEMS.tree.draw() + '<g class="sc-apple"><circle cx="-12" cy="-48" r="3"/><circle cx="8" cy="-60" r="3"/><circle cx="16" cy="-42" r="3"/>' +

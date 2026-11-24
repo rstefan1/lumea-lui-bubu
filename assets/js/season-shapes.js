@@ -7,6 +7,7 @@
      .snow        snow lying on roofs, trees, haystacks, boards ...
      .lights      a string of colored light bulbs along a roof
      .ornaments   colored balls and a star on a fir tree
+     .bow         the little red and white bow of a twisted string, as given on the 1st of March
    The bulbs and the balls have the classes bulb--1 ... bulb--4, so a mode chooses their colors.
    Nothing here moves.
    ===================================================================== */
@@ -86,5 +87,14 @@
     return '<g class="ornaments">' + out + '<path d="' + star + ' Z" class="tree-star"/></g>';
   }
 
-  window.SEASON_SHAPES = { line: line, peak: peak, dome: dome, lights: lights, ornaments: ornaments };
+  // The red and white bow of the 1st of March, tied at (x, y), k big: two loops, a knot and two twisted tails
+  // (each tail: a white string with a red dashed string over it, so it looks twisted), with a tassel at each end
+  function bow(x, y, k) {
+    return '<g class="bow" transform="translate(' + r(x) + " " + r(y) + ") scale(" + (k || 1) + ')">' +
+      '<path d="M0 0 Q-2 6 -5 11 M0 0 Q2.5 5 5 10" class="bow__string"/><path d="M0 0 Q-2 6 -5 11 M0 0 Q2.5 5 5 10" class="bow__twist"/>' +
+      '<path d="M0 0 C-4 -6 -11 -5 -10 0 C-9 4 -4 3 0 0 Z" class="bow__white"/><path d="M0 0 C4 -6 11 -5 10 0 C9 4 4 3 0 0 Z" class="bow__red"/>' +
+      '<circle cx="0" cy="0" r="2" class="bow__red"/><circle cx="-5" cy="11.5" r="1.6" class="bow__white"/><circle cx="5" cy="10.5" r="1.6" class="bow__red"/></g>';
+  }
+
+  window.SEASON_SHAPES = { line: line, peak: peak, dome: dome, lights: lights, ornaments: ornaments, bow: bow };
 })();
