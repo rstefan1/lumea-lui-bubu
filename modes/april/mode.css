@@ -1,0 +1,52 @@
+/* =====================================================================
+   modes/april/mode.css – the APRIL mode: a village full of flowers.
+   Tulips, daisies, crocuses and forget-me-nots everywhere in the grass, the fruit trees in blossom,
+   rows of flowers on the entrance sign and under the boards of the games, a few petals in the wind.
+   It is loaded only when the April mode is on (data/modes.js); the May mode starts from it.
+
+   To change how April looks, change only the SETTINGS just below:
+   a color is written like #f7c6d9 (pick one at https://htmlcolorcodes.com), a number is just a number.
+   The row of flowers on the boards is the picture modes/april/flowers.svg.
+   ===================================================================== */
+
+/* ============================== SETTINGS ============================== */
+:root {
+  /* what grows in the free places of the village (the kinds: see PATCHES in assets/js/scenery.js) */
+  --patches: blooms;
+
+  /* the fruit trees in blossom */
+  --blossom: #f7c6d9;
+  --blossom-light: #fde3ee;
+
+  /* the other leafy trees and the bushes: fresh green */
+  --leaf: #5fae45;
+  --leaf-light: #84c766;
+
+  /* petals carried by the wind */
+  --falling-count: 16;   /* how many on a big screen (phones and old devices get fewer); 0 = no petals */
+  --falling-time: 18;    /* seconds for a petal to cross the screen: bigger = slower */
+  --petal: #ffc2d6;
+}
+/* ====================== no need to change below ======================= */
+
+
+/* ---------- The trees: the apple trees in blossom (no apples yet), the others fresh green ---------- */
+.village-road .sc-leaf, .village-road .sc-leaf-small { fill: var(--leaf); }
+.village-road .sc-leaf-light { fill: var(--leaf-light); }
+.village-road .sc-item--apple .sc-leaf { fill: var(--blossom); }
+.village-road .sc-item--apple .sc-leaf-light { fill: var(--blossom-light); }
+.village-road .sc-apple, .village-road .sc-item--sunflowers { display: none; }
+.place .b-bush { fill: var(--leaf); }
+.place .b-bush-light { fill: var(--blossom); }
+
+/* ---------- Rows of flowers on the top of the entrance sign and under the board of every game ---------- */
+.place__info { position: relative; }
+.sign__board::before, .place__info::after {
+  content: ""; position: absolute; z-index: 1; left: 14px; right: 14px; height: 20px; pointer-events: none;
+  background: url("flowers.svg") 0 0 / 48px 20px repeat-x;
+}
+.sign__board::before { top: -17px; }
+.place__info::after { bottom: -12px; }
+
+/* ---------- Petals in the wind (made by assets/js/modes.js) ---------- */
+.falling__item { background: var(--petal); border-radius: 70% 0 70% 0; box-shadow: none; }
