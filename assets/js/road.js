@@ -222,7 +222,8 @@
     });
     // the paths to the doors (under the main road, which covers the place where they meet)
     doors.forEach(function (d, i) {
-      var mx = (d.road[0] + d.door[0]) / 2, my = Math.max(d.road[1], d.door[1]) + 10;
+      // the path dips only a little, so it stays above the name of the game (.place__info, assets/css/buildings.css)
+      var mx = (d.road[0] + d.door[0]) / 2, my = Math.max(d.road[1], d.door[1]) + road * 0.12;
       var pathPts = sample([d.road, [mx, my], d.door]);
       // a little trodden place in front of the door, then the path itself (wide, with stones along it)
       html += '<ellipse cx="' + r(d.door[0]) + '" cy="' + r(d.door[1] + 4) + '" rx="' + r(road * 0.75) + '" ry="' + r(road * 0.3) + '" class="vr-earth"/>';
