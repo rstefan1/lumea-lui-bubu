@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 18">
+  <!-- a string of little colored flags, repeated along the boards of the page (modes/june/mode.css) -->
+  <path d="M0 2 Q15 5 30 2 Q45 5 60 2" fill="none" stroke="#7a4a22" stroke-width="1.2"/>
+  <path d="M2 2.6 L12 3.6 L6.6 15 Z" fill="#ff4d6d"/>
+  <path d="M17 3.8 L27 3 L22.6 15.6 Z" fill="#ffd23f"/>
+  <path d="M32 2.6 L42 3.6 L36.6 15 Z" fill="#3fc8ff"/>
+  <path d="M47 3.8 L57 3 L52.6 15.6 Z" fill="#6fe05a"/>
+</svg>
