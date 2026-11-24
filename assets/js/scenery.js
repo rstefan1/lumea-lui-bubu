@@ -178,7 +178,7 @@
       });
       return out;
     } },
-    troita: { w: 36, h: 76, draw: function () {
+    waysideCross: { w: 36, h: 76, draw: function () {
       return '<ellipse cx="0" cy="0" rx="12" ry="3" class="sc-shadow"/><path d="M0 0 V-58 M-13 -42 H13" class="sc-cross"/>' +
         '<path d="M-16 -56 L0 -70 L16 -56 Z" class="sc-roof-small"/><rect x="-4" y="-50" width="8" height="10" rx="1" class="sc-icon"/>' +
         '<path d="M-6 -2 h12" class="sc-post"/>';
@@ -210,7 +210,7 @@
     } }
   };
   // things a village has only one of (or two)
-  var MAX = { pond: 1, cart: 1, garden: 1, troita: 1, scarecrow: 1, hives: 1, cow: 2,
+  var MAX = { pond: 1, cart: 1, garden: 1, waysideCross: 1, scarecrow: 1, hives: 1, cow: 2,
     lakelet: 2, puddle: 3, woodpile: 2, sunflowers: 2,
     windmill: 1, clothes: 1, bench: 1, house: 2, mushrooms: 3 };
   // the big things first (they need more room), the small ones fill the rest
@@ -219,7 +219,7 @@
   var CENTER = ["firs3", "haystacks", "sheep", "apple", "fir", "cow", "hens", "firs5", "haystacks", "apple", "fir",
     "sheep", "firs3", "haystacks", "hens", "apple", "fir"];
   var ORDER = ["windmill", "house", "firs5", "pond", "cart", "lakelet", "clothes", "garden", "fir", "sheep", "puddle", "house", "apple",
-    "firs3", "cow", "fir", "mushrooms", "lakelet", "hives", "bench", "tree", "troita", "firs5", "puddle",
+    "firs3", "cow", "fir", "mushrooms", "lakelet", "hives", "bench", "tree", "waysideCross", "firs5", "puddle",
     "scarecrow", "sunflowers", "fir", "woodpile", "hens", "firs3", "puddle", "mushrooms", "haystacks", "tree", "sheep", "fir",
     "apple", "flowers"];
 
@@ -286,7 +286,7 @@
     // drawn from the top down, so the lower ones stand in front
     placed.sort(function (a, b) { return a.y - b.y; });
     var front = placed.map(function (p) {
-      var flip = p.flip && p.name !== "troita" ? -1 : 1;
+      var flip = p.flip && p.name !== "waysideCross" ? -1 : 1;
       return '<g transform="translate(' + r(p.x) + " " + r(p.y) + ") scale(" + r(k * flip) + " " + r(k) + ')">' + ITEMS[p.name].draw() + "</g>";
     }).join("");
     return { back: fields(width, height, random), front: front };

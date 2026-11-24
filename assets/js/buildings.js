@@ -63,7 +63,7 @@
   }
 
   /* ---------- The railway station, with a train in front of it ---------- */
-  function gara(p) {
+  function station(p) {
     var sleepers = "";
     for (var x = 4; x < 320; x += 20) { sleepers += '<rect x="' + x + '" y="235" width="11" height="5" class="b-sleeper"/>'; }
     return haystack(300, 210, 40) +
@@ -133,7 +133,7 @@
   }
 
   /* ---------- The mountain cabin, with fir trees, a trail sign and Bubu's backpack ---------- */
-  function cabana(p) {
+  function cabin(p) {
     var logs = "";
     for (var y = 146; y < 226; y += 10) { logs += '<path d="M86 ' + y + ' H234" class="b-log-line"/>'; }
     return '<path d="M48 160 L168 34 L288 160 Z" class="b-mountain"/>' +
@@ -166,7 +166,7 @@
   }
 
   /* ---------- The post office, with a mailbox in front ---------- */
-  function posta(p) {
+  function postOffice(p) {
     return haystack(298, 232, 44) +
       '<rect x="52" y="104" width="216" height="128" class="b-wall-post"/>' +
       '<path d="M40 108 L70 72 L250 72 L280 108 Z" class="b-dark"/>' +
@@ -189,7 +189,7 @@
   }
 
   /* ---------- A simple house for any other game: an emoji in the round window, a word on the board ---------- */
-  function casa(p) {
+  function house(p) {
     return bush(46, 232, 15) + bush(282, 232, 13) +
       '<rect x="84" y="132" width="152" height="100" class="b-light"/>' +
       '<path d="M68 138 L160 60 L252 138 Z" class="b-dark"/>' +
@@ -204,7 +204,7 @@
   }
 
   /* ---------- The little forest: fir trees and leafy trees, a path with animal tracks on it ---------- */
-  function padure(p) {
+  function forest(p) {
     // paw prints along the path: [x, y, size, angle]
     var prints = [[150, 228, 1, -8], [168, 218, 1, -4], [152, 207, 0.9, -10], [170, 197, 0.85, -6], [156, 188, 0.75, -12], [171, 180, 0.7, -8]];
     var tracks = prints.map(function (t) {
@@ -225,17 +225,17 @@
       boardText(193, 195, 10, p.sign || "PĂDUREA");
   }
 
-  var DRAW = { gara: gara, advent: advent, cabana: cabana, posta: posta, casa: casa, padure: padure };
+  var DRAW = { station: station, advent: advent, cabin: cabin, "post-office": postOffice, house: house, forest: forest };
 
   function card(p, index) {
     var color = COLORS.indexOf(p.color) >= 0 ? p.color : "red";
-    var draw = DRAW[p.type] || casa;
+    var draw = DRAW[p.type] || house;
     var open = !!p.url;
     var tag = open ? "a" : "div";
     // one on the right, the next one on the left ...: the country road winds between them (assets/js/road.js).
     // The first one is on the right, because the entrance sign of the village stands on the left.
     var side = index % 2 ? " place--left" : " place--right";
-    return "<" + tag + ' class="place place--' + color + " place--" + (DRAW[p.type] ? p.type : "casa") + side + (open ? "" : " place--soon") + '"' +
+    return "<" + tag + ' class="place place--' + color + " place--" + (DRAW[p.type] ? p.type : "house") + side + (open ? "" : " place--soon") + '"' +
       (open ? ' href="' + esc(p.url) + '"' : "") + ">" +
       '<span class="place__scene">' +
         '<svg class="place__svg" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">' + draw(p) + "</svg>" +
