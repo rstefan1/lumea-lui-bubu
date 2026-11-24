@@ -26,8 +26,12 @@ update: init
 	if [ -z "$$changed" ]; then \
 		echo "All the games are already up to date."; \
 	else \
+		msg=""; \
+		for game in $$changed; do \
+			msg="$${msg:+$$msg, }$$game ($$(git -C $$game rev-parse --short HEAD))"; \
+		done; \
 		git add $$changed && \
-		git commit -m "Update $$(echo $$changed | sed 's/ /, /g')" && \
+		git commit -m "Update $$msg" && \
 		echo "Updated: $$changed (run 'git push' or 'make publish' to put it online)"; \
 	fi
 
