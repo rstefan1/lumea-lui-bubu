@@ -1,0 +1,122 @@
+/* =====================================================================
+   modes/winter/mode.css – the WINTER mode: the whole village covered with snow, snowflakes falling.
+   It is loaded only when the winter mode is on (data/modes.js), over assets/css/village.css and buildings.css.
+   No decorations for Christmas here: those are in modes/christmas/mode.css.
+
+   To change how winter looks, change only the SETTINGS just below:
+   a color is written like #f4f8fb (pick one at https://htmlcolorcodes.com), a number is just a number.
+   ===================================================================== */
+
+/* ============================== SETTINGS ============================== */
+:root {
+  /* the sky: at the very top, and down near the hills */
+  --sky-top: #a7c4dc;
+  --sky-low: #e6eef5;
+
+  /* the snow on the ground of the village
+     (--field must stay the same as the bottom edge of the picture at the top, modes/winter/landscape.svg) */
+  --field: #f4f8fb;
+  --field-low: #e8eff5;
+
+  /* the snow lying on roofs, trees, signs and buttons, and its blue-grey shadow */
+  --snow: #fbfdff;
+  --snow-shade: #c9d8e6;
+
+  /* the ice on the ponds */
+  --ice: #d4e9f5;
+
+  /* the leafy trees and the bushes, white with frost */
+  --frost: #b9c9d2;
+  --frost-light: #d3dee4;
+
+  /* the band at the very bottom of the page, under the fence (the text on it is white) */
+  --footer: #5b7d9f;
+
+  /* the snowflakes */
+  --falling-count: 45;   /* how many on a big screen (phones and old devices get fewer); 0 = no snowflakes */
+  --falling-time: 14;    /* seconds for a snowflake to fall from the top to the bottom: bigger = slower */
+  --falling-big: 15;     /* out of 100 snowflakes, how many are big six-armed stars (the rest are small dots) */
+}
+/* ====================== no need to change below ======================= */
+
+
+/* ---------- The landscape at the top: the same one, under the snow; a pale winter sun, grey-white clouds ---------- */
+.landscape { background-image: url("landscape.svg"); }
+.landscape__sun { background: radial-gradient(circle, #fffdf0 0 45%, #fff1c2 60%, rgba(255, 241, 194, 0) 72%); }
+.cloud, .cloud::before, .cloud::after { background: #f2f6f9; }
+
+/* ---------- The snow on everything (the hidden shapes of assets/js/season-shapes.js) and the snowmen ---------- */
+.snow, .village-road .sc-item--snowman { display: inline; }
+.snow { fill: var(--snow); stroke: var(--snow-shade); }
+.village-road .sc-snowman { fill: var(--snow); stroke: var(--snow-shade); }
+
+/* ---------- The fields and the yards of the buildings: snow ---------- */
+.village-road .sc-field--1 { fill: var(--field); }
+.village-road .sc-field--2 { fill: #eef3f8; }
+.village-road .sc-field--3 { fill: #f7fafc; }
+.village-road .sc-field--4 { fill: #ebf1f6; }
+.village-road .sc-field--5 { fill: #f2f6fa; }
+.village-road .sc-field--6 { fill: #e9f0f5; }
+.village-road .vr-yard-in { stop-color: #ffffff; }
+.village-road .vr-yard-out { stop-color: #fafcfe; }
+
+/* ---------- The country road: packed snow with two muddy wheel tracks; dry grass, no flowers ---------- */
+.village-road .vr-ground-shadow { fill: rgba(90, 120, 160, 0.18); }
+.village-road .vr-earth { fill: #e9edf1; stroke: #c3ceda; }
+.village-road .vr-rim { stroke: #c3ceda; }
+.village-road .vr-light { fill: #f6f8fa; }
+.village-road .vr-rut { stroke: #b9a78a; opacity: 0.6; }
+.village-road .vr-border-stone { fill: #f6f9fb; stroke: #b3bfcc; }
+.village-road .vr-pebble, .village-road .vr-flower { display: none; }
+.village-road .vr-tuft { stroke: #b3a27a; }
+.village-road .vr-shadow, .village-road .sc-shadow { fill: rgba(90, 120, 160, 0.2); }
+
+/* ---------- The things of the village ---------- */
+.village-road .sc-leaf, .village-road .sc-leaf-small { fill: var(--frost); }
+.village-road .sc-leaf-light { fill: var(--frost-light); }
+.village-road .sc-pond-edge { fill: #e3ebf2; }
+.village-road .sc-water { fill: var(--ice); }
+.village-road .sc-ripple { stroke: #ffffff; }
+.village-road .sc-reed { stroke: #b3a27a; }
+.village-road .sc-soil { fill: #eef3f8; }
+.village-road .sc-wool circle { stroke: #c9d8e6; }
+/* nothing of these in winter: apples, flowers, sunflowers, mushrooms, the sprouts of the garden, the washing on the line */
+.village-road .sc-apple, .village-road .sc-sprout,
+.village-road .sc-item--flowers, .village-road .sc-item--sunflowers, .village-road .sc-item--mushrooms,
+.village-road .sc-item--clothes { display: none; }
+
+/* ---------- The buildings of the games ---------- */
+.place .b-bush { fill: var(--frost); }
+.place .b-bush-light { fill: var(--frost-light); }
+.place .b-platform { fill: #e6ecf2; }
+.place .b-path { fill: #eef3f8; }
+.place .b-tracks { fill: #7f97b0; opacity: 0.6; }      /* animal tracks in the snow */
+.place .b-mountain { fill: #d3dfeb; }
+.place .b-mountain-far { fill: #e3ebf2; }
+
+/* ---------- Snow on the boards and the buttons: the entrance sign, the boards of the games, "Intră", "Nou!" ---------- */
+:root {
+  /* the shape of the snow: a puffy top, drops hanging at the bottom (repeated along the board) */
+  --snow-cap: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 16' preserveAspectRatio='none'%3E%3Cpath d='M0 6 C6 1 10 4 14 3 C19 1 22 4 26 3 C31 1 36 4 40 3 C44 2 46 4 48 6 V9 C45 9 44 15 40 15 C36 15 36 10 32 10 C29 10 28 16 23 16 C19 16 19 10 15 10 C12 10 11 13 8 13 C4 13 3 9 0 9 Z'/%3E%3C/svg%3E");
+}
+.place__info, .place__btn { position: relative; }
+.sign__board::before, .place__info::before, .place__btn::before, .place__badge::before, .scroll-hint::before {
+  content: ""; position: absolute; z-index: 1; left: 8px; right: 8px; top: -9px; height: 16px;
+  border-radius: 8px; pointer-events: none;
+  background: linear-gradient(var(--snow) 55%, var(--snow-shade));
+  -webkit-mask: var(--snow-cap) 0 0 / 48px 100% repeat-x;
+  mask: var(--snow-cap) 0 0 / 48px 100% repeat-x;
+}
+.sign__board::before { left: 4px; right: 4px; top: -11px; height: 20px; }
+.place__btn::before, .scroll-hint::before { left: 16px; right: 16px; top: -7px; height: 13px; }
+.place__badge::before { left: 6px; right: 6px; top: -7px; height: 12px; }
+
+/* ---------- The footer: snow on the fence, a cold blue band ---------- */
+.site-footer { background: var(--footer); }
+.site-footer::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 40'%3E%3Crect x='0' y='12' width='32' height='6' fill='%23b5763c'/%3E%3Crect x='0' y='28' width='32' height='6' fill='%23b5763c'/%3E%3Crect x='0' y='10.5' width='32' height='3' rx='1.5' fill='%23fbfdff'/%3E%3Crect x='0' y='26.5' width='32' height='3' rx='1.5' fill='%23fbfdff'/%3E%3Cpath d='M9 40 V8 L16 1 L23 8 V40 Z' fill='%23d39a5c' stroke='%237a4a22' stroke-width='1.5'/%3E%3Cpath d='M8.6 8.4 L16 0.4 L23.4 8.4 Q21 10.6 18.5 9.2 Q16 11.4 13.2 9.4 Q10.6 10.8 8.6 8.4 Z' fill='%23fbfdff' stroke='%23c9d8e6' stroke-width='0.8'/%3E%3C/svg%3E");
+}
+
+/* ---------- The snowflakes (made by assets/js/modes.js): small soft dots and a few big stars ---------- */
+.falling__item { background: var(--snow); box-shadow: 0 1px 2px rgba(70, 100, 140, 0.35); }
+.falling__item--big { background: url("snowflake.svg") center / contain no-repeat; border-radius: 0; box-shadow: none; }
