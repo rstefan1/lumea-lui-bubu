@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 -9 28 26">
+  <!-- the red and white bow of the 1st of March, on the boards of the page (modes/march/mode.css):
+       two loops, a knot, two twisted tails (a white string with a red dashed one over it) and two tassels -->
+  <g fill="none" stroke-linecap="round" stroke-width="2.6">
+    <path d="M0 0 Q-2 7 -6 13 M0 0 Q3 6 6 12" stroke="#ffffff"/>
+    <path d="M0 0 Q-2 7 -6 13 M0 0 Q3 6 6 12" stroke="#d6202a" stroke-dasharray="2.2 2.2"/>
+  </g>
+  <path d="M0 0 C-5 -8 -13 -6 -12 0 C-11 5 -5 4 0 0 Z" fill="#ffffff" stroke="#c8202a" stroke-width="1"/>
+  <path d="M0 0 C5 -8 13 -6 12 0 C11 5 5 4 0 0 Z" fill="#d6202a"/>
+  <circle cx="0" cy="0" r="2.6" fill="#d6202a" stroke="#ffffff" stroke-width="0.8"/>
+  <circle cx="-6" cy="14" r="2.2" fill="#ffffff" stroke="#c8202a" stroke-width="0.8"/>
+  <circle cx="6" cy="13" r="2.2" fill="#d6202a"/>
+</svg>
