@@ -2,3 +2,7 @@
 	path = trenul-lui-bubu
 	url = https://github.com/rstefan1/trenul-lui-bubu.git
 	branch = master
+[submodule "scrisorile-lui-bubu"]
+	path = scrisorile-lui-bubu
+	url = https://github.com/rstefan1/scrisorile-lui-bubu.git
+	branch = master

@@ -26,5 +26,13 @@ window.PLACES = [
     url: "trenul-lui-bubu/",
     color: "red",
     badge: "Nou!"
+  },
+  {
+    type: "post-office",
+    title: "Scrisori pentru Bubu",
+    description: "Scrie-i o scrisoare lui Bubu",
+    url: "scrisorile-lui-bubu/",
+    color: "blue",
+    badge: "Nou!"
   }
 ];
