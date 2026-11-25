@@ -36,13 +36,13 @@
 .place .b-frame-wood { stroke: #7a4a22; stroke-width: 3; }
 .place .b-window-bars { stroke: #7a4a22; stroke-width: 2.5; fill: none; }
 .place .b-window-bars-light { stroke: #fffaf0; stroke-width: 2.5; fill: none; }
-.place .b-number { font-family: "Fredoka", sans-serif; font-weight: 700; fill: #7a4a22; }
+.place .b-number { font-family: "Baloo 2", sans-serif; font-weight: 700; fill: #7a4a22; }
 .place .b-door  { fill: var(--dark); }
 .place .b-door-wood { fill: #6b3f1e; }
 .place .b-door-line { stroke: rgba(0, 0, 0, 0.3); stroke-width: 2; }
 .place .b-board { fill: #fffaf0; stroke: #7a4a22; stroke-width: 2; }
 .place .b-board-dark { fill: #3b3030; }
-.place .b-board-text { font-family: "Fredoka", sans-serif; font-weight: 700; fill: #5a3416; letter-spacing: 1px; }
+.place .b-board-text { font-family: "Baloo 2", sans-serif; font-weight: 700; fill: #5a3416; letter-spacing: 1px; }
 .place .b-board-text--light { fill: #fffaf0; }
 .place .b-clock { fill: #fff; stroke: #3b3030; stroke-width: 3; }
 .place .b-clock-hands { stroke: #3b3030; stroke-width: 2.5; stroke-linecap: round; fill: none; }
@@ -168,7 +168,7 @@ a.place .place__btn::after {
 .place--soon .place__info { filter: saturate(0.55); opacity: 0.9; }
 .place--soon .place__title { color: #4a4860; }
 .place__title {
-  font-family: "Fredoka", "Atkinson Hyperlegible", sans-serif; font-weight: 600;
+  font-family: "Baloo 2", "Atkinson Hyperlegible", sans-serif; font-weight: 600;
   font-size: 1.65rem; line-height: 1.1; color: var(--ink);
 }
 .place__desc { margin-top: 4px; font-size: 1.05rem; color: var(--muted); max-width: 30ch; }

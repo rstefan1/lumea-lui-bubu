@@ -41,7 +41,7 @@ body {
   background: linear-gradient(180deg, var(--sky-top) 0, var(--sky-low) calc(var(--land-h) - 120px), var(--field) var(--land-h), var(--field-low) 100%);
   overflow-x: hidden;
 }
-h1, h2 { font-family: "Fredoka", "Atkinson Hyperlegible", sans-serif; }
+h1, h2 { font-family: "Baloo 2", "Atkinson Hyperlegible", sans-serif; }
 a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); outline-offset: 4px; }
 
 /* ---------- The landscape at the top: sun, clouds and the hills of Bucovina ----------
@@ -92,7 +92,7 @@ a:focus-visible, [tabindex]:focus-visible { outline: 5px solid var(--focus); out
   transform: rotate(-1.5deg);
 }
 .sign__title {
-  margin: 0; font-family: "Fredoka", "Atkinson Hyperlegible", sans-serif;
+  margin: 0; font-family: "Baloo 2", "Atkinson Hyperlegible", sans-serif;
   font-weight: 700; font-size: clamp(2rem, min(5.5vw, 6vh), 3.4rem); line-height: 1.05;
   color: var(--paper);
   text-shadow: 0 3px 0 var(--wood-dark), 0 0 12px rgba(90, 52, 22, 0.35);
